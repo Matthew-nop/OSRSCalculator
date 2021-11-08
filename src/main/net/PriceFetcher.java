@@ -55,11 +55,18 @@ public class PriceFetcher {
 		prices.put(id, price);
 	}
 
-	public void fetchIDs(int[] ids) throws IOException{
+	public void addItem(int id, float price) {
+		prices.put(id, price);
+	}
+
+	public void addItem(int id) {
+		addItem(id, 0f);
+	}
+
+	public void addItems(int[] ids) {
 		for (int id : ids) {
-			prices.put(id, 0f);
+			addItem(id);
 		}
-		updatePrices();
 	}
 
 	public void addRecipe(Recipe recipe) {
