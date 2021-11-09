@@ -11,29 +11,29 @@ public enum Planks implements Recipe {
 	PLANKS(
 			1,
 			29,
-			new ItemQuantity[]{new ItemQuantity(Item.PLANK, 1)}),
+			new ItemQuantity(Item.PLANK, 1)),
 	OAK_PLANKS(
 			15,
 			60,
-			new ItemQuantity[]{new ItemQuantity(Item.OAK_PLANK, 1)}),
+			new ItemQuantity(Item.OAK_PLANK, 1)),
 	TEAK_PLANKS(
 			35,
 			90,
-			new ItemQuantity[]{new ItemQuantity(Item.PLANK, 1)}),
+			new ItemQuantity(Item.TEAK_PLANK, 1)),
 	MAHOGANY_PLANKS(
 			35,
 			90,
-			new ItemQuantity[]{new ItemQuantity(Item.PLANK, 1)}),
+			new ItemQuantity(Item.MAHOGANY_PLANK, 1)),
 	;
 
 	private final int level;
 	private final float xp;
-	private final ItemQuantity[] ingredients;
+	private final ItemQuantity ingredient;
 
-	Planks(int level, float xp, ItemQuantity[] ingredients) {
+	Planks(int level, float xp, ItemQuantity ingredient) {
 		this.level = level;
 		this.xp = xp;
-		this.ingredients = ingredients;
+		this.ingredient = ingredient;
 	}
 
 	@Override
@@ -43,7 +43,12 @@ public enum Planks implements Recipe {
 
 	@Override
 	public ItemQuantity[] getIngredients() {
-		return ingredients;
+		return new ItemQuantity[]{this.ingredient};
+	}
+
+	@Override
+	public String getName() {
+		return this.ingredient.getName();
 	}
 
 	@Override

@@ -70,6 +70,11 @@ public enum Tar implements Recipe {
 	}
 
 	@Override
+	public String getName() {
+		return this.output.getName();
+	}
+
+	@Override
 	public int getLevel() {
 		return this.level;
 	}

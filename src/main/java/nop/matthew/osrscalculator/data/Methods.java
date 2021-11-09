@@ -1,10 +1,16 @@
 package nop.matthew.osrscalculator.data;
 
 public enum Methods {
+	// Construction
+	PLANKS("Using planks", Skills.CONSTRUCTION),
+
+	// Firemaking
+	BURNING_LOGS("Burning logs", Skills.FIREMAKING),
+
+	// Herblore
 	CLEANING_HERBS("Cleaning herbs", Skills.HERBLORE),
 	MAKING_TAR("Making tar", Skills.HERBLORE),
 	MAKING_POTIONS("Making potions", Skills.HERBLORE),
-	PLANKS("Using planks", Skills.CONSTRUCTION),
 	;
 
 	private String name;
