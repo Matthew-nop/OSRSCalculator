@@ -131,7 +131,7 @@ public enum Item {
 	LANTADYME_POTION_UNF("Lantadyme potion (unf)", ItemID.LANTADYME_POTION_UNF),
 	LAVA_SCALE_SHARD("Lava scale shard", ItemID.LAVA_SCALE_SHARD),
 	LIMPWURT_ROOT("Limpwurt root", ItemID.LIMPWURT_ROOT),
-	MAGIC_ESSENCE3("Magic essence potion(3)", ItemID.MAGIC_ESSENCE3), // TODO: Does this work with the amulet of chemistry?
+	MAGIC_ESSENCE3("Magic essence potion(3)", ItemID.MAGIC_ESSENCE3),
 	MAGIC_ESSENCE_UNF("Magic essence (unf)", ItemID.MAGIC_ESSENCE_UNF),
 	MAGIC_POTION1("Magic potion(1)", ItemID.MAGIC_POTION1),
 	MAGIC_POTION2("Magic potion(2)", ItemID.MAGIC_POTION2),
@@ -156,7 +156,7 @@ public enum Item {
 	RELICYMS_BALM4("Relicym's balm(4)", ItemID.RELICYMS_BALM4),
 	RESTORE_POTION3("Restore potion(3)", ItemID.RESTORE_POTION3),
 	RESTORE_POTION4("Restore potion(4)", ItemID.RESTORE_POTION4),
-	SANFEW_SERUM1("Sanfew serum(1)", ItemID.SANFEW_SERUM1), // TODO: Does this work with the amulet of chemistry?
+	SANFEW_SERUM1("Sanfew serum(1)", ItemID.SANFEW_SERUM1),
 	SANFEW_SERUM2("Sanfew serum(2)", ItemID.SANFEW_SERUM2),
 	SANFEW_SERUM3("Sanfew serum(3)", ItemID.SANFEW_SERUM3),
 	SANFEW_SERUM4("Sanfew serum(4)", ItemID.SANFEW_SERUM4),

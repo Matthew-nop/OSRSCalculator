@@ -798,14 +798,11 @@ public enum Potions implements Recipe {
 			new ItemQuantity(Item.ZAMORAK_BREW4, 1)),
 	;
 
-	// TODO: refactor id, idAmulet to be an instance of Item
-	// if (id >= 0) then (id exists)
 	private final ItemQuantity output;
 	private final int level;
 	private final float xp;
 	private final ItemQuantity[] ingredients;
-	// The id of a potion given an amulet proc (e.g. 3-dose id -> 4-dose id)
-	// if (idAmulet >= 0) then (idAmulet exists)
+	// The outcome potion given an amulet proc (e.g. 3-dose -> 4-dose (this one))
 	private final ItemQuantity amuletItemQuantity;
 
 	Potions(ItemQuantity output, int level, float xp, ItemQuantity[] ingredients, ItemQuantity amuletItemQuantity) {
