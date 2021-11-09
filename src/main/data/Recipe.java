@@ -1,5 +1,7 @@
 package data;
 
+import java.util.Set;
+
 public interface Recipe {
 	int[] getOutput();
 
@@ -8,4 +10,8 @@ public interface Recipe {
 	int getLevel();
 
 	float getXp();
+
+	boolean flagsAffect(Set<Flags> flag);
+
+	boolean flagsAffect(Flags flag);
 }
