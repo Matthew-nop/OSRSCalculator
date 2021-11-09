@@ -1,6 +1,6 @@
 package net;
 
-import data.Ingredient;
+import data.Item;
 import data.Recipe;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,7 +73,7 @@ public class PriceFetcher {
 		for (int id : recipe.getOutput()) {
 			prices.put(id, 0f);
 		}
-		for (Ingredient ingredient : recipe.getIngredients()) {
+		for (Item ingredient : recipe.getIngredients()) {
 			prices.put(ingredient.getId(), 0f);
 		}
 	}
