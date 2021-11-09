@@ -1,6 +1,8 @@
 package nop.matthew.osrscalculator.ui;
 
+import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Skill;
+import nop.matthew.osrscalculator.data.Skills;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -12,6 +14,8 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Calculator {
 	public static final int SKILL_ICON_LENGTH = 40;
@@ -58,21 +62,20 @@ public class Calculator {
 	}
 
 	public void addSkill(Skill skill) throws IOException {
-		String key = skill.getKey();
-
+		Skills key = skill.getKey();
 		SkillPanel panel = new SkillPanel(skill);
-		this.resultPanel.add(key, panel.getScrollPane());
+		this.resultPanel.add(key.toString(), panel.getScrollPane());
 
 		JButton button = new JButton(new ImageIcon(ImageIO
-				.read(getClass().getResource("/SkillIcons/" + key.toLowerCase() + ".png"))
+				.read(getClass().getResource("/SkillIcons/" + key.toString().toLowerCase() + ".png"))
 				.getScaledInstance(SKILL_ICON_LENGTH, SKILL_ICON_LENGTH, Image.SCALE_DEFAULT)));
-		button.setToolTipText(key);
+		button.setToolTipText(key.toString());
 		button.addActionListener(e -> {
-			System.out.println("Selected calculator panel for " + key);
+			System.out.println("Selected calculator panel for " + key.toString());
 			panel.update();
-			this.selectionPanel.setMethods(skill.getMethodRecipes().keySet().toArray(new String[]{}));
+			this.selectionPanel.setMethods(Arrays.stream(Methods.values()).filter(m -> m.getSkill().equals(key)).collect(Collectors.toList()));
 			CardLayout layout = (CardLayout) (resultPanel.getLayout());
-			layout.show(resultPanel, key);
+			layout.show(resultPanel, key.toString());
 		});
 		this.selectionPanel.addButton(button);
 	}

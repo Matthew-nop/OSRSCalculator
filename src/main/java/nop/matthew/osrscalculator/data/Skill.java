@@ -2,21 +2,22 @@ package nop.matthew.osrscalculator.data;
 
 import nop.matthew.osrscalculator.net.PriceFetcher;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
 public abstract class Skill {
+	protected Skills skill;
 	protected PriceFetcher priceFetcher;
-	protected TreeMap<String, Recipe[]> methodRecipes;
-	protected String key;
+	protected TreeMap<Methods, Recipe[]> methodRecipes;
 	protected Set<Flags> flags;
 
-	public Skill(PriceFetcher priceFetcher, String key) {
+	public Skill(Skills skill, PriceFetcher priceFetcher) {
+		this.skill = skill;
 		this.priceFetcher = priceFetcher;
-		this.methodRecipes = new TreeMap<>();
-		this.key = key;
+		this.methodRecipes = new TreeMap<Methods, Recipe[]>();
 		this.flags = new HashSet<>();
 	}
 
@@ -38,24 +39,43 @@ public abstract class Skill {
 	 */
 	public abstract void addTertiaryPrices();
 
-	public abstract Map<Integer, Float> getRecipeOutCosts(Recipe r);
+	public Map<Integer, Float> getRecipeOutCosts(Recipe r) {
+		HashMap<Integer, Float> costs = new HashMap<Integer, Float>();
+		ItemQuantity[] outputs = r.getOutput();
 
-	public abstract Map<Integer, Float> getRecipeInCosts(Recipe r);
+		for (ItemQuantity item : outputs) {
+			int id = item.getId();
+			costs.put(id, priceFetcher.getPrice(id));
+		}
 
-	public Set<String> getMethods() {
+		return costs;
+	}
+
+	public Map<Integer, Float> getRecipeInCosts(Recipe r) {
+		HashMap<Integer, Float> costs = new HashMap<Integer, Float>();
+
+		for (ItemQuantity i : r.getIngredients()) {
+			int id = i.getId();
+			costs.put(id, priceFetcher.getPrice(id)*i.getQuantity());
+		}
+
+		return costs;
+	}
+
+	public Set<Methods> getMethods() {
 		return this.methodRecipes.keySet();
 	}
 
-	public Recipe[] getRecipes(String method) {
+	public Recipe[] getRecipes(Methods method) {
 		return this.methodRecipes.get(method);
 	}
 
-	public TreeMap<String, Recipe[]> getMethodRecipes() {
+	public TreeMap<Methods, Recipe[]> getMethodRecipes() {
 		return this.methodRecipes;
 	}
 
-	public String getKey() {
-		return this.key;
+	public Skills getKey() {
+		return this.skill;
 	}
 
 	public Set<Flags> getFlags() {

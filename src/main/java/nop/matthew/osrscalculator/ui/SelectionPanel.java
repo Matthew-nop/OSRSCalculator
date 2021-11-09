@@ -1,12 +1,16 @@
 package nop.matthew.osrscalculator.ui;
 
+import nop.matthew.osrscalculator.data.Methods;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.List;
 
+// TODO: the selected method should filter the shown recipes
 public class SelectionPanel extends JPanel {
 	private final JPanel buttons;
 	private final JComboBox<String> selectedMethod;
@@ -41,10 +45,10 @@ public class SelectionPanel extends JPanel {
 		buttons.add(button);
 	}
 
-	public void setMethods(String[] methods) {
+	public void setMethods(List<Methods> methods) {
 		this.selectedMethod.removeAllItems();
-		for (String method : methods) {
-			this.selectedMethod.addItem(method);
+		for (Methods method : methods) {
+			this.selectedMethod.addItem(method.getName());
 		}
 	}
 }

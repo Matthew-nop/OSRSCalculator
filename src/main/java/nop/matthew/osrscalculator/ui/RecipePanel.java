@@ -1,5 +1,7 @@
 package nop.matthew.osrscalculator.ui;
 
+import nop.matthew.osrscalculator.data.ItemQuantity;
+import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Recipe;
 
 import javax.swing.BorderFactory;
@@ -18,6 +20,7 @@ public class RecipePanel extends JPanel {
 	public final static int COST_WIDTH = 150;
 
 	private Recipe recipe;
+	private Methods method;
 	private JPanel outcome;
 	private JPanel process;
 	private JPanel cost;
@@ -26,17 +29,21 @@ public class RecipePanel extends JPanel {
 	private JLabel outputs;
 	private JLabel inputs;
 
-	public RecipePanel(Recipe recipe) {
+	// TODO: make this look decent
+	public RecipePanel(Recipe recipe, Methods method) {
 		super();
 		setLayout(new BorderLayout(0, 0));
 		setMinimumSize(new Dimension(Calculator.MINIMUM_WIDTH, RECIPEPANEL_HEIGHT));
 		Border border = BorderFactory.createLineBorder(Color.black);
 		this.recipe = recipe;
+		this.method = method;
 
 		this.outcome = new JPanel(new BorderLayout(0, 0));
-		this.outcome.add(BorderLayout.CENTER, new JLabel(recipe.getOutput()[0].getName())); // TODO: place an image and display name
+		ItemQuantity[] output = recipe.getOutput();
+		String name = output.length > 0 ? output[0].getName() : "N/A";
+		this.outcome.add(BorderLayout.CENTER, new JLabel(name)); // TODO: place an image
 		this.outcome.add(BorderLayout.SOUTH, new JLabel(recipe.getLevel() + " - " + recipe.getXp()));
-		this.outcome.setPreferredSize(new Dimension(COST_WIDTH, RECIPEPANEL_HEIGHT));
+		this.outcome.setPreferredSize(new Dimension(OUTCOME_WIDTH, RECIPEPANEL_HEIGHT));
 		this.outcome.setBorder(border);
 		add(BorderLayout.WEST, outcome);
 
