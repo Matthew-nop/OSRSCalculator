@@ -18,7 +18,7 @@ public class Calculator {
 	public static final int SKILL_ICON_LENGTH = 40;
 	public static final int METHOD_SELECTION_WIDTH = 160;
 	public static final int METHOD_SELECTION_HEIGHT = 40;
-	public static final int MINIMUM_WIDTH = OSRSCalculator.SKILL_COUNT*SKILL_ICON_LENGTH;
+	public static final int MINIMUM_WIDTH = OSRSCalculator.SKILL_COUNT * SKILL_ICON_LENGTH;
 	public static final int MINIMUM_HEIGHT = SKILL_ICON_LENGTH + METHOD_SELECTION_HEIGHT;
 
 	private final JFrame mainFrame;

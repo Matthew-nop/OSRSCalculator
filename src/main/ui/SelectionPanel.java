@@ -1,7 +1,11 @@
 package ui;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 
 public class SelectionPanel extends JPanel {
 	private final JPanel buttons;
