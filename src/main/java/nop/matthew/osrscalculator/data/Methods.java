@@ -1,6 +1,7 @@
 package nop.matthew.osrscalculator.data;
 
 public enum Methods {
+	CLEANING_HERBS("Cleaning herbs", Skills.HERBLORE),
 	MAKING_TAR("Making tar", Skills.HERBLORE),
 	MAKING_POTIONS("Making potions", Skills.HERBLORE),
 	PLANKS("Using planks", Skills.CONSTRUCTION),
