@@ -1,6 +1,6 @@
 package nop.matthew.osrscalculator.net;
 
-import nop.matthew.osrscalculator.data.Item;
+import nop.matthew.osrscalculator.data.ItemQuantity;
 import nop.matthew.osrscalculator.data.Recipe;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,10 +74,10 @@ public class PriceFetcher {
 	}
 
 	public void addRecipe(Recipe recipe) {
-		for (int id : recipe.getOutput()) {
-			prices.put(id, 0f);
+		for (ItemQuantity itemQuantity : recipe.getOutput()) {
+			prices.put(itemQuantity.getId(), 0f);
 		}
-		for (Item ingredient : recipe.getIngredients()) {
+		for (ItemQuantity ingredient : recipe.getIngredients()) {
 			prices.put(ingredient.getId(), 0f);
 		}
 	}

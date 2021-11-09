@@ -2,9 +2,12 @@ package nop.matthew.osrscalculator.ui;
 
 import nop.matthew.osrscalculator.data.Recipe;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.text.DecimalFormat;
 import java.util.Map;
@@ -27,14 +30,15 @@ public class RecipePanel extends JPanel {
 		super();
 		setLayout(new BorderLayout(0, 0));
 		setMinimumSize(new Dimension(Calculator.MINIMUM_WIDTH, RECIPEPANEL_HEIGHT));
+		Border border = BorderFactory.createLineBorder(Color.black);
 		this.recipe = recipe;
 
 		this.outcome = new JPanel(new BorderLayout(0, 0));
-		this.outcome.add(BorderLayout.CENTER, new JLabel(String.valueOf(recipe.getOutput()[0]))); // TODO: place an image and display name
+		this.outcome.add(BorderLayout.CENTER, new JLabel(recipe.getOutput()[0].getName())); // TODO: place an image and display name
 		this.outcome.add(BorderLayout.SOUTH, new JLabel(recipe.getLevel() + " - " + recipe.getXp()));
 		this.outcome.setPreferredSize(new Dimension(COST_WIDTH, RECIPEPANEL_HEIGHT));
+		this.outcome.setBorder(border);
 		add(BorderLayout.WEST, outcome);
-
 
 		this.process = new JPanel(new BorderLayout(0, 0));
 		this.outputs = new JLabel("0");
@@ -42,6 +46,7 @@ public class RecipePanel extends JPanel {
 		this.inputs = new JLabel("0");
 		this.process.add(BorderLayout.SOUTH, this.inputs);
 		this.process.setMinimumSize(new Dimension(Calculator.MINIMUM_WIDTH - OUTCOME_WIDTH - COST_WIDTH, RECIPEPANEL_HEIGHT));
+		this.process.setBorder(border);
 		add(BorderLayout.CENTER, process);
 
 		this.cost = new JPanel(new BorderLayout(0, 0));
@@ -50,6 +55,7 @@ public class RecipePanel extends JPanel {
 		this.profitNormalised = new JLabel("0");
 		this.cost.add(BorderLayout.SOUTH, this.profitNormalised);
 		this.cost.setPreferredSize(new Dimension(COST_WIDTH, RECIPEPANEL_HEIGHT));
+		this.cost.setBorder(border);
 		add(BorderLayout.EAST, cost);
 	}
 
@@ -59,7 +65,6 @@ public class RecipePanel extends JPanel {
 		for (float cost : out.values()) {
 			sumOut += cost;
 		}
-
 		for (float cost : in.values()) {
 			sumIn += cost;
 		}
