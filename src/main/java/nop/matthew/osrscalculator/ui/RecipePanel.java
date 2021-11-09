@@ -1,6 +1,6 @@
-package ui;
+package nop.matthew.osrscalculator.ui;
 
-import data.Recipe;
+import nop.matthew.osrscalculator.data.Recipe;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

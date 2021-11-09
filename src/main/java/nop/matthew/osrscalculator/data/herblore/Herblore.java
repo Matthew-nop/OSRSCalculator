@@ -1,10 +1,10 @@
-package data.herblore;
+package nop.matthew.osrscalculator.data.herblore;
 
-import data.Item;
-import data.ItemID;
-import data.Recipe;
-import data.Skill;
-import net.PriceFetcher;
+import nop.matthew.osrscalculator.data.Item;
+import nop.matthew.osrscalculator.data.ItemID;
+import nop.matthew.osrscalculator.data.Recipe;
+import nop.matthew.osrscalculator.data.Skill;
+import nop.matthew.osrscalculator.net.PriceFetcher;
 
 import java.util.HashMap;
 import java.util.Map;

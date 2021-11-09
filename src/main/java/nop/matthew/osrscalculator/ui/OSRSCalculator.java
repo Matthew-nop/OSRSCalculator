@@ -1,7 +1,7 @@
-package ui;
+package nop.matthew.osrscalculator.ui;
 
-import data.herblore.Herblore;
-import net.PriceFetcher;
+import nop.matthew.osrscalculator.data.herblore.Herblore;
+import nop.matthew.osrscalculator.net.PriceFetcher;
 
 import java.io.IOException;
 

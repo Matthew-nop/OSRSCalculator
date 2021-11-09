@@ -1,6 +1,6 @@
-package data;
+package nop.matthew.osrscalculator.data;
 
-import net.PriceFetcher;
+import nop.matthew.osrscalculator.net.PriceFetcher;
 
 import java.util.HashSet;
 import java.util.Map;
