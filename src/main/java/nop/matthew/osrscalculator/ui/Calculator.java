@@ -35,7 +35,7 @@ public class Calculator extends JFrame{
 		this.resultPanel = new ResultPanel();
 	}
 
-	public void setup(int width, int height, Skills defaultSkill) {
+	public void setup(Skills defaultSkill) {
 		// Set up the main frame
 		setLayout(this.mainLayout);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,7 +53,6 @@ public class Calculator extends JFrame{
 		// Set up the results panel
 		add(BorderLayout.CENTER, resultPanel);
 		this.resultPanel.setActiveSkills(defaultSkill);
-		this.resultPanel.setVisible(true);
 
 		addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent componentEvent) {
@@ -73,8 +72,8 @@ public class Calculator extends JFrame{
 		button.setToolTipText(key.toString());
 		button.addActionListener(e -> {
 			System.out.println("Selected calculator panel for " + key.toString());
-			this.selectionPanel.setMethods(Arrays.stream(Methods.values()).filter(m -> m.getSkill().equals(key)).collect(Collectors.toList()));
 			this.resultPanel.setActiveSkills(key);
+			this.selectionPanel.setMethods(Arrays.stream(Methods.values()).filter(m -> m.getSkill().equals(key)).collect(Collectors.toList()));
 			setSize(getPreferredSize().width,getMinimumSize().height + resultPanel.getPreferredSize().height);
 		});
 		this.selectionPanel.addButton(button);
