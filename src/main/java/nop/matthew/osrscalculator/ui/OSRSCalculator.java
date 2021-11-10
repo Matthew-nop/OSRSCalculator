@@ -13,16 +13,24 @@ import nop.matthew.osrscalculator.data.prayer.Prayer;
 import nop.matthew.osrscalculator.data.smithing.Smithing;
 import nop.matthew.osrscalculator.net.PriceFetcher;
 
+import javax.swing.JScrollPane;
 import java.io.IOException;
 
 public class OSRSCalculator {
 	public static final int SKILL_ICON_LENGTH = 40;
 	public static final int SKILL_COUNT = 11;
-	
+
+	/*
+	Magic numbers for UI
+	 */
 	public static final int METHOD_SELECTION_HEIGHT = 40;
 	public static final int METHOD_SELECTION_WIDTH = 160;
 	public static final int DEFAULT_RESULTPANEL_HEIGHT = 400;
-
+	public final static int RECIPEPANEL_HEIGHT = 50;
+	public final static int OUTCOME_WIDTH = 100;
+	public final static int COST_WIDTH = 100;
+	public final static int VERTICAL_SCROLLBAR_WIDTH = (new JScrollPane()).getVerticalScrollBar().getPreferredSize().width;
+	public final static int PROCESS_WIDTH_OFFSET = -(OUTCOME_WIDTH + COST_WIDTH + VERTICAL_SCROLLBAR_WIDTH);
 	public static final int MINIMUM_WIDTH = SKILL_COUNT * SKILL_ICON_LENGTH;
 	public static final int MINIMUM_HEIGHT = SKILL_ICON_LENGTH + METHOD_SELECTION_HEIGHT;
 

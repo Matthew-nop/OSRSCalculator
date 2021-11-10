@@ -8,6 +8,7 @@ import nop.matthew.osrscalculator.data.Skills;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class SkillPanel extends JPanel {
 		this.skill = skill;
 		this.recipePanels = new ArrayList<RecipePanel>();
 		int count = 0;
-		constraints.anchor = GridBagConstraints.NORTH;
+		constraints.anchor = GridBagConstraints.NORTHEAST;
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		constraints.gridwidth = 1;
 		constraints.weighty = 0;
@@ -45,7 +46,12 @@ public class SkillPanel extends JPanel {
 		add(new JPanel(), constraints);
 
 		this.recipePanels.trimToSize();
-		scrollPane = new JScrollPane(this, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane = new JScrollPane(this, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER) {
+			@Override
+			public Dimension getPreferredSize() {
+				return this.viewport.getPreferredSize();
+			}
+		};
 	}
 
 	public void update() {
@@ -61,7 +67,7 @@ public class SkillPanel extends JPanel {
 
 		int size = this.recipePanels.size();
 		int count = 0;
-		constraints.anchor = GridBagConstraints.NORTH;
+		constraints.anchor = GridBagConstraints.NORTHEAST;
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		constraints.gridwidth = 1;
 		constraints.weighty = 0;
@@ -83,7 +89,7 @@ public class SkillPanel extends JPanel {
 				add(recipePanel, constraints);
 			}
 		}
-		constraints.fill = GridBagConstraints.BOTH;
+		constraints.fill = GridBagConstraints.VERTICAL;
 		constraints.weighty = 1;
 		add(new JPanel(), constraints);
 
@@ -97,5 +103,10 @@ public class SkillPanel extends JPanel {
 
 	public JScrollPane getScrollPane() {
 		return scrollPane;
+	}
+
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(OSRSCalculator.calculator.getWidth() - OSRSCalculator.VERTICAL_SCROLLBAR_WIDTH, OSRSCalculator.RECIPEPANEL_HEIGHT*this.recipePanels.size());
 	}
 }
