@@ -39,6 +39,17 @@ public class SkillPanel extends JPanel {
 		}
 	}
 
+	public void setMethod(Methods method) {
+		removeAll();
+		if (method != null)
+			this.recipePanels.stream().filter(r -> r.getMethod().equals(method)).forEach(this::add);
+		else
+			this.recipePanels.forEach(this::add);
+
+		repaint();
+		revalidate();
+	}
+
 	public Skills getSkills() {
 		return skill.getSkills();
 	}

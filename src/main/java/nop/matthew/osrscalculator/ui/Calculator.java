@@ -7,6 +7,7 @@ import nop.matthew.osrscalculator.data.Skills;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -42,6 +43,12 @@ public class Calculator extends JFrame{
 		// Set up the selection panel
 		add(BorderLayout.NORTH, this.selectionPanel);
 		this.selectionPanel.setup();
+		JComboBox<String> selectedMethod = this.selectionPanel.getSelectedMethod();
+		selectedMethod.addActionListener(e -> {
+			Object selected = selectedMethod.getSelectedItem();
+			if (selected != null)
+				this.resultPanel.setMethod(Methods.getFromName(selected.toString()));
+		});
 
 		// Set up the results panel
 		add(BorderLayout.CENTER, resultPanel);
@@ -68,8 +75,6 @@ public class Calculator extends JFrame{
 			System.out.println("Selected calculator panel for " + key.toString());
 			this.selectionPanel.setMethods(Arrays.stream(Methods.values()).filter(m -> m.getSkill().equals(key)).collect(Collectors.toList()));
 			this.resultPanel.setActiveSkills(key);
-			//this.mainFrame.setSize(new Dimension(mainFrame.getWidth(), this.resultPanel.getPreferredSize().height + this.selectionPanel.getPreferredSize().height));
-			System.out.println(this.resultPanel.getPreferredSize().toString());
 			setSize(getPreferredSize().width,getMinimumSize().height + resultPanel.getPreferredSize().height);
 		});
 		this.selectionPanel.addButton(button);

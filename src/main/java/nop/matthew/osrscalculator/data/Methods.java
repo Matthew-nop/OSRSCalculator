@@ -33,4 +33,13 @@ public enum Methods {
 	public String toString() {
 		return this.name;
 	}
+
+	public static Methods getFromName(String name) {
+		for (Methods m : Methods.values()) {
+			if (m.toString().equals(name))
+				return m;
+		}
+
+		return null;
+	}
 }
