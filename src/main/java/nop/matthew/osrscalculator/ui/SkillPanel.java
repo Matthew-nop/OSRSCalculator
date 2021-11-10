@@ -3,6 +3,7 @@ package nop.matthew.osrscalculator.ui;
 import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Recipe;
 import nop.matthew.osrscalculator.data.Skill;
+import nop.matthew.osrscalculator.data.Skills;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -36,6 +37,10 @@ public class SkillPanel extends JPanel {
 			Recipe r = panel.getRecipe();
 			panel.setCosts(this.skill.getRecipeOutCosts(r), this.skill.getRecipeInCosts(r));
 		}
+	}
+
+	public Skills getSkills() {
+		return skill.getSkills();
 	}
 
 	public JScrollPane getScrollPane() {

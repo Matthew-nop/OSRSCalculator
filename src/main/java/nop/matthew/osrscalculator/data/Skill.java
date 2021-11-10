@@ -9,13 +9,13 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public abstract class Skill {
-	protected Skills skill;
+	protected Skills skills;
 	protected PriceFetcher priceFetcher;
 	protected TreeMap<Methods, Recipe[]> methodRecipes;
 	protected Set<Flags> flags;
 
-	public Skill(Skills skill, PriceFetcher priceFetcher) {
-		this.skill = skill;
+	public Skill(Skills skills, PriceFetcher priceFetcher) {
+		this.skills = skills;
 		this.priceFetcher = priceFetcher;
 		this.methodRecipes = new TreeMap<Methods, Recipe[]>();
 		this.flags = new HashSet<>();
@@ -62,6 +62,10 @@ public abstract class Skill {
 		return costs;
 	}
 
+	public Skills getSkills() {
+		return this.skills;
+	}
+
 	public Set<Methods> getMethods() {
 		return this.methodRecipes.keySet();
 	}
@@ -75,7 +79,7 @@ public abstract class Skill {
 	}
 
 	public Skills getKey() {
-		return this.skill;
+		return this.skills;
 	}
 
 	public Set<Flags> getFlags() {

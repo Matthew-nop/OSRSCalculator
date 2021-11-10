@@ -23,25 +23,24 @@ public class SelectionPanel extends JPanel {
 	}
 
 	public void setup() {
-		Dimension buttonsSize = new Dimension(Calculator.MINIMUM_WIDTH, Calculator.SKILL_ICON_LENGTH);
-		this.buttons.setMinimumSize(buttonsSize);
+		Dimension buttonsSize = new Dimension(OSRSCalculator.MINIMUM_WIDTH, OSRSCalculator.SKILL_ICON_LENGTH);
+		this.buttons.setPreferredSize(buttonsSize);
 		add(BorderLayout.NORTH, buttons);
 
-		this.selectedMethod.setMinimumSize(new Dimension(Calculator.METHOD_SELECTION_WIDTH, Calculator.METHOD_SELECTION_HEIGHT));
+		this.selectedMethod.setPreferredSize(new Dimension(OSRSCalculator.METHOD_SELECTION_WIDTH, OSRSCalculator.METHOD_SELECTION_HEIGHT));
 		add(BorderLayout.EAST, selectedMethod);
 
-		setLocation(0, 0);
-		Dimension size = new Dimension(Calculator.MINIMUM_WIDTH, Calculator.SKILL_ICON_LENGTH + Calculator.METHOD_SELECTION_HEIGHT);
-		setMinimumSize(size);
-		setPreferredSize(size);
+		setMinimumSize(new Dimension(OSRSCalculator.MINIMUM_WIDTH, this.buttons.getPreferredSize().height + this.selectedMethod.getPreferredSize().height));
 		setVisible(true);
 	}
 
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(Math.max(this.getWidth(), this.getMinimumSize().width), this.getMinimumSize().height);
+	}
+
 	public void addButton(JButton button) {
-		Dimension size = new Dimension(Calculator.SKILL_ICON_LENGTH, Calculator.SKILL_ICON_LENGTH);
-		button.setMinimumSize(size);
-		button.setMaximumSize(size);
-		button.setPreferredSize(size);
+		button.setMinimumSize(new Dimension(OSRSCalculator.SKILL_ICON_LENGTH, OSRSCalculator.SKILL_ICON_LENGTH));
 		buttons.add(button);
 	}
 

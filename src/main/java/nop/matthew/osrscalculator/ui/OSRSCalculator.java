@@ -16,10 +16,17 @@ import nop.matthew.osrscalculator.net.PriceFetcher;
 import java.io.IOException;
 
 public class OSRSCalculator {
-	public static final int DEFAULT_APP_WIDTH = Calculator.MINIMUM_WIDTH;
-	public static final int DEFAULT_APP_HEIGHT = Calculator.MINIMUM_HEIGHT + 500;
-
+	public static final int SKILL_ICON_LENGTH = 40;
 	public static final int SKILL_COUNT = 11;
+	
+	public static final int METHOD_SELECTION_HEIGHT = 40;
+	public static final int METHOD_SELECTION_WIDTH = 160;
+	public static final int DEFAULT_RESULTPANEL_HEIGHT = 400;
+
+	public static final int MINIMUM_WIDTH = SKILL_COUNT * SKILL_ICON_LENGTH;
+	public static final int MINIMUM_HEIGHT = SKILL_ICON_LENGTH + METHOD_SELECTION_HEIGHT;
+
+	protected static Calculator calculator;
 
 	public static void main(String[] args) throws IOException {
 		PriceFetcher priceFetcher = new PriceFetcher();
@@ -49,8 +56,7 @@ public class OSRSCalculator {
 		smithing.addRecipePrices();
 
 		priceFetcher.updatePrices();
-
-		Calculator calculator = new Calculator();
+		calculator = new Calculator();
 		calculator.addSkill(construction);
 		calculator.addSkill(cooking);
 		calculator.addSkill(crafting);
@@ -63,6 +69,12 @@ public class OSRSCalculator {
 		calculator.addSkill(prayer);
 		calculator.addSkill(smithing);
 
-		calculator.openSwing(DEFAULT_APP_WIDTH, DEFAULT_APP_HEIGHT);
+		openSwing();
+	}
+
+	public static void openSwing() {
+		calculator.setup(MINIMUM_WIDTH, MINIMUM_HEIGHT, null);
+		calculator.pack();
+		calculator.setVisible(true);
 	}
 }
