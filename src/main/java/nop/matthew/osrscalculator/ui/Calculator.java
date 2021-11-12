@@ -77,15 +77,22 @@ public class Calculator extends JFrame{
 		});
 	}
 
+	/** Add a skill to the results panel
+	 *
+	 * @param skill the skill to add
+	 * @throws IOException if the image fails to read
+	 */
 	public void addSkill(Skill skill) throws IOException {
 		Skills key = skill.getKey();
 		SkillPanel panel = new SkillPanel(skill);
-		this.resultPanel.add(key.toString(), panel);
+		this.resultPanel.add(panel);
 
+		// Create a JButton with the given skill's image
 		JButton button = new JButton(new ImageIcon(ImageIO
 				.read(getClass().getResource("/SkillIcons/" + key.toString().toLowerCase() + ".png"))
 				.getScaledInstance(OSRSCalculator.SKILL_ICON_LENGTH, OSRSCalculator.SKILL_ICON_LENGTH, Image.SCALE_DEFAULT)));
 		button.setToolTipText(key.toString());
+		// When clicked, swap to the given skill's panel on the result panel
 		button.addActionListener(e -> {
 			System.out.println("Selected calculator panel for " + key.toString());
 			this.resultPanel.setActiveSkills(key);
@@ -95,6 +102,7 @@ public class Calculator extends JFrame{
 		this.selectionPanel.addButton(button);
 	}
 
+	// These overrides are probably bad. Fix?
 	@Override
 	public Dimension getPreferredSize() {
 		Insets insets = getInsets();

@@ -58,11 +58,19 @@ public class SelectionPanel extends JPanel {
 		return selectedMethod;
 	}
 
+	/** Add a button to the panel for selecting skills
+	 *
+	 * @param button the button to add
+	 */
 	public void addButton(JButton button) {
 		button.setMinimumSize(new Dimension(OSRSCalculator.SKILL_ICON_LENGTH, OSRSCalculator.SKILL_ICON_LENGTH));
 		buttons.add(button);
 	}
 
+	/** Set the list of methods which the filter combobox should display
+	 *
+	 * @param methods The list of methods
+	 */
 	public void setMethods(List<Methods> methods) {
 		this.selectedMethod.removeAllItems();
 		selectedMethod.addItem("All");

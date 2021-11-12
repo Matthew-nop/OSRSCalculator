@@ -38,12 +38,21 @@ class ResultPanel extends JPanel {
 		this.lastHeight = OSRSCalculator.DEFAULT_RESULTPANEL_HEIGHT;
 	}
 
-	public Component add(String string, SkillPanel skillPanel) {
-		super.add(string, skillPanel.getScrollPane());
+	/** Add the given SkillPanel to the panel
+	 *
+	 * @param skillPanel the SkillPanel to add
+	 * @return the added SkillPanel
+	 */
+	public Component add(SkillPanel skillPanel) {
+		super.add(skillPanel.getSkills().toString(), skillPanel.getScrollPane());
 		this.skillPanels.put(skillPanel.getSkills(), skillPanel);
 		return skillPanel;
 	}
 
+	/** Set the active skill which is displayed
+	 *
+	 * @param skills the skill to change to. If null, the panel is hidden.
+	 */
 	public void setActiveSkills(Skills skills) {
 		if (skills != null && !skills.equals(this.activeSkills)) {
 			SkillPanel currentPanel = skillPanels.get(skills);
@@ -63,6 +72,10 @@ class ResultPanel extends JPanel {
 		}
 	}
 
+	/** Set the method by which the active skill's recipes will be filtered
+	 *
+	 * @param method the method to filter by
+	 */
 	public void setMethod(Methods method) {
 		if (activeSkills != null)
 			skillPanels.get(activeSkills).setMethod(method);
