@@ -33,25 +33,26 @@ public class SelectionPanel extends JPanel {
 	public SelectionPanel() {
 		super();
 		setLayout(new BorderLayout(0, 0));
-		this.buttons = new JPanel(new GridLayout(1, 11));
-		this.selectedMethod = new JComboBox<>();
+		this.buttons = new JPanel(new GridLayout(1, 11)){
+			@Override
+			public Dimension getPreferredSize(){
+				return new Dimension(OSRSCalculator.MINIMUM_WIDTH*this.getComponentCount(), OSRSCalculator.SKILL_ICON_LENGTH);
+			}
+		};
+		this.selectedMethod = new JComboBox<>(){
+			@Override
+			public Dimension getPreferredSize() {
+				return new Dimension(OSRSCalculator.METHOD_SELECTION_WIDTH, OSRSCalculator.METHOD_SELECTION_HEIGHT);
+			}
+		};
 	}
 
 	public void setup() {
-		Dimension buttonsSize = new Dimension(OSRSCalculator.MINIMUM_WIDTH, OSRSCalculator.SKILL_ICON_LENGTH);
-		this.buttons.setPreferredSize(buttonsSize);
 		add(BorderLayout.NORTH, buttons);
-
-		this.selectedMethod.setPreferredSize(new Dimension(OSRSCalculator.METHOD_SELECTION_WIDTH, OSRSCalculator.METHOD_SELECTION_HEIGHT));
 		add(BorderLayout.EAST, selectedMethod);
 
-		setMinimumSize(new Dimension(OSRSCalculator.MINIMUM_WIDTH, this.buttons.getPreferredSize().height + this.selectedMethod.getPreferredSize().height));
+		setMinimumSize(getMinimumSize());
 		setVisible(true);
-	}
-
-	@Override
-	public Dimension getPreferredSize() {
-		return new Dimension(Math.max(this.getWidth(), this.getMinimumSize().width), this.getMinimumSize().height);
 	}
 
 	public JComboBox<String> getSelectedMethod() {
@@ -77,5 +78,15 @@ public class SelectionPanel extends JPanel {
 		for (Methods method : methods) {
 			this.selectedMethod.addItem(method.getName());
 		}
+	}
+
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(OSRSCalculator.calculator.getWidth(), this.getMinimumSize().height);
+	}
+
+	@Override
+	public Dimension getMinimumSize() {
+		return new Dimension(OSRSCalculator.calculator.getMinimumSize().width, this.buttons.getPreferredSize().height + this.selectedMethod.getPreferredSize().height);
 	}
 }

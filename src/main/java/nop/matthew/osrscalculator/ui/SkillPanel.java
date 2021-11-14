@@ -36,34 +36,35 @@ public class SkillPanel extends JPanel {
 	private final Skill skill;
 	private final ArrayList<RecipePanel> recipePanels;
 	private final JScrollPane scrollPane;
+	private int count;
 
 	public SkillPanel(Skill skill) {
 		super(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
 		this.skill = skill;
 		this.recipePanels = new ArrayList<RecipePanel>();
-		int count = 0;
-		constraints.anchor = GridBagConstraints.NORTHEAST;
-		constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.count = 0;
+		constraints.anchor = GridBagConstraints.NORTHWEST;
+		constraints.fill = GridBagConstraints.BOTH;
 		constraints.gridwidth = 1;
 		constraints.weighty = 0;
 		for (Map.Entry<Methods, Recipe[]> entry : skill.getMethodRecipes().entrySet()) {
 			Methods method = entry.getKey();
 			Recipe[] recipes = entry.getValue();
-			for (int i = 0; i < recipes.length; i++, count++) {
+			for (int i = 0; i < recipes.length; i++, this.count++) {
 				RecipePanel recipePanel = new RecipePanel(recipes[i], method);
 				this.recipePanels.add(recipePanel);
 
 				constraints.gridx = 0;
-				constraints.gridy = count;
+				constraints.gridy = this.count;
 				add(recipePanel, constraints);
 			}
 		}
-		constraints.fill = GridBagConstraints.BOTH;
 		constraints.weighty = 1;
 		add(new JPanel(), constraints);
 
 		this.recipePanels.trimToSize();
+		validate();
 		scrollPane = new JScrollPane(this, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER) {
 			@Override
 			public Dimension getPreferredSize() {
@@ -90,9 +91,9 @@ public class SkillPanel extends JPanel {
 		removeAll();
 		GridBagConstraints constraints = new GridBagConstraints();
 
-		int count = 0;
-		constraints.anchor = GridBagConstraints.NORTHEAST;
-		constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.count = 0;
+		constraints.anchor = GridBagConstraints.NORTHWEST;
+		constraints.fill = GridBagConstraints.BOTH;
 		constraints.gridwidth = 1;
 		constraints.weighty = 0;
 		List<RecipePanel> panels = this.recipePanels;
@@ -101,14 +102,12 @@ public class SkillPanel extends JPanel {
 					.filter(r -> r.getMethod().equals(method))
 					.collect(Collectors.toList());
 		int size = panels.size();
-		for (int i = 0; i < size; i++, count++) {
-			RecipePanel recipePanel = panels.get(i);
+		for (; this.count < size; this.count++) {
+			RecipePanel recipePanel = panels.get(this.count);
 			constraints.gridx = 0;
-			constraints.gridy = count;
+			constraints.gridy = this.count;
 			add(recipePanel, constraints);
 		}
-
-		constraints.fill = GridBagConstraints.VERTICAL;
 		constraints.weighty = 1;
 		add(new JPanel(), constraints);
 

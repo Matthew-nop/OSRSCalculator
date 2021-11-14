@@ -30,7 +30,7 @@ public class CostPanel extends JPanel {
 	private final float xp;
 
 	public CostPanel(Recipe recipe) {
-		super();
+		super(new BorderLayout(0, 0));
 		this.profit = new JLabel();
 		this.profitNormalised = new JLabel();
 		this.xp = recipe.getXp();

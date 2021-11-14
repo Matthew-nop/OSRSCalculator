@@ -25,6 +25,7 @@ import javax.swing.border.Border;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.util.Map;
 
 public class RecipePanel extends JPanel {
@@ -36,8 +37,7 @@ public class RecipePanel extends JPanel {
 
 	// TODO: make this look decent
 	public RecipePanel(Recipe recipe, Methods method) {
-		super();
-		setLayout(new BorderLayout(0, 0));
+		super(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		Border border = BorderFactory.createLineBorder(Color.black);
 		this.recipe = recipe;
 		this.method = method;
@@ -53,6 +53,8 @@ public class RecipePanel extends JPanel {
 		this.cost = new CostPanel(recipe);
 		this.cost.setBorder(border);
 		add(BorderLayout.EAST, cost);
+
+		validate();
 	}
 
 	/** Set the costs for this panel

@@ -26,16 +26,14 @@ import java.awt.Dimension;
 import java.util.HashMap;
 
 class ResultPanel extends JPanel {
-	Skills activeSkills;
+	SkillPanel currentPanel;
 	CardLayout cardLayout;
 	HashMap<Skills, SkillPanel> skillPanels;
-	int lastHeight;
 
 	public ResultPanel() {
 		super(new CardLayout(0, 0));
 		this.cardLayout = (CardLayout) getLayout();
 		this.skillPanels = new HashMap<>(OSRSCalculator.SKILL_COUNT);
-		this.lastHeight = OSRSCalculator.DEFAULT_RESULTPANEL_HEIGHT;
 	}
 
 	/** Add the given SkillPanel to the panel
@@ -51,25 +49,12 @@ class ResultPanel extends JPanel {
 
 	/** Set the active skill which is displayed
 	 *
-	 * @param skills the skill to change to. If null, the panel is hidden.
+	 * @param skills the skill to change to.
 	 */
 	public void setActiveSkills(Skills skills) {
-		if (skills != null && !skills.equals(this.activeSkills)) {
-			SkillPanel currentPanel = skillPanels.get(skills);
-			if (currentPanel != null)
-				currentPanel.update();
-			this.cardLayout.show(this, skills.toString());
-			this.activeSkills = skills;
-			setVisible(true);
-		}
-		else {
-			// If the panel hasn't been set up, ignore
-			if (this.getWidth() > 0)
-				this.lastHeight = getHeight();
-			this.cardLayout.show(this, null);
-			this.activeSkills = null;
-			setVisible(false);
-		}
+		this.cardLayout.show(this, skills.toString());
+		this.currentPanel = skillPanels.get(skills);
+		this.currentPanel.update();
 	}
 
 	/** Set the method by which the active skill's recipes will be filtered
@@ -77,18 +62,16 @@ class ResultPanel extends JPanel {
 	 * @param method the method to filter by
 	 */
 	public void setMethod(Methods method) {
-		if (activeSkills != null)
-			skillPanels.get(activeSkills).setMethod(method);
+		if (currentPanel != null)
+			currentPanel.setMethod(method);
 	}
 
 	public Skills getActiveSkills() {
-		return activeSkills;
+		return currentPanel.getSkills();
 	}
 
 	@Override
 	public Dimension getPreferredSize() {
-		return isVisible() ?
-				new Dimension(OSRSCalculator.calculator.getWidth(), lastHeight) :
-				new Dimension(OSRSCalculator.calculator.getWidth(), 0);
+		return new Dimension(getWidth(), getHeight());
 	}
 }
