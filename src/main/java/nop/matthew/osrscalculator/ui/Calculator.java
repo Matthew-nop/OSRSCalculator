@@ -27,6 +27,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.LayoutManager;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ItemEvent;
@@ -36,7 +37,6 @@ import java.util.stream.Collectors;
 
 public class Calculator extends JFrame {
 	private final JPanel contentPane;
-	private final BorderLayout mainLayout;
 	private final JMenuBar menuBar;
 	private final SelectionPanel selectionPanel;
 	private final ResultPanel resultPanel;
@@ -44,15 +44,14 @@ public class Calculator extends JFrame {
 
 	public Calculator() {
 		super("OSRS Calculator");
-		this.mainLayout = new BorderLayout(0, 0);
-		this.contentPane = new JPanel(mainLayout);
-		setLayout(this.mainLayout);
+		LayoutManager layoutManager = new BorderLayout(0, 0);
+		this.contentPane = new JPanel(layoutManager);
+		setLayout(layoutManager);
 		setContentPane(contentPane);
 		setResizable(true);
 		setMinimumSize(getMinimumSize());
 		JFrame.setDefaultLookAndFeelDecorated(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
 		this.menuBar = new JMenuBar();
 		this.selectionPanel = new SelectionPanel();
 		this.resultPanel = new ResultPanel();
@@ -123,6 +122,7 @@ public class Calculator extends JFrame {
 		sortRecipes(SortCriteria.LEVEL);
 
 		setSize(width, height);
+		setLocationRelativeTo(null);
 		validate();
 		repaint();
 		pack();
@@ -146,7 +146,7 @@ public class Calculator extends JFrame {
 				.getScaledInstance(OSRSCalculator.SKILL_ICON_LENGTH, OSRSCalculator.SKILL_ICON_LENGTH, Image.SCALE_DEFAULT)));
 		button.setToolTipText(key.toString());
 		button.addActionListener(e -> selectSkill(key));
-		this.selectionPanel.addButton(button);
+		this.selectionPanel.addSkillButton(button);
 	}
 
 	private void selectSkill(Skills skills) {
@@ -162,6 +162,14 @@ public class Calculator extends JFrame {
 	private void sortRecipes(SortCriteria criteria) {
 		this.sortCriteria = criteria;
 		this.resultPanel.sortBy(criteria);
+	}
+
+	public SelectionPanel getSelectionPanel() {
+		return this.selectionPanel;
+	}
+
+	public ResultPanel getResultPanel() {
+		return this.resultPanel;
 	}
 
 	@Override
