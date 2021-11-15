@@ -27,6 +27,7 @@ public enum Methods {
 	CLEANING_HERBS("Cleaning herbs", Skills.HERBLORE),
 	MAKING_TAR("Making tar", Skills.HERBLORE),
 	MAKING_POTIONS("Making potions", Skills.HERBLORE),
+	MAKING_DIVINE_POTIONS("Making divine potions", Skills.HERBLORE),
 	;
 
 	private final String name;
