@@ -33,7 +33,8 @@ public enum SortCriteria {
 		this.name = name;
 	}
 
-	/** Returns a comparator for the given SortCriteria
+	/**
+	 * Returns a comparator for the given SortCriteria
 	 *
 	 * @param sortType the given SortCriteria
 	 * @return a Comparator for the given criteria
@@ -53,7 +54,8 @@ public enum SortCriteria {
 		}
 	}
 
-	/** Returns the first SortCriteria which matches the given name
+	/**
+	 * Returns the first SortCriteria which matches the given name
 	 *
 	 * @param name the given name
 	 * @return the first matching SortCriteria

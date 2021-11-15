@@ -44,7 +44,8 @@ public class PriceFetcher {
 		this.endpoint = baseUrl;
 	}
 
-	/** Update the current stored item prices
+	/**
+	 * Update the current stored item prices
 	 *
 	 * @throws IOException If either the connection or JSON parsing fails
 	 */
@@ -67,7 +68,8 @@ public class PriceFetcher {
 		}
 	}
 
-	/** Immediately fetch the current price of an item
+	/**
+	 * Immediately fetch the current price of an item
 	 *
 	 * @param id the item's id
 	 * @throws IOException If either the connection or JSON parsing fails
@@ -83,7 +85,8 @@ public class PriceFetcher {
 		prices.put(id, price);
 	}
 
-	/** Add an item to start fetching prices for
+	/**
+	 * Add an item to start fetching prices for
 	 *
 	 * @param id the item's id
 	 */
@@ -91,7 +94,8 @@ public class PriceFetcher {
 		this.prices.put(id, 0f);
 	}
 
-	/** Add items to start fetching prices for
+	/**
+	 * Add items to start fetching prices for
 	 *
 	 * @param ids for these ids, start fetching their prices
 	 */
@@ -101,7 +105,8 @@ public class PriceFetcher {
 		}
 	}
 
-	/** Add the components from a recipe to start fetching prices for
+	/**
+	 * Add the components from a recipe to start fetching prices for
 	 *
 	 * @param recipe the recipe
 	 */
@@ -114,7 +119,8 @@ public class PriceFetcher {
 		}
 	}
 
-	/** Get the current cached price of an item
+	/**
+	 * Get the current cached price of an item
 	 *
 	 * @param id the item's id
 	 * @return the price of the item

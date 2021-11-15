@@ -45,7 +45,8 @@ public enum Methods {
 		return this.skill;
 	}
 
-	/** Returns the first Method which matches the given name
+	/**
+	 * Returns the first Method which matches the given name
 	 *
 	 * @param name the given name
 	 * @return the first matching Method

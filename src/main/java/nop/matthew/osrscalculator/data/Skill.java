@@ -37,8 +37,8 @@ public abstract class Skill {
 		this.flags = new HashSet<>();
 	}
 
-	/** Add all items from a skill's recipes to the price fetcher
-	 *
+	/**
+	 * Add all items from a skill's recipes to the price fetcher
 	 */
 	public void addRecipePrices() {
 		for (Recipe[] recipes : methodRecipes.values()) {
@@ -50,12 +50,13 @@ public abstract class Skill {
 		addTertiaryPrices();
 	}
 
-	/** Add all items which are not in a recipe, but require prices to be tracked
-	 *
+	/**
+	 * Add all items which are not in a recipe, but require prices to be tracked
 	 */
 	protected abstract void addTertiaryPrices();
 
-	/** Get a map of (ItemID -> total cost) for recipe outputs
+	/**
+	 * Get a map of (ItemID -> total cost) for recipe outputs
 	 *
 	 * @param recipe the recipe
 	 * @return the map of costs
@@ -66,13 +67,14 @@ public abstract class Skill {
 
 		for (ItemQuantity item : outputs) {
 			int id = item.getId();
-			costs.put(id, priceFetcher.getPrice(id)*item.getQuantity());
+			costs.put(id, priceFetcher.getPrice(id) * item.getQuantity());
 		}
 
 		return costs;
 	}
 
-	/** Get a map of (ItemID -> total cost) for recipe inputs
+	/**
+	 * Get a map of (ItemID -> total cost) for recipe inputs
 	 *
 	 * @param recipe the recipe
 	 * @return the map of costs
@@ -82,7 +84,7 @@ public abstract class Skill {
 
 		for (ItemQuantity item : recipe.getIngredients()) {
 			int id = item.getId();
-			costs.put(id, priceFetcher.getPrice(id)*item.getQuantity());
+			costs.put(id, priceFetcher.getPrice(id) * item.getQuantity());
 		}
 
 		return costs;

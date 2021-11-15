@@ -38,7 +38,8 @@ class ResultPanel extends JPanel {
 		this.skillPanels = new HashMap<>(OSRSCalculator.SKILL_COUNT);
 	}
 
-	/** Add the given SkillPanel to the panel
+	/**
+	 * Add the given SkillPanel to the panel
 	 *
 	 * @param skillPanel the SkillPanel to add
 	 * @return the added SkillPanel
@@ -49,7 +50,8 @@ class ResultPanel extends JPanel {
 		return skillPanel;
 	}
 
-	/** Set the active skill which is displayed
+	/**
+	 * Set the active skill which is displayed
 	 *
 	 * @param skills the skill to change to.
 	 */
@@ -59,7 +61,8 @@ class ResultPanel extends JPanel {
 		this.currentPanel.update();
 	}
 
-	/** Set the method by which the active skill's recipes will be filtered
+	/**
+	 * Set the method by which the active skill's recipes will be filtered
 	 *
 	 * @param method the method to filter by
 	 */
@@ -68,7 +71,8 @@ class ResultPanel extends JPanel {
 			currentPanel.setMethod(method);
 	}
 
-	/** Sort the active skill's list of RecipePanels
+	/**
+	 * Sort the active skill's list of RecipePanels
 	 *
 	 * @param sortCriteria the SortCriteria to sort by
 	 */

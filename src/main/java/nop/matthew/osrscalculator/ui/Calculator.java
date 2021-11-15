@@ -75,14 +75,14 @@ public class Calculator extends JFrame {
 		JRadioButtonMenuItem levelSort = new JRadioButtonMenuItem(SortCriteria.LEVEL.toString(), true);
 		levelSort.addItemListener(e -> {
 			if (e.getStateChange() == ItemEvent.SELECTED)
-			sortRecipes(SortCriteria.LEVEL);
+				sortRecipes(SortCriteria.LEVEL);
 		});
 		sortGroup.add(levelSort);
 		sort.add(levelSort);
 		JRadioButtonMenuItem normalisedCostSort = new JRadioButtonMenuItem(SortCriteria.NORMALISED_COST.toString());
 		normalisedCostSort.addItemListener(e -> {
 			if (e.getStateChange() == ItemEvent.SELECTED)
-			sortRecipes(SortCriteria.NORMALISED_COST);
+				sortRecipes(SortCriteria.NORMALISED_COST);
 		});
 		sortGroup.add(normalisedCostSort);
 		sort.add(normalisedCostSort);
@@ -129,7 +129,8 @@ public class Calculator extends JFrame {
 		setVisible(true);
 	}
 
-	/** Add a skill to the results panel
+	/**
+	 * Add a skill to the results panel
 	 *
 	 * @param skill the skill to add
 	 * @throws IOException if the image fails to read
