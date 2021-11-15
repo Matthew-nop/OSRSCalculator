@@ -75,7 +75,9 @@ public class Calculator extends JFrame {
 		selectSkill(defaultSkill);
 
 		addComponentListener(new ComponentAdapter() {
+			@Override
 			public void componentResized(ComponentEvent componentEvent) {
+				resultPanel.getCurrentPanel().revalidate();
 				pack();
 			}
 		});
@@ -122,9 +124,6 @@ public class Calculator extends JFrame {
 
 	@Override
 	public Dimension getMinimumSize() {
-		Insets insets = getInsets();
-		return new Dimension(
-				OSRSCalculator.MINIMUM_WIDTH + insets.right + insets.left,
-				OSRSCalculator.MINIMUM_HEIGHT + insets.top + insets.bottom);
+		return new Dimension(OSRSCalculator.MINIMUM_WIDTH, OSRSCalculator.MINIMUM_HEIGHT);
 	}
 }
