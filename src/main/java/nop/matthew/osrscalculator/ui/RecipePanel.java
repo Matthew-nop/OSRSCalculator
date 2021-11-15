@@ -34,10 +34,14 @@ public class RecipePanel extends JPanel {
 	private final OutcomePanel outcome;
 	private final ProcessPanel process;
 	private final CostPanel cost;
+	private double profit;
+	private double normalisedProfit;
 
 	// TODO: make this look decent
 	public RecipePanel(Recipe recipe, Methods method) {
 		super(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		this.profit = 0;
+		this.normalisedProfit = 0;
 		Border border = BorderFactory.createLineBorder(Color.black);
 		this.recipe = recipe;
 		this.method = method;
@@ -65,9 +69,11 @@ public class RecipePanel extends JPanel {
 	public void setCosts(Map<Integer, Float> out, Map<Integer, Float> in) {
 		double costOut = out.values().stream().mapToDouble(v -> v).sum();
 		double costIn = in.values().stream().mapToDouble(v -> v).sum();
+		this.profit = costOut - costIn;
+		this.normalisedProfit = this.profit / (double) this.recipe.getXp();
 
 		this.process.setCosts(costOut, costIn);
-		this.cost.setProfit(costOut - costIn);
+		this.cost.setProfit(profit, normalisedProfit);
 		repaint();
 	}
 
@@ -76,7 +82,15 @@ public class RecipePanel extends JPanel {
 	}
 
 	public Methods getMethod() {
-		return method;
+		return this.method;
+	}
+
+	public double getProfit() {
+		return this.profit;
+	}
+
+	public double getNormalisedProfit() {
+		return this.normalisedProfit;
 	}
 
 	@Override

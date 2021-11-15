@@ -25,30 +25,28 @@ import java.awt.Dimension;
 import java.text.DecimalFormat;
 
 public class CostPanel extends JPanel {
-	private JLabel profit;
-	private JLabel profitNormalised;
-	private final float xp;
+	private JLabel profitLabel;
+	private JLabel normalisedProfitLabel;
 
 	public CostPanel(Recipe recipe) {
 		super(new BorderLayout(0, 0));
-		this.profit = new JLabel();
-		this.profitNormalised = new JLabel();
-		this.xp = recipe.getXp();
+		this.profitLabel = new JLabel();
+		this.normalisedProfitLabel = new JLabel();
 
-		this.profit = new JLabel("0");
-		add(BorderLayout.NORTH, this.profit);
-		this.profitNormalised = new JLabel("0");
-		add(BorderLayout.SOUTH, this.profitNormalised);
+		this.profitLabel = new JLabel("0");
+		add(BorderLayout.NORTH, this.profitLabel);
+		this.normalisedProfitLabel = new JLabel("0");
+		add(BorderLayout.SOUTH, this.normalisedProfitLabel);
 	}
 
 	/** Update the panel's information
 	 *
-	 * @param profit the profit to display
+	 * @param normalisedProfit the normalised profit to display
 	 */
-	public void setProfit(double profit) {
+	public void setProfit(double profit, double normalisedProfit) {
 		DecimalFormat df = new DecimalFormat("#.#");
-		this.profit.setText("Profit: " + df.format(profit));
-		this.profitNormalised.setText("GP/XP: " + df.format(profit / this.xp));
+		this.profitLabel.setText("Profit: " + df.format(profit));
+		this.normalisedProfitLabel.setText("GP/XP: " + df.format(normalisedProfit));
 	}
 
 	@Override

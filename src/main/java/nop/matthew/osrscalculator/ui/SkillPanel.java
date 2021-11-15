@@ -20,26 +20,28 @@ import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Recipe;
 import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
+import nop.matthew.osrscalculator.data.SortCriteria;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class SkillPanel extends JPanel {
 	private final Skill skill;
 	private final ArrayList<RecipePanel> recipePanels;
+	private List<RecipePanel> shownPanels;
 	private int count;
 
 	public SkillPanel(Skill skill) {
 		super(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
 		this.skill = skill;
-		this.recipePanels = new ArrayList<RecipePanel>();
+		this.recipePanels = new ArrayList<>();
 		this.count = 0;
 		constraints.anchor = GridBagConstraints.NORTHWEST;
 		constraints.fill = GridBagConstraints.BOTH;
@@ -61,14 +63,39 @@ public class SkillPanel extends JPanel {
 		add(new JPanel(), constraints);
 
 		this.recipePanels.trimToSize();
+		this.shownPanels = new ArrayList<>(this.recipePanels);
 		validate();
+	}
+
+	private void setShownPanels(List<RecipePanel> panels) {
+		removeAll();
+		GridBagConstraints constraints = new GridBagConstraints();
+
+		this.count = 0;
+		constraints.anchor = GridBagConstraints.NORTHWEST;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.gridwidth = 1;
+		constraints.weighty = 0;
+
+		int size = panels.size();
+		for (; this.count < size; this.count++) {
+			constraints.gridx = 0;
+			constraints.gridy = this.count;
+			add(panels.get(this.count), constraints);
+		}
+		constraints.weighty = 1;
+		add(new JPanel(), constraints);
+
+		validate();
+		repaint();
+		this.shownPanels = panels;
 	}
 
 	/** Update recipe panel information
 	 *
 	 */
 	public void update() {
-		for (RecipePanel panel : recipePanels) {
+		for (RecipePanel panel : this.recipePanels) {
 			Recipe r = panel.getRecipe();
 			panel.setCosts(this.skill.getRecipeOutCosts(r), this.skill.getRecipeInCosts(r));
 		}
@@ -80,30 +107,27 @@ public class SkillPanel extends JPanel {
 	 */
 	public void setMethod(Methods method) {
 		removeAll();
-		GridBagConstraints constraints = new GridBagConstraints();
-
-		this.count = 0;
-		constraints.anchor = GridBagConstraints.NORTHWEST;
-		constraints.fill = GridBagConstraints.BOTH;
-		constraints.gridwidth = 1;
-		constraints.weighty = 0;
-		List<RecipePanel> panels = this.recipePanels;
+		ArrayList<RecipePanel> panels = new ArrayList<>(recipePanels);
 		if (method != null)
-			panels = panels.stream()
-					.filter(r -> r.getMethod().equals(method))
-					.collect(Collectors.toList());
-		int size = panels.size();
-		for (; this.count < size; this.count++) {
-			RecipePanel recipePanel = panels.get(this.count);
-			constraints.gridx = 0;
-			constraints.gridy = this.count;
-			add(recipePanel, constraints);
-		}
-		constraints.weighty = 1;
-		add(new JPanel(), constraints);
+			panels.removeIf(p -> !p.getMethod().equals(method));
 
-		repaint();
-		revalidate();
+		setShownPanels(panels);
+	}
+
+	/** Set the sorting criteria for the list of shown recipes
+	 *
+	 * @param sortCriteria the sorting criteria
+	 */
+	public void sortBy(SortCriteria sortCriteria) {
+		if (sortCriteria == null)
+			return;
+
+		Comparator<RecipePanel> comparator = SortCriteria.getComparator(sortCriteria);
+		if (comparator == null)
+			return;
+
+		this.shownPanels.sort(comparator);
+		setShownPanels(this.shownPanels);
 	}
 
 	public Skills getSkills() {

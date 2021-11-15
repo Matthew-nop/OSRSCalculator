@@ -29,8 +29,8 @@ public enum Methods {
 	MAKING_POTIONS("Making potions", Skills.HERBLORE),
 	;
 
-	private String name;
-	private Skills skill;
+	private final String name;
+	private final Skills skill;
 
 	Methods(String name, Skills skill) {
 		this.name = name;
@@ -45,11 +45,11 @@ public enum Methods {
 		return this.skill;
 	}
 
-	@Override
-	public String toString() {
-		return this.name;
-	}
-
+	/** Returns the first Method which matches the given name
+	 *
+	 * @param name the given name
+	 * @return the first matching Method
+	 */
 	public static Methods getFromName(String name) {
 		for (Methods m : Methods.values()) {
 			if (m.toString().equals(name))
@@ -57,5 +57,10 @@ public enum Methods {
 		}
 
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return this.name;
 	}
 }
