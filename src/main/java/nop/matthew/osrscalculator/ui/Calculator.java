@@ -109,8 +109,10 @@ public class Calculator extends JFrame {
 		JComboBox<String> selectedMethod = this.selectionPanel.getSelectedMethod();
 		selectedMethod.addActionListener(e -> {
 			Object selected = selectedMethod.getSelectedItem();
-			if (selected != null)
+			if (selected != null) {
 				this.resultPanel.setMethod(Methods.getFromName(selected.toString()));
+				this.resultPanel.sortBy(this.sortCriteria);
+			}
 			repaint();
 			revalidate();
 		});
