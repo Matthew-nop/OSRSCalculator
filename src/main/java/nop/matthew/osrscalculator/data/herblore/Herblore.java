@@ -61,11 +61,11 @@ public class Herblore extends Skill {
 		// If using the amulet of chemistry, and the recipe is affected
 		if (recipe.flagsAffect(flags)) {
 			// 5% chance to proc, with 20% of the amulet consumed each proc
-			costs.put(ItemID.AMULET_OF_CHEMISTRY, priceFetcher.getPrice(ItemID.AMULET_OF_CHEMISTRY)*0.01f);
+			costs.put(ItemID.AMULET_OF_CHEMISTRY, priceFetcher.getPrice(ItemID.AMULET_OF_CHEMISTRY) * 0.01f);
 		}
 		for (ItemQuantity i : recipe.getIngredients()) {
 			int id = i.getId();
-			costs.put(id, priceFetcher.getPrice(id)*i.getQuantity());
+			costs.put(id, priceFetcher.getPrice(id) * i.getQuantity());
 		}
 
 		return costs;

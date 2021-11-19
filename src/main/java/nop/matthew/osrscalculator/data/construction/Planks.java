@@ -38,7 +38,7 @@ public enum Planks implements Recipe {
 			new ItemQuantity(Item.TEAK_PLANK, 1)),
 	MAHOGANY_PLANKS(
 			40,
-			90,
+			140,
 			new ItemQuantity(Item.MAHOGANY_PLANK, 1)),
 	;
 

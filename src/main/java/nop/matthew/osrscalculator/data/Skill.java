@@ -33,7 +33,7 @@ public abstract class Skill {
 	public Skill(Skills skills, PriceFetcher priceFetcher) {
 		this.skills = skills;
 		this.priceFetcher = priceFetcher;
-		this.methodRecipes = new TreeMap<Methods, Recipe[]>();
+		this.methodRecipes = new TreeMap<>();
 		this.flags = new HashSet<>();
 	}
 
@@ -73,7 +73,8 @@ public abstract class Skill {
 		return costs;
 	}
 
-	/** Returns the xp gained per the  given recipe's action
+	/**
+	 * Returns the xp gained per the  given recipe's action
 	 *
 	 * @param recipe the recipe
 	 * @return The xp gained
