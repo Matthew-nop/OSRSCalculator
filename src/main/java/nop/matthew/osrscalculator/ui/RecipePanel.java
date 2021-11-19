@@ -18,6 +18,7 @@ package nop.matthew.osrscalculator.ui;
 
 import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Recipe;
+import nop.matthew.osrscalculator.data.Skill;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -26,11 +27,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.util.Map;
 
 public class RecipePanel extends JPanel {
 	private final Recipe recipe;
 	private final Methods method;
+	private final Skill skill;
 	private final OutcomePanel outcome;
 	private final ProcessPanel process;
 	private final CostPanel cost;
@@ -38,23 +39,24 @@ public class RecipePanel extends JPanel {
 	private double normalisedProfit;
 
 	// TODO: make this look decent
-	public RecipePanel(Recipe recipe, Methods method) {
+	public RecipePanel(Recipe recipe, Methods method, Skill skill) {
 		super(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		this.profit = 0;
 		this.normalisedProfit = 0;
 		Border border = BorderFactory.createLineBorder(Color.black);
 		this.recipe = recipe;
 		this.method = method;
+		this.skill = skill;
 
-		this.outcome = new OutcomePanel(recipe);
+		this.outcome = new OutcomePanel(recipe, skill);
 		this.outcome.setBorder(border);
 		add(BorderLayout.WEST, outcome);
 
-		this.process = new ProcessPanel(recipe);
+		this.process = new ProcessPanel();
 		this.process.setBorder(border);
 		add(BorderLayout.CENTER, process);
 
-		this.cost = new CostPanel(recipe);
+		this.cost = new CostPanel();
 		this.cost.setBorder(border);
 		add(BorderLayout.EAST, cost);
 
@@ -62,17 +64,16 @@ public class RecipePanel extends JPanel {
 	}
 
 	/**
-	 * Set the costs for this panel
-	 *
-	 * @param out the output cost map
-	 * @param in  the input cost map
+	 * Update this panel's information
 	 */
-	public void setCosts(Map<Integer, Float> out, Map<Integer, Float> in) {
-		double costOut = out.values().stream().mapToDouble(v -> v).sum();
-		double costIn = in.values().stream().mapToDouble(v -> v).sum();
+	public void updatePanel() {
+		double costOut = this.skill.getRecipeOutCosts(this.recipe).values().stream().mapToDouble(v -> v).sum();
+		double costIn = this.skill.getRecipeInCosts(this.recipe).values().stream().mapToDouble(v -> v).sum();
 		this.profit = costOut - costIn;
-		this.normalisedProfit = this.profit / (double) this.recipe.getXp();
+		double xp = this.skill.getXp(this.recipe);
+		this.normalisedProfit = this.profit / xp;
 
+		this.outcome.setXp(xp);
 		this.process.setCosts(costOut, costIn);
 		this.cost.setProfit(profit, normalisedProfit);
 		repaint();

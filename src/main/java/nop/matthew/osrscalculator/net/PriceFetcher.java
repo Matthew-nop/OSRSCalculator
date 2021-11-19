@@ -16,6 +16,7 @@
 
 package nop.matthew.osrscalculator.net;
 
+import nop.matthew.osrscalculator.data.Item;
 import nop.matthew.osrscalculator.data.ItemQuantity;
 import nop.matthew.osrscalculator.data.Recipe;
 import org.json.JSONException;
@@ -40,7 +41,7 @@ public class PriceFetcher {
 	private HashMap<Integer, Float> prices;
 
 	public PriceFetcher() throws IOException {
-		this.prices = new HashMap<Integer, Float>(); // TODO: set an accurate initial size
+		this.prices = new HashMap<>();
 		this.endpoint = baseUrl;
 	}
 
@@ -148,7 +149,7 @@ public class PriceFetcher {
 			return attempt;
 		} catch (IOException e) {
 			System.err.println(e + "\nConnection attempt " + (attempt + 1) + " timed out after waiting " + CONNECTION_TIMEOUT_MS + "ms");
-			return attempt >= CONNECTION_RETRY_MAX ? -1 : connect(attempt++);
+			return attempt >= CONNECTION_RETRY_MAX ? -1 : connect(++attempt);
 		}
 	}
 
