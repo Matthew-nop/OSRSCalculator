@@ -131,4 +131,8 @@ public abstract class Skill {
 	public void unsetFlag(Flags flag) {
 		this.flags.remove(flag);
 	}
+
+	public boolean checkFlag(Flags flag) {
+		return this.flags.contains(flag);
+	}
 }
