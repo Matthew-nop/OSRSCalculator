@@ -30,11 +30,12 @@ public class EfficiencyPanel extends JPanel {
 
 	public EfficiencyPanel() {
 		super(new GridLayout(0, 1, 0, 0));
+
 		this.normalisedProfitLabel = new JLabel();
 		this.profitLabel = new JLabel();
 		this.actionCountLabel = new JLabel();
-
 		setEfficiency(0d, 0d, "0");
+
 		add(this.normalisedProfitLabel);
 		add(this.profitLabel);
 		add(this.actionCountLabel);
