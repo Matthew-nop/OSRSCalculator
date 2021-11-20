@@ -52,12 +52,12 @@ public class EfficiencyPanel extends JPanel {
 		this.profitLabel.setText(" Profit: " + df.format(profit));
 		this.normalisedProfitLabel.setText(" GP/XP: " + df.format(normalisedProfit));
 		if (profit >= 0) {
-			this.profitLabel.setForeground(Color.GREEN);
-			this.normalisedProfitLabel.setForeground(Color.GREEN);
+			this.profitLabel.setForeground(new Color(0x00AB66));
+			this.normalisedProfitLabel.setForeground(new Color(0x00AB66));
 		}
 		else {
-			this.profitLabel.setForeground(Color.RED);
-			this.normalisedProfitLabel.setForeground(Color.RED);
+			this.profitLabel.setForeground(new Color(0xE30022));
+			this.normalisedProfitLabel.setForeground(new Color(0xE30022));
 		}
 	}
 
