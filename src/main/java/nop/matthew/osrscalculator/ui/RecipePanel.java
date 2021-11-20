@@ -16,6 +16,7 @@
 
 package nop.matthew.osrscalculator.ui;
 
+import nop.matthew.osrscalculator.data.Experience;
 import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Recipe;
 import nop.matthew.osrscalculator.data.Skill;
@@ -40,7 +41,6 @@ public class RecipePanel extends JPanel {
 	private double profit;
 	private double normalisedProfit;
 
-	// TODO: make this look decent
 	public RecipePanel(Recipe recipe, Methods method, Skill skill) {
 		super(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		this.profit = 0;
@@ -83,14 +83,28 @@ public class RecipePanel extends JPanel {
 		repaint();
 	}
 
+	/**
+	 * Update this panel's action count from the given xp values
+	 *
+	 * @param start the starting xp value
+	 * @param end   the ending xp value
+	 */
 	public void updateActionXp(int start, int end) {
 		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
-		int count = (int) Math.ceil((end - start)/xp);
+		int count = (int) Math.ceil((end - start) / xp);
 		this.efficiency.setActionCount(df.format(count));
 	}
 
+	/**
+	 * Update this panel's action count from the given player level
+	 *
+	 * @param start the starting level
+	 * @param end   the ending level
+	 */
 	public void updateActionLevel(int start, int end) {
-		// stub
+		int startXp = Experience.getXpFromLevel(start);
+		int endXp = Experience.getXpFromLevel(end);
+		updateActionXp(startXp, endXp);
 	}
 
 	public Recipe getRecipe() {
