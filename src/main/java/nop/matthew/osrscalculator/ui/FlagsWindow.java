@@ -47,7 +47,7 @@ public class FlagsWindow extends JDialog {
 						skillPanel.setFlag(flag);
 					else
 						skillPanel.unsetFlag(flag);
-					skillPanel.update();
+					skillPanel.updateCosts();
 				});
 				this.contentPanel.add(checkBox);
 				count++;

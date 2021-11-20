@@ -36,6 +36,7 @@ public class RecipePanel extends JPanel {
 	private final OutcomePanel outcome;
 	private final IngredientsPanel ingredients;
 	private final EfficiencyPanel efficiency;
+	private double xp;
 	private double profit;
 	private double normalisedProfit;
 
@@ -44,6 +45,7 @@ public class RecipePanel extends JPanel {
 		super(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		this.profit = 0;
 		this.normalisedProfit = 0;
+		this.xp = skill.getXp(recipe);
 		Border border = BorderFactory.createLineBorder(Color.black);
 		this.recipe = recipe;
 		this.method = method;
@@ -67,18 +69,28 @@ public class RecipePanel extends JPanel {
 	/**
 	 * Update this panel's information
 	 */
-	public void updatePanel() {
+	public void updateResults() {
 		double costOut = this.skill.getRecipeOutCosts(this.recipe).values().stream().mapToDouble(v -> v).sum();
 		double costIn = this.skill.getRecipeInCosts(this.recipe).values().stream().mapToDouble(v -> v).sum();
 		this.profit = costOut - costIn;
-		double xp = this.skill.getXp(this.recipe);
+		this.xp = this.skill.getXp(this.recipe);
 		this.normalisedProfit = this.profit / xp;
 
 		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
 		this.outcome.setXp(df.format(xp));
-		this.ingredients.setCosts(df.format(costIn));
-		this.efficiency.setEfficiency(normalisedProfit, profit, "0");
+		this.ingredients.setCost(df.format(costIn));
+		this.efficiency.setProfits(normalisedProfit, profit);
 		repaint();
+	}
+
+	public void updateActionXp(int start, int end) {
+		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
+		int count = (int) Math.ceil((end - start)/xp);
+		this.efficiency.setActionCount(df.format(count));
+	}
+
+	public void updateActionLevel(int start, int end) {
+		// stub
 	}
 
 	public Recipe getRecipe() {

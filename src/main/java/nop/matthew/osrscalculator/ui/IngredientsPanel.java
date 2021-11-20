@@ -39,7 +39,7 @@ public class IngredientsPanel extends JPanel {
 		for (ItemQuantity itemQuantity : recipe.getIngredients()) {
 			ingredients.add(new JLabel(((int) itemQuantity.getQuantity()) + "x " + itemQuantity.getName()));
 		}
-		setCosts("0");
+		setCost("0");
 
 		add(BorderLayout.SOUTH, this.costSum);
 		add(BorderLayout.NORTH, ingredients);
@@ -50,7 +50,7 @@ public class IngredientsPanel extends JPanel {
 	 *
 	 * @param costSum The sum of costs for inputs
 	 */
-	public void setCosts(String costSum) {
+	public void setCost(String costSum) {
 		this.costSum.setText("Input: " + costSum);
 	}
 

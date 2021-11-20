@@ -58,7 +58,7 @@ class ResultPanel extends JPanel {
 	public void setActiveSkills(Skills skills) {
 		this.cardLayout.show(this, skills.toString());
 		this.currentPanel = skillPanels.get(skills);
-		this.currentPanel.update();
+		this.currentPanel.updateCosts();
 	}
 
 	/**
