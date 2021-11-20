@@ -28,14 +28,14 @@ import java.awt.Dimension;
 import java.util.HashMap;
 
 class ResultPanel extends JPanel {
-	SkillPanel currentPanel;
-	CardLayout cardLayout;
-	HashMap<Skills, SkillPanel> skillPanels;
+	private static SkillPanel currentPanel;
+	private static CardLayout cardLayout;
+	private static HashMap<Skills, SkillPanel> skillPanels;
 
 	public ResultPanel() {
 		super(new CardLayout(0, 0));
-		this.cardLayout = (CardLayout) getLayout();
-		this.skillPanels = new HashMap<>(OSRSCalculator.SKILL_COUNT);
+		cardLayout = (CardLayout) getLayout();
+		skillPanels = new HashMap<>(OSRSCalculator.SKILL_COUNT);
 	}
 
 	/**
@@ -46,7 +46,7 @@ class ResultPanel extends JPanel {
 	 */
 	public Component add(SkillPanel skillPanel) {
 		super.add(skillPanel.getSkills().toString(), new JScrollPane(new ScrollSkillPanel(skillPanel), JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
-		this.skillPanels.put(skillPanel.getSkills(), skillPanel);
+		skillPanels.put(skillPanel.getSkills(), skillPanel);
 		return skillPanel;
 	}
 
@@ -56,9 +56,9 @@ class ResultPanel extends JPanel {
 	 * @param skills the skill to change to.
 	 */
 	public void setActiveSkills(Skills skills) {
-		this.cardLayout.show(this, skills.toString());
-		this.currentPanel = skillPanels.get(skills);
-		this.currentPanel.updateCosts();
+		cardLayout.show(this, skills.toString());
+		currentPanel = skillPanels.get(skills);
+		currentPanel.updateCosts();
 	}
 
 	/**
@@ -83,11 +83,11 @@ class ResultPanel extends JPanel {
 	}
 
 	public SkillPanel getCurrentPanel() {
-		return this.currentPanel;
+		return currentPanel;
 	}
 
 	public Skills getActiveSkills() {
-		return this.currentPanel.getSkills();
+		return currentPanel.getSkills();
 	}
 
 	@Override

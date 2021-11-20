@@ -141,13 +141,13 @@ public class Calculator extends JFrame {
 				.getScaledInstance(OSRSCalculator.SKILL_ICON_LENGTH, OSRSCalculator.SKILL_ICON_LENGTH, Image.SCALE_DEFAULT)));
 		button.setToolTipText(key.toString());
 		button.addActionListener(e -> selectSkill(key));
-		selectionPanel.addSkillButton(button);
+		SelectionPanel.addSkillButton(button);
 	}
 
 	private void selectSkill(Skills skills) {
 		System.out.println("Selected calculator panel for " + skills);
 		resultPanel.setActiveSkills(skills);
-		selectionPanel.setMethods(Arrays.stream(Methods.values()).filter(m -> m.getSkill().equals(skills)).collect(Collectors.toList()));
+		SelectionPanel.setMethods(Arrays.stream(Methods.values()).filter(m -> m.getSkill().equals(skills)).collect(Collectors.toList()));
 		resultPanel.sortBy(sortCriteria);
 		pack();
 		repaint();
