@@ -21,6 +21,7 @@ import nop.matthew.osrscalculator.data.ItemQuantity;
 import nop.matthew.osrscalculator.data.Item;
 import nop.matthew.osrscalculator.data.Recipe;
 
+import java.net.URL;
 import java.util.Set;
 
 public enum Herbs implements Recipe {
@@ -130,12 +131,17 @@ public enum Herbs implements Recipe {
 	}
 
 	@Override
-	public boolean flagsAffect(Set<Flags> flag) {
+	public boolean flagAffects(Set<Flags> flag) {
 		return false;
 	}
 
 	@Override
-	public boolean flagsAffect(Flags flag) {
+	public boolean flagAffects(Flags flag) {
 		return false;
+	}
+
+	@Override
+	public URL getIconPath() {
+		return getClass().getResource("/Items/" + this.output.getId() + ".png");
 	}
 }

@@ -21,6 +21,7 @@ import nop.matthew.osrscalculator.data.Item;
 import nop.matthew.osrscalculator.data.ItemQuantity;
 import nop.matthew.osrscalculator.data.Recipe;
 
+import java.net.URL;
 import java.util.Set;
 
 public enum DivinePotions implements Recipe {
@@ -351,12 +352,17 @@ public enum DivinePotions implements Recipe {
 	}
 
 	@Override
-	public boolean flagsAffect(Set<Flags> flags) {
+	public boolean flagAffects(Set<Flags> flags) {
 		return (flags.contains(Flags.AMULET_OF_CHEMISTRY)) && (this.amuletItemQuantity != null);
 	}
 
 	@Override
-	public boolean flagsAffect(Flags flag) {
+	public boolean flagAffects(Flags flag) {
 		return (flag == Flags.AMULET_OF_CHEMISTRY) && (this.amuletItemQuantity != null);
+	}
+
+	@Override
+	public URL getIconPath() {
+		return getClass().getResource("/Items/" + this.output.getId() + ".png");
 	}
 }

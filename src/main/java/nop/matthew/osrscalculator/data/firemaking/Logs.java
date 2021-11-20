@@ -21,6 +21,7 @@ import nop.matthew.osrscalculator.data.Item;
 import nop.matthew.osrscalculator.data.ItemQuantity;
 import nop.matthew.osrscalculator.data.Recipe;
 
+import java.net.URL;
 import java.util.Set;
 
 public enum Logs implements Recipe {
@@ -109,12 +110,17 @@ public enum Logs implements Recipe {
 	}
 
 	@Override
-	public boolean flagsAffect(Set<Flags> flag) {
+	public boolean flagAffects(Set<Flags> flag) {
 		return false;
 	}
 
 	@Override
-	public boolean flagsAffect(Flags flag) {
+	public boolean flagAffects(Flags flag) {
 		return false;
+	}
+
+	@Override
+	public URL getIconPath() {
+		return getClass().getResource("/Items/" + this.ingredient.getId() + ".png");
 	}
 }

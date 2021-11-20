@@ -152,7 +152,7 @@ public class Calculator extends JFrame {
 
 		// Create a JButton with the given skill's image to swap to it
 		JButton button = new JButton(new ImageIcon(ImageIO
-				.read(getClass().getResource("/SkillIcons/" + key.toString().toLowerCase() + ".png"))
+				.read(skill.getIconPath())
 				.getScaledInstance(OSRSCalculator.SKILL_ICON_LENGTH, OSRSCalculator.SKILL_ICON_LENGTH, Image.SCALE_DEFAULT)));
 		button.setToolTipText(key.toString());
 		button.addActionListener(e -> selectSkill(key));
