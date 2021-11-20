@@ -42,14 +42,14 @@ public class OSRSCalculator {
 	/*
 	Magic numbers for UI
 	 */
+	public static final int METHOD_SELECTION_WIDTH = 140;
 	public static final int METHOD_SELECTION_HEIGHT = 40;
-	public static final int METHOD_SELECTION_WIDTH = 160;
 	public static final int RECIPE_IMAGE_SIZE = 60;
 	public static final int RECIPEPANEL_HEIGHT = RECIPE_IMAGE_SIZE + 20;
-	public final static int OUTCOME_WIDTH = RECIPE_IMAGE_SIZE;
-	public final static int EFFICIENCY_WIDTH = 120;
-	public final static int VERTICAL_SCROLLBAR_WIDTH = (new JScrollPane()).getVerticalScrollBar().getPreferredSize().width;
-	public final static int PROCESS_WIDTH_OFFSET = -(OUTCOME_WIDTH + EFFICIENCY_WIDTH + VERTICAL_SCROLLBAR_WIDTH);
+	public static final int OUTCOME_WIDTH = RECIPE_IMAGE_SIZE;
+	public static final int EFFICIENCY_WIDTH = 120;
+	public static final int VERTICAL_SCROLLBAR_WIDTH = (new JScrollPane()).getVerticalScrollBar().getPreferredSize().width;
+	public static final int PROCESS_WIDTH_OFFSET = -(OUTCOME_WIDTH + EFFICIENCY_WIDTH + VERTICAL_SCROLLBAR_WIDTH);
 	public static final int MINIMUM_WIDTH = SKILL_COUNT * SKILL_ICON_LENGTH;
 	public static final int MINIMUM_HEIGHT = SKILL_ICON_LENGTH + METHOD_SELECTION_HEIGHT;
 
