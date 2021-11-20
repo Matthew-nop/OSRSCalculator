@@ -135,6 +135,7 @@ public enum Item {
 	GRIMY_TARROMIN("Grimy Tarromin", ItemID.GRIMY_TARROMIN),
 	GRIMY_TOADFLAX("Grimy Toadflax", ItemID.GRIMY_TOADFLAX),
 	GRIMY_TORSTOL("Grimy Torstol", ItemID.GRIMY_TORSTOL),
+	GROUND_GUAM("Ground guam", ItemID.GROUND_GUAM),
 	GUAM_LEAF("Guam leaf", ItemID.GUAM_LEAF),
 	GUAM_POTION_UNF("Guam potion (unf)", ItemID.GUAM_POTION_UNF),
 	GUAM_TAR("Guam tar", ItemID.GUAM_TAR),

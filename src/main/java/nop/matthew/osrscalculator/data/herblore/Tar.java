@@ -16,7 +16,10 @@
 
 package nop.matthew.osrscalculator.data.herblore;
 
-import nop.matthew.osrscalculator.data.*;
+import nop.matthew.osrscalculator.data.Flags;
+import nop.matthew.osrscalculator.data.Item;
+import nop.matthew.osrscalculator.data.ItemQuantity;
+import nop.matthew.osrscalculator.data.Recipe;
 
 import java.util.Set;
 
@@ -29,12 +32,20 @@ public enum Tar implements Recipe {
 					new ItemQuantity(Item.GUAM_LEAF, 1),
 					new ItemQuantity(Item.SWAMP_TAR, 15)
 			}),
+	GROUNDGUAM_TAR(
+			new ItemQuantity(Item.GUAM_TAR, 15),
+			19,
+			30,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.GROUND_GUAM, 1),
+					new ItemQuantity(Item.SWAMP_TAR, 15)
+			}),
 	HARRALANDER_TAR(
 			new ItemQuantity(Item.HARRALANDER_TAR, 15),
 			44,
 			72.5f,
 			new ItemQuantity[]{
-					new ItemQuantity(Item.GUAM_LEAF, 1),
+					new ItemQuantity(Item.HARRALANDER, 1),
 					new ItemQuantity(Item.SWAMP_TAR, 15)
 			}),
 	MARRENTILL_TAR(
@@ -42,15 +53,7 @@ public enum Tar implements Recipe {
 			31,
 			42.5f,
 			new ItemQuantity[]{
-					new ItemQuantity(Item.GUAM_LEAF, 1),
-					new ItemQuantity(Item.SWAMP_TAR, 15)
-			}),
-	TARROMIN(
-			new ItemQuantity(Item.TARROMIN, 15),
-			11,
-			5,
-			new ItemQuantity[]{
-					new ItemQuantity(Item.GUAM_LEAF, 1),
+					new ItemQuantity(Item.MARRENTILL, 1),
 					new ItemQuantity(Item.SWAMP_TAR, 15)
 			}),
 	TARROMIN_TAR(
