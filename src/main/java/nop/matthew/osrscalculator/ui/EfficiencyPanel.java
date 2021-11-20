@@ -18,23 +18,24 @@ package nop.matthew.osrscalculator.ui;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.text.DecimalFormat;
+import java.awt.GridLayout;
 
-public class CostPanel extends JPanel {
-	private JLabel profitLabel;
-	private JLabel normalisedProfitLabel;
+public class EfficiencyPanel extends JPanel {
+	private final JLabel normalisedProfitLabel;
+	private final JLabel profitLabel;
+	private final JLabel actionCountLabel;
 
-	public CostPanel() {
-		super(new BorderLayout(0, 0));
-		this.profitLabel = new JLabel();
+	public EfficiencyPanel() {
+		super(new GridLayout(0, 1, 0, 0));
 		this.normalisedProfitLabel = new JLabel();
+		this.profitLabel = new JLabel();
+		this.actionCountLabel = new JLabel();
 
-		this.profitLabel = new JLabel("0");
-		add(BorderLayout.NORTH, this.profitLabel);
-		this.normalisedProfitLabel = new JLabel("0");
-		add(BorderLayout.SOUTH, this.normalisedProfitLabel);
+		setEfficiency("0", "0", "0");
+		add(this.normalisedProfitLabel);
+		add(this.profitLabel);
+		add(this.actionCountLabel);
 	}
 
 	/**
@@ -42,10 +43,10 @@ public class CostPanel extends JPanel {
 	 *
 	 * @param normalisedProfit the normalised profit to display
 	 */
-	public void setProfit(double profit, double normalisedProfit) {
-		DecimalFormat df = new DecimalFormat("#.#");
-		this.profitLabel.setText("Profit: " + df.format(profit));
-		this.normalisedProfitLabel.setText("GP/XP: " + df.format(normalisedProfit));
+	public void setEfficiency(String normalisedProfit, String profit, String actionCount) {
+		this.profitLabel.setText("Profit: " + profit);
+		this.normalisedProfitLabel.setText("GP/XP: " + normalisedProfit);
+		this.actionCountLabel.setText("Actions: " + actionCount);
 	}
 
 	@Override
