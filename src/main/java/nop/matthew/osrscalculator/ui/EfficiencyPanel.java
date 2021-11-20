@@ -18,8 +18,10 @@ package nop.matthew.osrscalculator.ui;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.text.DecimalFormat;
 
 public class EfficiencyPanel extends JPanel {
 	private final JLabel normalisedProfitLabel;
@@ -32,7 +34,7 @@ public class EfficiencyPanel extends JPanel {
 		this.profitLabel = new JLabel();
 		this.actionCountLabel = new JLabel();
 
-		setEfficiency("0", "0", "0");
+		setEfficiency(0d, 0d, "0");
 		add(this.normalisedProfitLabel);
 		add(this.profitLabel);
 		add(this.actionCountLabel);
@@ -43,14 +45,23 @@ public class EfficiencyPanel extends JPanel {
 	 *
 	 * @param normalisedProfit the normalised profit to display
 	 */
-	public void setEfficiency(String normalisedProfit, String profit, String actionCount) {
-		this.profitLabel.setText("Profit: " + profit);
-		this.normalisedProfitLabel.setText("GP/XP: " + normalisedProfit);
-		this.actionCountLabel.setText("Actions: " + actionCount);
+	public void setEfficiency(double normalisedProfit, double profit, String actionCount) {
+		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
+		this.profitLabel.setText(" Profit: " + df.format(profit));
+		this.normalisedProfitLabel.setText(" GP/XP: " + df.format(normalisedProfit));
+		if (profit >= 0) {
+			this.profitLabel.setForeground(Color.GREEN);
+			this.normalisedProfitLabel.setForeground(Color.GREEN);
+		}
+		else {
+			this.profitLabel.setForeground(Color.RED);
+			this.normalisedProfitLabel.setForeground(Color.RED);
+		}
+		this.actionCountLabel.setText(" Actions: " + actionCount);
 	}
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(OSRSCalculator.COST_WIDTH, OSRSCalculator.RECIPEPANEL_HEIGHT);
+		return new Dimension(OSRSCalculator.EFFICIENCY_WIDTH, OSRSCalculator.RECIPEPANEL_HEIGHT);
 	}
 }

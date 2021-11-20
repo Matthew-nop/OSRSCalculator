@@ -23,25 +23,34 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.text.DecimalFormat;
 
 public class OutcomePanel extends JPanel {
-	private final JLabel levelLabel;
-	private final int level;
+	private final JLabel xpLabel;
 
 	public OutcomePanel(Recipe recipe, Skill skill) {
 		super(new BorderLayout(0, 0));
-		this.level = recipe.getLevel();
-		this.levelLabel = new JLabel();
+
+		this.xpLabel = new JLabel();
 		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
 		setXp(df.format(skill.getXp(recipe)));
 
-		add(BorderLayout.CENTER, new JLabel(recipe.getName())); // TODO: place an image
-		add(BorderLayout.SOUTH, this.levelLabel);
+		JLabel imageLabel = new JLabel();
+		int level = recipe.getLevel();
+		imageLabel.setToolTipText(recipe.getName());
+		imageLabel.setLayout(new BorderLayout(0, 0));
+		JLabel levelLabel = new JLabel("Lvl " + recipe.getLevel());
+		Font defaultFont = imageLabel.getFont();
+		levelLabel.setFont(new Font(defaultFont.getFontName(), Font.BOLD, 16));
+		imageLabel.add(BorderLayout.NORTH, levelLabel);
+
+		add(BorderLayout.CENTER, imageLabel); // TODO: place an image
+		add(BorderLayout.SOUTH, this.xpLabel);
 	}
 
 	public void setXp(String xp) {
-		this.levelLabel.setText("Lvl " + this.level + " - " + xp  + "xp");
+		this.xpLabel.setText(xp  + "xp");
 	}
 
 	@Override
