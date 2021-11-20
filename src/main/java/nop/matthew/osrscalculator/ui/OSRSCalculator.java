@@ -44,7 +44,7 @@ public class OSRSCalculator {
 	 */
 	public static final int METHOD_SELECTION_HEIGHT = 40;
 	public static final int METHOD_SELECTION_WIDTH = 160;
-	public final static int RECIPEPANEL_HEIGHT = 50;
+	public final static int RECIPEPANEL_HEIGHT = 70;
 	public final static int OUTCOME_WIDTH = 100;
 	public final static int COST_WIDTH = 100;
 	public final static int VERTICAL_SCROLLBAR_WIDTH = (new JScrollPane()).getVerticalScrollBar().getPreferredSize().width;

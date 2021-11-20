@@ -16,20 +16,30 @@
 
 package nop.matthew.osrscalculator.ui;
 
+import nop.matthew.osrscalculator.data.ItemQuantity;
+import nop.matthew.osrscalculator.data.Recipe;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 
-public class ProcessPanel extends JPanel {
-	JLabel costSum;
+public class IngredientsPanel extends JPanel {
+	private final JLabel costSum;
 
-	public ProcessPanel() {
+	public IngredientsPanel(Recipe recipe) {
 		super(new BorderLayout(0, 0));
 		this.costSum = new JLabel();
+		JPanel ingredients = new JPanel(new GridLayout(0, 1, 0, 0));
+
+		for (ItemQuantity itemQuantity : recipe.getIngredients()) {
+			ingredients.add(new JLabel(((int) itemQuantity.getQuantity()) + "x " + itemQuantity.getName()));
+		}
 
 		setCosts("0");
 		add(BorderLayout.SOUTH, this.costSum);
+		add(BorderLayout.NORTH, ingredients);
 	}
 
 	/**
