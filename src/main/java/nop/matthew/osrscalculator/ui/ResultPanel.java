@@ -94,4 +94,9 @@ class ResultPanel extends JPanel {
 	public Dimension getPreferredSize() {
 		return new Dimension(getWidth(), getHeight());
 	}
+
+	@Override
+	public Dimension getMinimumSize() {
+		return new Dimension(0, 0);
+	}
 }

@@ -22,11 +22,18 @@ import nop.matthew.osrscalculator.data.Skills;
 import nop.matthew.osrscalculator.data.SortCriteria;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -128,6 +135,7 @@ public class Calculator extends JFrame {
 		validate();
 		repaint();
 		pack();
+		setMinimumSize(this.getLayout().minimumLayoutSize(this));
 		setVisible(true);
 	}
 
@@ -176,14 +184,7 @@ public class Calculator extends JFrame {
 
 	@Override
 	public Dimension getPreferredSize() {
-		Insets insets = getInsets();
-		return new Dimension(
-				Math.max(getWidth(), OSRSCalculator.MINIMUM_WIDTH + insets.right + insets.left),
-				Math.max(getHeight(), OSRSCalculator.MINIMUM_HEIGHT + insets.top + insets.bottom));
-	}
-
-	@Override
-	public Dimension getMinimumSize() {
-		return new Dimension(OSRSCalculator.MINIMUM_WIDTH, OSRSCalculator.MINIMUM_HEIGHT);
+		Dimension min = getMinimumSize();
+		return new Dimension(Math.max(getWidth(), min.width), Math.max(getHeight(), min.height));
 	}
 }

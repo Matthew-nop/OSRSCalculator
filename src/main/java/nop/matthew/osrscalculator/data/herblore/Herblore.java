@@ -71,7 +71,6 @@ public class Herblore extends Skill {
 		return costs;
 	}
 
-
 	@Override
 	protected void addTertiaryPrices() {
 		this.priceFetcher.addItem(ItemID.AMULET_OF_CHEMISTRY);
