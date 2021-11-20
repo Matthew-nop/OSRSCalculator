@@ -255,6 +255,45 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.SNAPE_GRASS, 1)
 			},
 			new ItemQuantity(Item.FISHING_POTION4, 1)),
+	GUTHIX_BALANCE1(
+			new ItemQuantity(Item.GUTHIX_BALANCE1, 1),
+			22,
+			50,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.RESTORE_POTION1, 1),
+					new ItemQuantity(Item.GARLIC, 1),
+					new ItemQuantity(Item.SILVER_DUST, 1)
+			},
+			new ItemQuantity(Item.GUTHIX_BALANCE2, 1)),
+	GUTHIX_BALANCE2(
+			new ItemQuantity(Item.GUTHIX_BALANCE2, 1),
+			22,
+			50,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.RESTORE_POTION2, 1),
+					new ItemQuantity(Item.GARLIC, 1),
+					new ItemQuantity(Item.SILVER_DUST, 1)
+			},
+			new ItemQuantity(Item.GUTHIX_BALANCE3, 1)),
+	GUTHIX_BALANCE3(
+			new ItemQuantity(Item.GUTHIX_BALANCE3, 1),
+			22,
+			50,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.RESTORE_POTION3, 1),
+					new ItemQuantity(Item.GARLIC, 1),
+					new ItemQuantity(Item.SILVER_DUST, 1)
+			},
+			new ItemQuantity(Item.GUTHIX_BALANCE4, 1)),
+	GUTHIX_BALANCE4(
+			new ItemQuantity(Item.GUTHIX_BALANCE4, 1),
+			22,
+			50,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.RESTORE_POTION4, 1),
+					new ItemQuantity(Item.GARLIC, 1),
+					new ItemQuantity(Item.SILVER_DUST, 1)
+			}),
 	GUTHIX_REST(
 			new ItemQuantity(Item.GUTHIX_REST3, 1),
 			18,
