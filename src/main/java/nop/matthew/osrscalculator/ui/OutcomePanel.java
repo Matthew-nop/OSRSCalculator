@@ -52,7 +52,7 @@ public class OutcomePanel extends JPanel {
 	}
 
 	public void setXp(String xp) {
-		this.xpLabel.setText(xp  + "xp");
+		this.xpLabel.setText(xp + "xp");
 	}
 
 	@Override

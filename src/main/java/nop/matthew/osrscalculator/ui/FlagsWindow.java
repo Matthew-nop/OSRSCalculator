@@ -26,14 +26,12 @@ import java.awt.Window;
 import java.awt.event.ItemEvent;
 
 public class FlagsWindow extends JDialog {
-	private final JPanel contentPanel;
-
 	public FlagsWindow(Window window) {
 		super(window);
-		SkillPanel skillPanel = OSRSCalculator.calculator.getResultPanel().getCurrentPanel();
+		SkillPanel skillPanel = Calculator.getResultPanel().getCurrentPanel();
 		GridLayout layoutManager = new GridLayout();
-		this.contentPanel = new JPanel(layoutManager);
-		setContentPane(this.contentPanel);
+		JPanel contentPanel = new JPanel(layoutManager);
+		setContentPane(contentPanel);
 		setLayout(layoutManager);
 		setModal(true);
 
@@ -49,7 +47,7 @@ public class FlagsWindow extends JDialog {
 						skillPanel.unsetFlag(flag);
 					skillPanel.updateCosts();
 				});
-				this.contentPanel.add(checkBox);
+				contentPanel.add(checkBox);
 				count++;
 			}
 		}
