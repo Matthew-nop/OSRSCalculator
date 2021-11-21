@@ -30,6 +30,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.SwingUtilities;
@@ -54,6 +55,7 @@ public class Calculator extends JFrame {
 	private Thread priceFetcherThread;
 	private final Object autoUpdatePricesLock = new Object();
 	private boolean autoUpdatePrices;
+	private final Object lastPriceUpdateLock = new Object();
 	private long lastPriceUpdate;
 
 	private Calculator() {
@@ -120,6 +122,14 @@ public class Calculator extends JFrame {
 
 		// Prices
 		JMenu prices = new JMenu("Prices");
+		JMenuItem updatePrices = new JMenuItem("Update now");
+		updatePrices.addActionListener(e -> {
+			try {
+				updatePriceFetcher();
+			} catch (IOException ignored) {
+			}
+		});
+		prices.add(updatePrices);
 		JCheckBoxMenuItem autoUpdateCheckbox = new JCheckBoxMenuItem("AutoUpdate", this.autoUpdatePrices);
 		autoUpdateCheckbox.addItemListener(e -> {
 			if (e.getStateChange() == ItemEvent.SELECTED)
@@ -245,7 +255,9 @@ public class Calculator extends JFrame {
 
 	private void updatePriceFetcher() throws IOException {
 		PriceFetcher.updatePrices();
-		this.lastPriceUpdate = System.currentTimeMillis();
+		synchronized (this.lastPriceUpdateLock) {
+			this.lastPriceUpdate = System.currentTimeMillis();
+		}
 	}
 
 	public SortCriteria getSortCriteria() {
