@@ -64,17 +64,17 @@ public class OSRSCalculator {
 	public static final int AUTOUPDATE_WAIT_MS = 60 * 1000;
 
 	public static void main(String[] args) throws IOException {
-		Construction construction = new Construction();
-		Cooking cooking = new Cooking();
-		Crafting crafting = new Crafting();
-		Farming farming = new Farming();
-		Firemaking firemaking = new Firemaking();
-		Fletching fletching = new Fletching();
-		Herblore herblore = new Herblore();
-		Hunter hunter = new Hunter();
-		Magic magic = new Magic();
-		Prayer prayer = new Prayer();
-		Smithing smithing = new Smithing();
+		Construction construction = Construction.getInstance();
+		Cooking cooking = Cooking.getInstance();
+		Crafting crafting = Crafting.getInstance();
+		Farming farming = Farming.getInstance();
+		Firemaking firemaking = Firemaking.getInstance();
+		Fletching fletching = Fletching.getInstance();
+		Herblore herblore = Herblore.getInstance();
+		Hunter hunter = Hunter.getInstance();
+		Magic magic = Magic.getInstance();
+		Prayer prayer = Prayer.getInstance();
+		Smithing smithing = Smithing.getInstance();
 
 		construction.addRecipePrices();
 		cooking.addRecipePrices();

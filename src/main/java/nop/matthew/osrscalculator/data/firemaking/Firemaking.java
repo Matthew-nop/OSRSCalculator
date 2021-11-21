@@ -21,9 +21,15 @@ import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
 
 public class Firemaking extends Skill {
-	public Firemaking() {
+	private static final Firemaking firemaking = new Firemaking();
+
+	private Firemaking() {
 		super(Skills.FIREMAKING);
 		this.methodRecipes.put(Methods.BURNING_LOGS, Logs.values());
+	}
+
+	public static Firemaking getInstance() {
+		return firemaking;
 	}
 
 	@Override

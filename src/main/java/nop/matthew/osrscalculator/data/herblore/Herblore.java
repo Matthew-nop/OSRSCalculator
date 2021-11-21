@@ -29,12 +29,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Herblore extends Skill {
-	public Herblore() {
+	private static final Herblore herblore = new Herblore();
+
+	private Herblore() {
 		super(Skills.HERBLORE);
 		this.methodRecipes.put(Methods.MAKING_POTIONS, Potions.values());
 		this.methodRecipes.put(Methods.MAKING_DIVINE_POTIONS, DivinePotions.values());
 		this.methodRecipes.put(Methods.CLEANING_HERBS, Herbs.values());
 		this.methodRecipes.put(Methods.MAKING_TAR, Tar.values());
+	}
+
+	public static Herblore getInstance() {
+		return herblore;
 	}
 
 	@Override

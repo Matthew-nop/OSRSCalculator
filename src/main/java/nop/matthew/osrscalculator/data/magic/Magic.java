@@ -20,8 +20,14 @@ import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
 
 public class Magic extends Skill {
-	public Magic() {
+	private static final Magic magic = new Magic();
+
+	private Magic() {
 		super(Skills.MAGIC);
+	}
+
+	public static Magic getInstance() {
+		return magic;
 	}
 
 	@Override

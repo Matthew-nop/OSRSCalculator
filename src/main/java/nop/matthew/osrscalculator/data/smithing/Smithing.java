@@ -20,8 +20,14 @@ import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
 
 public class Smithing extends Skill {
-	public Smithing() {
+	private static final Smithing smithing = new Smithing();
+
+	private Smithing() {
 		super(Skills.SMITHING);
+	}
+
+	public static Smithing getInstance() {
+		return smithing;
 	}
 
 	@Override

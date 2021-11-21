@@ -20,8 +20,14 @@ import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
 
 public class Cooking extends Skill {
-	public Cooking() {
+	private static final Cooking cooking = new Cooking();
+
+	private Cooking() {
 		super(Skills.COOKING);
+	}
+
+	public static Cooking getInstance() {
+		return cooking;
 	}
 
 	@Override

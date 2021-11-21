@@ -20,8 +20,14 @@ import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
 
 public class Crafting extends Skill {
-	public Crafting() {
+	private static final Crafting crafting = new Crafting();
+
+	private Crafting() {
 		super(Skills.CRAFTING);
+	}
+
+	public static Crafting getInstance() {
+		return crafting;
 	}
 
 	@Override
