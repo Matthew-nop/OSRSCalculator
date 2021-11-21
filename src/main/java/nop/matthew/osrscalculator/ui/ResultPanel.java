@@ -73,7 +73,8 @@ class ResultPanel extends JPanel {
 	 * Update the costs of the current displayed panel
 	 */
 	public void updateCosts() {
-		this.currentPanel.updateCosts();
+		if (this.currentPanel != null)
+			this.currentPanel.updateCosts();
 	}
 
 	/**
