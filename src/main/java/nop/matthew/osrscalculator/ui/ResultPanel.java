@@ -31,7 +31,6 @@ class ResultPanel extends JPanel {
 	private SkillPanel currentPanel;
 	private final CardLayout cardLayout;
 	private final HashMap<Skills, SkillPanel> skillPanels;
-
 	private static ResultPanel resultPanel = null;
 
 	private ResultPanel() {
@@ -41,8 +40,9 @@ class ResultPanel extends JPanel {
 	}
 
 	synchronized public static ResultPanel getInstance() {
-		if (resultPanel == null)
+		if (resultPanel == null) {
 			resultPanel = new ResultPanel();
+		}
 		return resultPanel;
 	}
 
@@ -73,8 +73,9 @@ class ResultPanel extends JPanel {
 	 * Update the costs of the current displayed panel
 	 */
 	public void updateCosts() {
-		if (this.currentPanel != null)
+		if (this.currentPanel != null) {
 			this.currentPanel.updateCosts();
+		}
 	}
 
 	/**
@@ -83,8 +84,9 @@ class ResultPanel extends JPanel {
 	 * @param method the method to filter by
 	 */
 	public void setMethod(Methods method) {
-		if (this.currentPanel != null)
+		if (this.currentPanel != null) {
 			this.currentPanel.setMethod(method);
+		}
 	}
 
 	/**
@@ -93,8 +95,9 @@ class ResultPanel extends JPanel {
 	 * @param sortCriteria the SortCriteria to sort by
 	 */
 	public void sortBy(SortCriteria sortCriteria) {
-		if (this.currentPanel != null)
+		if (this.currentPanel != null) {
 			this.currentPanel.sortBy(sortCriteria);
+		}
 		repaint();
 	}
 

@@ -50,12 +50,12 @@ public class Calculator extends JFrame {
 	private final JMenuBar menuBar = new JMenuBar();
 	private final ResultPanel resultPanel;
 	private final SelectionPanel selectionPanel;
+	private final Object autoUpdatePricesLock = new Object();
+	private final Object lastPriceUpdateLock = new Object();
 	private SortCriteria sortCriteria;
 	private boolean goalIsLevel;
 	private Thread priceFetcherThread;
-	private final Object autoUpdatePricesLock = new Object();
 	private boolean autoUpdatePrices;
-	private final Object lastPriceUpdateLock = new Object();
 	private long lastPriceUpdate;
 
 	private Calculator() {
@@ -92,29 +92,33 @@ public class Calculator extends JFrame {
 		JRadioButtonMenuItem levelSort, normalisedCostSort, profitSort, nameSort;
 		levelSort = new JRadioButtonMenuItem(SortCriteria.LEVEL.toString(), sortCriteria.equals(SortCriteria.LEVEL));
 		levelSort.addItemListener(e -> {
-			if (e.getStateChange() == ItemEvent.SELECTED)
+			if (e.getStateChange() == ItemEvent.SELECTED) {
 				sortRecipes(SortCriteria.LEVEL);
+			}
 		});
 		sortGroup.add(levelSort);
 		sort.add(levelSort);
 		normalisedCostSort = new JRadioButtonMenuItem(SortCriteria.NORMALISED_COST.toString(), sortCriteria.equals(SortCriteria.NORMALISED_COST));
 		normalisedCostSort.addItemListener(e -> {
-			if (e.getStateChange() == ItemEvent.SELECTED)
+			if (e.getStateChange() == ItemEvent.SELECTED) {
 				sortRecipes(SortCriteria.NORMALISED_COST);
+			}
 		});
 		sortGroup.add(normalisedCostSort);
 		sort.add(normalisedCostSort);
 		profitSort = new JRadioButtonMenuItem(SortCriteria.PROFIT.toString(), sortCriteria.equals(SortCriteria.PROFIT));
 		profitSort.addItemListener(e -> {
-			if (e.getStateChange() == ItemEvent.SELECTED)
+			if (e.getStateChange() == ItemEvent.SELECTED) {
 				sortRecipes(SortCriteria.PROFIT);
+			}
 		});
 		sortGroup.add(profitSort);
 		sort.add(profitSort);
 		nameSort = new JRadioButtonMenuItem(SortCriteria.NAME.toString(), sortCriteria.equals(SortCriteria.NAME));
 		nameSort.addItemListener(e -> {
-			if (e.getStateChange() == ItemEvent.SELECTED)
+			if (e.getStateChange() == ItemEvent.SELECTED) {
 				sortRecipes(SortCriteria.NAME);
+			}
 		});
 		sortGroup.add(nameSort);
 		sort.add(nameSort);
@@ -132,10 +136,12 @@ public class Calculator extends JFrame {
 		prices.add(updatePrices);
 		JCheckBoxMenuItem autoUpdateCheckbox = new JCheckBoxMenuItem("AutoUpdate", this.autoUpdatePrices);
 		autoUpdateCheckbox.addItemListener(e -> {
-			if (e.getStateChange() == ItemEvent.SELECTED)
+			if (e.getStateChange() == ItemEvent.SELECTED) {
 				startPriceAutoUpdate();
-			else if (e.getStateChange() == ItemEvent.DESELECTED)
+			}
+			else if (e.getStateChange() == ItemEvent.DESELECTED) {
 				stopPriceAutoUpdate();
+			}
 		});
 		prices.add(autoUpdateCheckbox);
 		this.menuBar.add(prices);
@@ -164,8 +170,9 @@ public class Calculator extends JFrame {
 		this.selectionPanel.setup();
 		this.contentPane.add(BorderLayout.NORTH, this.selectionPanel);
 
-		if (this.autoUpdatePrices)
+		if (this.autoUpdatePrices) {
 			startPriceAutoUpdate();
+		}
 
 		setSize(width, height);
 		setLocationRelativeTo(null);
@@ -218,11 +225,12 @@ public class Calculator extends JFrame {
 		this.priceFetcherThread = new Thread(() -> {
 			System.out.println("PriceFetcher AutoUpdate thread started.");
 			boolean autoUpdate = true;
-			while (autoUpdate)
+			while (autoUpdate) {
 				try {
 					long wait = this.lastPriceUpdate + OSRSCalculator.AUTOUPDATE_WAIT_MS - System.currentTimeMillis();
-					if (wait > 0)
+					if (wait > 0) {
 						Thread.sleep(wait);
+					}
 					updatePriceFetcher();
 					System.out.println("Auto updated prices with system time: " + this.lastPriceUpdate);
 					SwingUtilities.invokeLater(() -> ResultPanel.getInstance().updateCosts());
@@ -241,6 +249,7 @@ public class Calculator extends JFrame {
 						autoUpdate = this.autoUpdatePrices;
 					}
 				}
+			}
 			System.out.println("PriceFetcher AutoUpdate thread stopped.");
 		});
 		this.priceFetcherThread.start();

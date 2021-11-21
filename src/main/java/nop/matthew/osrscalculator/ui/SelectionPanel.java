@@ -76,8 +76,9 @@ public class SelectionPanel extends JPanel {
 	}
 
 	synchronized public static SelectionPanel getInstance() {
-		if (selectionPanel == null)
+		if (selectionPanel == null) {
 			selectionPanel = new SelectionPanel();
+		}
 		return selectionPanel;
 	}
 

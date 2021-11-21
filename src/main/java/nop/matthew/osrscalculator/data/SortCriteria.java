@@ -62,8 +62,9 @@ public enum SortCriteria {
 	 */
 	public static SortCriteria getFromName(String name) {
 		for (SortCriteria t : SortCriteria.values()) {
-			if (t.toString().equals(name))
+			if (t.toString().equals(name)) {
 				return t;
+			}
 		}
 
 		return null;

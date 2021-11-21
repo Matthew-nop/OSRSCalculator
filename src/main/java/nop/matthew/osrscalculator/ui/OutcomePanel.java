@@ -73,7 +73,7 @@ public class OutcomePanel extends JPanel {
 		levelLabel.setFont(new Font(defaultFont.getFontName(), Font.BOLD, 16));
 		imageLabel.add(BorderLayout.NORTH, levelLabel);
 
-		add(BorderLayout.CENTER, imageLabel); // TODO: place an image
+		add(BorderLayout.CENTER, imageLabel);
 		add(BorderLayout.SOUTH, this.xpLabel);
 	}
 

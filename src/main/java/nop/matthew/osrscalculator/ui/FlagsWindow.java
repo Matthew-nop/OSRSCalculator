@@ -41,10 +41,12 @@ public class FlagsWindow extends JDialog {
 			if (flag.getSkill().equals(skillPanel.getSkills())) {
 				JCheckBox checkBox = new JCheckBox(flag.toString(), skillPanel.checkFlag(flag));
 				checkBox.addItemListener(e -> {
-					if (e.getStateChange() == ItemEvent.SELECTED)
+					if (e.getStateChange() == ItemEvent.SELECTED) {
 						skillPanel.setFlag(flag);
-					else
+					}
+					else {
 						skillPanel.unsetFlag(flag);
+					}
 					skillPanel.updateCosts();
 				});
 				contentPanel.add(checkBox);
