@@ -27,8 +27,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
@@ -48,21 +46,7 @@ public class OutcomePanel extends JPanel {
 		// Set up the image label
 		JLabel imageLabel;
 		try {
-			BufferedImage image = ImageIO.read(recipe.getIconPath());
-			int desiredWidth, desiredHeight;
-			int imgWidth = image.getWidth();
-			int imgHeight = image.getHeight();
-			// Maintain the image's aspect ratio when scaling
-			if (imgHeight > imgWidth) {
-				desiredWidth = (int) ((imgWidth / (float) imgHeight) * OSRSCalculator.RECIPE_IMAGE_SIZE);
-				desiredHeight = OSRSCalculator.RECIPE_IMAGE_SIZE;
-			}
-			else {
-				desiredWidth = OSRSCalculator.RECIPE_IMAGE_SIZE;
-				desiredHeight = (int) ((imgHeight / (float) imgWidth) * OSRSCalculator.RECIPE_IMAGE_SIZE);
-			}
-
-			imageLabel = new JLabel(new ImageIcon(image.getScaledInstance(desiredWidth, desiredHeight, Image.SCALE_SMOOTH)));
+			imageLabel = new JLabel(new ImageIcon(ImageIO.read(recipe.getIconPath())));
 		} catch (IOException ignored) {
 			imageLabel = new JLabel();
 		}

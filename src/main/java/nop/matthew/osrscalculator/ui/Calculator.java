@@ -180,6 +180,7 @@ public class Calculator extends JFrame {
 		repaint();
 		pack();
 		setMinimumSize(this.getLayout().minimumLayoutSize(this));
+		System.gc();
 		setVisible(true);
 	}
 
