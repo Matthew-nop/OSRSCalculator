@@ -28,7 +28,7 @@ import java.awt.event.ItemEvent;
 public class FlagsWindow extends JDialog {
 	public FlagsWindow(Window window) {
 		super(window);
-		SkillPanel skillPanel = Calculator.getResultPanel().getCurrentPanel();
+		SkillPanel skillPanel = ResultPanel.getInstance().getCurrentPanel();
 		GridLayout layoutManager = new GridLayout();
 		JPanel contentPanel = new JPanel(layoutManager);
 		setContentPane(contentPanel);

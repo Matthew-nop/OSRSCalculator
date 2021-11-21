@@ -28,14 +28,22 @@ import java.awt.Dimension;
 import java.util.HashMap;
 
 class ResultPanel extends JPanel {
-	private static SkillPanel currentPanel;
-	private static CardLayout cardLayout;
-	private static HashMap<Skills, SkillPanel> skillPanels;
+	private SkillPanel currentPanel;
+	private final CardLayout cardLayout;
+	private final HashMap<Skills, SkillPanel> skillPanels;
 
-	public ResultPanel() {
+	private static ResultPanel resultPanel = null;
+
+	private ResultPanel() {
 		super(new CardLayout(0, 0));
-		cardLayout = (CardLayout) getLayout();
-		skillPanels = new HashMap<>(OSRSCalculator.SKILL_COUNT);
+		this.cardLayout = (CardLayout) getLayout();
+		this.skillPanels = new HashMap<>(OSRSCalculator.SKILL_COUNT);
+	}
+
+	synchronized public static ResultPanel getInstance() {
+		if (resultPanel == null)
+			resultPanel = new ResultPanel();
+		return resultPanel;
 	}
 
 	/**
@@ -46,7 +54,7 @@ class ResultPanel extends JPanel {
 	 */
 	public Component add(SkillPanel skillPanel) {
 		super.add(skillPanel.getSkills().toString(), new JScrollPane(new ScrollSkillPanel(skillPanel), JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
-		skillPanels.put(skillPanel.getSkills(), skillPanel);
+		this.skillPanels.put(skillPanel.getSkills(), skillPanel);
 		return skillPanel;
 	}
 
@@ -56,9 +64,16 @@ class ResultPanel extends JPanel {
 	 * @param skills the skill to change to.
 	 */
 	public void setActiveSkills(Skills skills) {
-		cardLayout.show(this, skills.toString());
-		currentPanel = skillPanels.get(skills);
-		currentPanel.updateCosts();
+		this.cardLayout.show(this, skills.toString());
+		this.currentPanel = this.skillPanels.get(skills);
+		this.currentPanel.updateCosts();
+	}
+
+	/**
+	 * Update the costs of the current displayed panel
+	 */
+	public void updateCosts() {
+		this.currentPanel.updateCosts();
 	}
 
 	/**
@@ -67,8 +82,8 @@ class ResultPanel extends JPanel {
 	 * @param method the method to filter by
 	 */
 	public void setMethod(Methods method) {
-		if (currentPanel != null)
-			currentPanel.setMethod(method);
+		if (this.currentPanel != null)
+			this.currentPanel.setMethod(method);
 	}
 
 	/**
@@ -77,17 +92,17 @@ class ResultPanel extends JPanel {
 	 * @param sortCriteria the SortCriteria to sort by
 	 */
 	public void sortBy(SortCriteria sortCriteria) {
-		if (currentPanel != null)
-			currentPanel.sortBy(sortCriteria);
+		if (this.currentPanel != null)
+			this.currentPanel.sortBy(sortCriteria);
 		repaint();
 	}
 
 	public SkillPanel getCurrentPanel() {
-		return currentPanel;
+		return this.currentPanel;
 	}
 
 	public Skills getActiveSkills() {
-		return currentPanel.getSkills();
+		return this.currentPanel.getSkills();
 	}
 
 	@Override

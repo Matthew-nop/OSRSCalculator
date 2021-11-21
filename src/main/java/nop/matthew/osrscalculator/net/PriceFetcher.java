@@ -27,43 +27,35 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PriceFetcher {
-	private static final String baseUrl = "https://prices.runescape.wiki/api/v1/osrs/latest";
+	private static final String USER_AGENT = "OSRSCalculator";
+	private static final String BASE_URL = "https://prices.runescape.wiki/api/v1/osrs/latest";
 	private static final int CONNECTION_TIMEOUT_MS = 20000;
 	private static final int READ_TIMEOUT_MS = 60000;
 	private static final int CONNECTION_RETRY_MAX = 2;
 
-	private URLConnection conn;
-	private String endpoint;
-	private HashMap<Integer, Float> prices;
-
-	public PriceFetcher() throws IOException {
-		this.prices = new HashMap<>();
-		this.endpoint = baseUrl;
-	}
+	private static final ConcurrentHashMap<Integer, Float> prices = new ConcurrentHashMap<>();
 
 	/**
 	 * Update the current stored item prices
 	 *
 	 * @throws IOException If either the connection or JSON parsing fails
 	 */
-	public void updatePrices() throws IOException {
-		this.endpoint = baseUrl;
-		JSONObject data = readData();
+	public static void updatePrices() throws IOException {
+		JSONObject data = readData(BASE_URL);
 
 		for (Integer id : prices.keySet()) {
-			JSONObject item = null;
-			float price = 0f;
+			JSONObject jsonObject = null;
 			try {
-				item = data.getJSONObject(id.toString());
-				price = readPrice(item);
+				jsonObject = data.getJSONObject(id.toString());
 			} catch (JSONException ignored) {
 				System.out.println("itemID: " + id + " was not found with the prices API");
 			}
 
-			System.out.println("itemID: " + id + " fetched price of " + price);
+			float price = readPrice(jsonObject);
+			System.out.println("itemID: " + id + " price set to " + price);
 			prices.put(id, price);
 		}
 	}
@@ -74,15 +66,19 @@ public class PriceFetcher {
 	 * @param id the item's id
 	 * @throws IOException If either the connection or JSON parsing fails
 	 */
-	public void fetchID(int id) throws IOException {
-		this.endpoint = baseUrl + "?id=" + id;
-		JSONObject data = readData();
+	public static void fetchID(int id) throws IOException {
+		String endpoint = BASE_URL + "?id=" + id;
+		JSONObject data = readData(endpoint);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = data.getJSONObject(String.valueOf(id));
+		} catch (JSONException ignored) {
+			System.out.println("itemID: " + id + " was not found with the prices API");
+		}
 
-		JSONObject item = data.getJSONObject("id");
-
-		float price = readPrice(data.getJSONObject("id"));
-		System.out.println("Fetched price of " + price + " for item id " + id);
-		prices.put(id, price);
+		float price = readPrice(jsonObject);
+		System.out.println("itemID: " + id + " price set to " + price);
+		prices.put(id, readPrice(jsonObject));
 	}
 
 	/**
@@ -90,8 +86,8 @@ public class PriceFetcher {
 	 *
 	 * @param id the item's id
 	 */
-	public void addItem(int id) {
-		this.prices.put(id, 0f);
+	public static void addItem(int id) {
+		prices.put(id, 0f);
 	}
 
 	/**
@@ -99,7 +95,7 @@ public class PriceFetcher {
 	 *
 	 * @param ids for these ids, start fetching their prices
 	 */
-	public void addItems(int[] ids) {
+	public static void addItems(int[] ids) {
 		for (int id : ids) {
 			addItem(id);
 		}
@@ -110,7 +106,7 @@ public class PriceFetcher {
 	 *
 	 * @param recipe the recipe
 	 */
-	public void addRecipe(Recipe recipe) {
+	public static void addRecipe(Recipe recipe) {
 		for (ItemQuantity itemQuantity : recipe.getOutput()) {
 			prices.put(itemQuantity.getId(), 0f);
 		}
@@ -125,40 +121,37 @@ public class PriceFetcher {
 	 * @param id the item's id
 	 * @return the price of the item
 	 */
-	public Float getPrice(int id) {
-		return prices.get(id);
+	public static Float getPrice(int id) {
+		Float price = prices.get(id);
+		return price != null ? price : 0;
 	}
 
-	public HashMap<Integer, Float> getPrices() {
-		return this.prices;
-	}
-
-	private void connect() throws IOException {
-		connect(0);
-	}
-
-	private int connect(int attempt) throws IOException {
-		this.conn = new URL(endpoint).openConnection();
-		this.conn.setRequestProperty("User-Agent", "OSRSCalculator");
-		this.conn.setConnectTimeout(CONNECTION_TIMEOUT_MS);
-		this.conn.setReadTimeout(READ_TIMEOUT_MS);
-		try {
-			System.out.println("Attempting to connect to \"" + this.conn.getURL().toString() + "\"...");
-			conn.connect();
-			return attempt;
-		} catch (IOException e) {
-			System.err.println(e + "\nConnection attempt " + (attempt + 1) + " timed out after waiting " + CONNECTION_TIMEOUT_MS + "ms");
-			return attempt >= CONNECTION_RETRY_MAX ? -1 : connect(++attempt);
+	private static URLConnection connect(String endpoint) throws IOException {
+		URLConnection conn = new URL(endpoint).openConnection();
+		conn.setRequestProperty("User-Agent", USER_AGENT);
+		conn.setConnectTimeout(CONNECTION_TIMEOUT_MS);
+		conn.setReadTimeout(READ_TIMEOUT_MS);
+		for (int attempt = 0; attempt < CONNECTION_RETRY_MAX; ++attempt) {
+			try {
+				System.out.println("Attempting to connect to \"" + conn.getURL().toString() + "\"...");
+				conn.connect();
+				return conn;
+			} catch (IOException e) {
+				System.err.println(e + "\nConnection attempt " + (attempt + 1) + " timed out after waiting " + CONNECTION_TIMEOUT_MS + "ms");
+			}
 		}
+		return null;
 	}
 
-	private JSONObject readData() throws IOException {
-		connect();
-		InputStream inputStream = this.conn.getInputStream();
-		if (this.conn == null || inputStream == null)
-			throw new IOException("Update attempted  with null connection or connection input stream");
+	private static JSONObject readData(String endpoint) throws IOException {
+		URLConnection conn = connect(endpoint);
+		if (conn == null)
+			throw new IOException("Update attempted with null connection");
+		InputStream inputStream = conn.getInputStream();
+		if (inputStream == null)
+			throw new IOException("Update attempted while collection input stream is null");
 
-		BufferedReader in = new BufferedReader(new InputStreamReader(this.conn.getInputStream()));
+		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		StringBuilder sb = new StringBuilder();
 		String line;
 		while ((line = in.readLine()) != null) {
@@ -168,7 +161,7 @@ public class PriceFetcher {
 		return new JSONObject(sb.toString()).getJSONObject("data");
 	}
 
-	private float readPrice(JSONObject item) {
+	private static float readPrice(JSONObject item) {
 		// If the item isn't traded, let the price equal 0
 		if (item == null)
 			return 0;
@@ -190,7 +183,8 @@ public class PriceFetcher {
 		if (high >= 0 && low >= 0) {
 			// Return the average of the low and high prices
 			return (high + low) / 2f;
-		} else {
+		}
+		else {
 			// If there's only data for low or high, use that instead of the average
 			return (high < 0) ? low : high;
 		}

@@ -29,7 +29,6 @@ import nop.matthew.osrscalculator.data.hunter.Hunter;
 import nop.matthew.osrscalculator.data.magic.Magic;
 import nop.matthew.osrscalculator.data.prayer.Prayer;
 import nop.matthew.osrscalculator.data.smithing.Smithing;
-import nop.matthew.osrscalculator.net.PriceFetcher;
 
 import javax.swing.JScrollPane;
 import java.io.IOException;
@@ -61,23 +60,21 @@ public class OSRSCalculator {
 	public static final Skills DEFAULT_SKILL = Skills.HERBLORE;
 	public static final SortCriteria DEFAULT_SORTCRITERIA = SortCriteria.LEVEL;
 	public static final boolean GOAL_IS_LEVEL_DEFAULT = true;
-
-	protected static Calculator calculator;
+	public static final boolean AUTOUPDATE_PRICES_DEFAULT = true;
+	public static final int AUTOUPDATE_WAIT_MS = 60 * 1000;
 
 	public static void main(String[] args) throws IOException {
-		PriceFetcher priceFetcher = new PriceFetcher();
-
-		Construction construction = new Construction(priceFetcher);
-		Cooking cooking = new Cooking(priceFetcher);
-		Crafting crafting = new Crafting(priceFetcher);
-		Farming farming = new Farming(priceFetcher);
-		Firemaking firemaking = new Firemaking(priceFetcher);
-		Fletching fletching = new Fletching(priceFetcher);
-		Herblore herblore = new Herblore(priceFetcher);
-		Hunter hunter = new Hunter(priceFetcher);
-		Magic magic = new Magic(priceFetcher);
-		Prayer prayer = new Prayer(priceFetcher);
-		Smithing smithing = new Smithing(priceFetcher);
+		Construction construction = new Construction();
+		Cooking cooking = new Cooking();
+		Crafting crafting = new Crafting();
+		Farming farming = new Farming();
+		Firemaking firemaking = new Firemaking();
+		Fletching fletching = new Fletching();
+		Herblore herblore = new Herblore();
+		Hunter hunter = new Hunter();
+		Magic magic = new Magic();
+		Prayer prayer = new Prayer();
+		Smithing smithing = new Smithing();
 
 		construction.addRecipePrices();
 		cooking.addRecipePrices();
@@ -91,8 +88,7 @@ public class OSRSCalculator {
 		prayer.addRecipePrices();
 		smithing.addRecipePrices();
 
-		priceFetcher.updatePrices();
-		calculator = new Calculator();
+		Calculator calculator = Calculator.getInstance();
 		calculator.addSkill(construction);
 		calculator.addSkill(cooking);
 		calculator.addSkill(crafting);
@@ -105,10 +101,6 @@ public class OSRSCalculator {
 		calculator.addSkill(prayer);
 		calculator.addSkill(smithing);
 
-		openSwing();
-	}
-
-	public static void openSwing() {
 		calculator.openSwing(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 }
