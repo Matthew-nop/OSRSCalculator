@@ -21,6 +21,7 @@ import nop.matthew.osrscalculator.data.Methods;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -95,14 +96,13 @@ public class SelectionPanel extends JPanel {
 			revalidate();
 		});
 		goalsButton.addActionListener(e -> {
-			int start, end;
 			try {
-				start = Integer.parseInt(startBox.getText());
-				end = Integer.parseInt(endBox.getText());
+				int start = Integer.parseInt(startBox.getText());
+				int end = Integer.parseInt(endBox.getText());
+				resultPanel.getCurrentPanel().updateActions(start, end, calculator.goalIsLevel());
 			} catch (NumberFormatException exception) {
-				return;
+				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Invalid input for start/end values.\nPlease input integers within range.");
 			}
-			resultPanel.getCurrentPanel().updateActions(start, end, calculator.goalIsLevel());
 		});
 	}
 
@@ -127,6 +127,14 @@ public class SelectionPanel extends JPanel {
 		for (Methods method : methods) {
 			selectedMethod.addItem(method.getName());
 		}
+	}
+
+	public void setStartBoxText(String text) {
+		this.startBox.setText(text);
+	}
+
+	public void setEndBoxText(String text) {
+		this.endBox.setText(text);
 	}
 
 	@Override
