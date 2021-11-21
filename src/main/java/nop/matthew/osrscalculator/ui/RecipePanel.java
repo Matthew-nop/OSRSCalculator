@@ -89,7 +89,7 @@ public class RecipePanel extends JPanel {
 	 * @param startXp the starting xp value
 	 * @param endXp   the ending xp value
 	 */
-	public void updateActionXp(int startXp, int endXp) {
+	public void updateActionsXp(int startXp, int endXp) {
 		SelectionPanel selectionPanel = SelectionPanel.getInstance();
 		if (startXp < 0) {
 			startXp = 0;
@@ -115,7 +115,7 @@ public class RecipePanel extends JPanel {
 	 * @param startLvl the starting level
 	 * @param endLvl   the ending level
 	 */
-	public void updateActionLevel(int startLvl, int endLvl) {
+	public void updateActionsLevel(int startLvl, int endLvl) {
 		SelectionPanel selectionPanel = SelectionPanel.getInstance();
 		if (startLvl < 0) {
 			startLvl = 0;
