@@ -116,6 +116,6 @@ public enum Tar implements Recipe {
 
 	@Override
 	public URL getIconPath() {
-		return getClass().getResource("/SkillIcons/" + this.output.getId() + ".png");
+		return getClass().getResource("/Items/" + this.output.getId() + " - " + this.getName().toLowerCase() + " detail.png");
 	}
 }

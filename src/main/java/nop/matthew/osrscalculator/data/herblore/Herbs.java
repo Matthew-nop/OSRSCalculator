@@ -142,6 +142,6 @@ public enum Herbs implements Recipe {
 
 	@Override
 	public URL getIconPath() {
-		return getClass().getResource("/Items/" + this.output.getId() + ".png");
+		return getClass().getResource("/Items/" + this.output.getId() + " - " + this.getName().toLowerCase() + " detail.png");
 	}
 }

@@ -35,7 +35,7 @@ public enum Potions implements Recipe {
 			},
 			new ItemQuantity(Item.AGILITY_POTION4, 1)),
 	ANTIDOTE_PLUS(
-			new ItemQuantity(Item.ANTIDOTE4, 1),
+			new ItemQuantity(Item.ANTIDOTE_PLUS4, 1),
 			68,
 			155,
 			new ItemQuantity[]{
@@ -630,6 +630,6 @@ public enum Potions implements Recipe {
 
 	@Override
 	public URL getIconPath() {
-		return getClass().getResource("/Items/" + this.output.getId() + ".png");
+		return getClass().getResource("/Items/" + this.output.getId() + " - " + this.getName().toLowerCase() + " detail.png");
 	}
 }

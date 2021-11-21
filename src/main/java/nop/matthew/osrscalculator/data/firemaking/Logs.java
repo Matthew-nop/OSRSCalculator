@@ -121,6 +121,6 @@ public enum Logs implements Recipe {
 
 	@Override
 	public URL getIconPath() {
-		return getClass().getResource("/Items/" + this.ingredient.getId() + ".png");
+		return getClass().getResource("/Items/" + this.ingredient.getId() + " - " + this.getName().toLowerCase() + " detail.png");
 	}
 }

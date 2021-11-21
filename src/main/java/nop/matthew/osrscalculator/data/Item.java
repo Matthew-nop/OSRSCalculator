@@ -145,7 +145,7 @@ public enum Item {
 	GUTHIX_REST3("Guthix rest(3)", ItemID.GUTHIX_REST3),
 	HARRALANDER("Harralander", ItemID.HARRALANDER),
 	HARRALANDER_POTION_UNF("Harralander potion (unf)", ItemID.HARRALANDER_POTION_UNF),
-	HARRALANDER_TAR("Harralandler tar", ItemID.HARRALANDER_TAR),
+	HARRALANDER_TAR("Harralander tar", ItemID.HARRALANDER_TAR),
 	HUNTER_POTION3("Hunter potion(3)", ItemID.HUNTER_POTION3),
 	HUNTER_POTION4("Hunter potion(4)", ItemID.HUNTER_POTION4),
 	INFERNAL_ASHES("Infernal ashes", ItemID.INFERNAL_ASHES),
