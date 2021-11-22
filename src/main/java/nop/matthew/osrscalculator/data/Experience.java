@@ -38,7 +38,7 @@ public final class Experience {
 	 * @return the minimum XP value needed
 	 */
 	public static int getXpFromLevel(int level) {
-		if (level > LEVEL_MAX_VIRT) {
+		if (level > LEVEL_MAX_VIRT || level < 1) {
 			throw new IllegalArgumentException("level must be from [1, 126], received: " + level);
 		}
 
