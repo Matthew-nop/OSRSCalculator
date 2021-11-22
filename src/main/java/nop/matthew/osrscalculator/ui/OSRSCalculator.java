@@ -43,7 +43,7 @@ public class OSRSCalculator {
 	 */
 	public static final int METHOD_SELECTION_WIDTH = 140;
 	public static final int METHOD_SELECTION_HEIGHT = 40;
-	public static final int RECIPE_IMAGE_SIZE = 60;
+	public static final int RECIPE_IMAGE_SIZE = 64;
 	public static final int RECIPEPANEL_HEIGHT = RECIPE_IMAGE_SIZE + 20;
 	public static final int OUTCOME_WIDTH = RECIPE_IMAGE_SIZE;
 	public static final int EFFICIENCY_WIDTH = 120;
@@ -51,6 +51,7 @@ public class OSRSCalculator {
 	public static final int PROCESS_WIDTH_OFFSET = -(OUTCOME_WIDTH + EFFICIENCY_WIDTH + VERTICAL_SCROLLBAR_WIDTH);
 	public static final int MINIMUM_WIDTH = SKILL_COUNT * SKILL_ICON_LENGTH;
 	public static final int MINIMUM_HEIGHT = SKILL_ICON_LENGTH + METHOD_SELECTION_HEIGHT;
+	public static final int TEXT_BORDER_SIZE = 3;
 
 	/*
 	Defaults for UI

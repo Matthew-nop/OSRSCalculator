@@ -21,6 +21,7 @@ import nop.matthew.osrscalculator.data.Recipe;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -35,7 +36,9 @@ public class IngredientsPanel extends JPanel {
 		this.costSum = new JLabel();
 		this.costSum.setBackground(Color.LIGHT_GRAY);
 		this.costSum.setOpaque(true);
+		this.costSum.setBorder(new EmptyBorder(0, OSRSCalculator.TEXT_BORDER_SIZE, 0, OSRSCalculator.TEXT_BORDER_SIZE));
 		JPanel ingredients = new JPanel(new GridLayout(0, 1, 0, 0));
+		ingredients.setBorder(new EmptyBorder(OSRSCalculator.TEXT_BORDER_SIZE, OSRSCalculator.TEXT_BORDER_SIZE, OSRSCalculator.TEXT_BORDER_SIZE, OSRSCalculator.TEXT_BORDER_SIZE));
 		for (ItemQuantity itemQuantity : recipe.getIngredients()) {
 			ingredients.add(new JLabel(((int) itemQuantity.getQuantity()) + "x " + itemQuantity.getName()));
 		}
