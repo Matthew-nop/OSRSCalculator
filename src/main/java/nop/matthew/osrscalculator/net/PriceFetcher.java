@@ -16,7 +16,6 @@
 
 package nop.matthew.osrscalculator.net;
 
-import nop.matthew.osrscalculator.data.ItemQuantity;
 import nop.matthew.osrscalculator.data.Recipe;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +26,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class PriceFetcher {
 	private static final String USER_AGENT = "OSRSCalculator";
@@ -36,7 +37,11 @@ public class PriceFetcher {
 	private static final int READ_TIMEOUT_MS = 60000;
 	private static final int CONNECTION_RETRY_MAX = 2;
 
-	private static final ConcurrentHashMap<Integer, Float> prices = new ConcurrentHashMap<>();
+	/**
+	 * A concurrent map of item id -> price
+	 * price is 0 if the item is not found with the API or is untradeable
+	 */
+	private static final ConcurrentMap<Integer, Float> prices = new ConcurrentHashMap<>();
 
 	/**
 	 * Update the current stored item prices
@@ -44,7 +49,7 @@ public class PriceFetcher {
 	 * @throws IOException If either the connection or JSON parsing fails
 	 */
 	public static void updatePrices() throws IOException {
-		JSONObject data = readData(BASE_URL);
+		JSONObject data = readData();
 
 		for (Integer id : prices.keySet()) {
 			JSONObject jsonObject = null;
@@ -58,27 +63,6 @@ public class PriceFetcher {
 			System.out.println("itemID: " + id + " price set to " + price);
 			prices.put(id, price);
 		}
-	}
-
-	/**
-	 * Immediately fetch the current price of an item
-	 *
-	 * @param id the item's id
-	 * @throws IOException If either the connection or JSON parsing fails
-	 */
-	public static void fetchID(int id) throws IOException {
-		String endpoint = BASE_URL + "?id=" + id;
-		JSONObject data = readData(endpoint);
-		JSONObject jsonObject = null;
-		try {
-			jsonObject = data.getJSONObject(String.valueOf(id));
-		} catch (JSONException ignored) {
-			System.out.println("itemID: " + id + " was not found with the prices API");
-		}
-
-		float price = readPrice(jsonObject);
-		System.out.println("itemID: " + id + " price set to " + price);
-		prices.put(id, readPrice(jsonObject));
 	}
 
 	/**
@@ -102,23 +86,19 @@ public class PriceFetcher {
 	}
 
 	/**
-	 * Add the components from a recipe to start fetching prices for
+	 * Start tracking the inputs/outputs from a given recipe
 	 *
-	 * @param recipe the recipe
+	 * @param recipe the given recipe
 	 */
 	public static void addRecipe(Recipe recipe) {
-		for (ItemQuantity itemQuantity : recipe.getOutput()) {
-			prices.put(itemQuantity.getId(), 0f);
-		}
-		for (ItemQuantity ingredient : recipe.getIngredients()) {
-			prices.put(ingredient.getId(), 0f);
-		}
+		Arrays.stream(recipe.getOutput()).forEach(i -> addItem(i.getId()));
+		Arrays.stream(recipe.getIngredients()).forEach(i -> addItem(i.getId()));
 	}
 
 	/**
-	 * Get the current cached price of an item
+	 * Get the current cached price of a given item
 	 *
-	 * @param id the item's id
+	 * @param id the given item's id
 	 * @return the price of the item
 	 */
 	public static Float getPrice(int id) {
@@ -126,8 +106,8 @@ public class PriceFetcher {
 		return price != null ? price : 0;
 	}
 
-	private static URLConnection connect(String endpoint) throws IOException {
-		URLConnection conn = new URL(endpoint).openConnection();
+	private static URLConnection connect() throws IOException {
+		URLConnection conn = new URL(PriceFetcher.BASE_URL).openConnection();
 		conn.setRequestProperty("User-Agent", USER_AGENT);
 		conn.setConnectTimeout(CONNECTION_TIMEOUT_MS);
 		conn.setReadTimeout(READ_TIMEOUT_MS);
@@ -143,14 +123,14 @@ public class PriceFetcher {
 		return null;
 	}
 
-	private static JSONObject readData(String endpoint) throws IOException {
-		URLConnection conn = connect(endpoint);
+	private static JSONObject readData() throws IOException {
+		URLConnection conn = connect();
 		if (conn == null) {
 			throw new IOException("Update attempted with null connection");
 		}
 		InputStream inputStream = conn.getInputStream();
 		if (inputStream == null) {
-			throw new IOException("Update attempted while collection input stream is null");
+			throw new IOException("Update attempted while connection input stream is null");
 		}
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -188,6 +168,8 @@ public class PriceFetcher {
 			return (high + low) / 2f;
 		}
 		else {
+			// This should always be true if item != null
+			assert(high >= 0 || low >= 0);
 			// If there's only data for low or high, use that instead of the average
 			return (high < 0) ? low : high;
 		}
