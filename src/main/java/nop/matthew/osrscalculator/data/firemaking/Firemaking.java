@@ -26,6 +26,7 @@ public class Firemaking extends Skill {
 	private Firemaking() {
 		super(Skills.FIREMAKING);
 		this.methodRecipes.put(Methods.BURNING_LOGS, Logs.values());
+		this.methodRecipes.put(Methods.CREMATING_SHADES, PyreLogs.values());
 	}
 
 	public static Firemaking getInstance() {
