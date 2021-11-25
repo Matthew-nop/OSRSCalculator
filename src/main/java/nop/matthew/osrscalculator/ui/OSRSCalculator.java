@@ -52,6 +52,8 @@ public class OSRSCalculator {
 	public static final int MINIMUM_WIDTH = SKILL_COUNT * SKILL_ICON_LENGTH;
 	public static final int MINIMUM_HEIGHT = SKILL_ICON_LENGTH + METHOD_SELECTION_HEIGHT;
 	public static final int TEXT_BORDER_SIZE = 3;
+	public static final int FLAG_DIALOG_MIN_WIDTH = 200;
+	public static final int FLAG_DIALOG_MIN_HEIGHT = 100;
 
 	/*
 	Defaults for UI

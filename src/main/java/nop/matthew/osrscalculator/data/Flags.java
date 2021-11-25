@@ -16,6 +16,8 @@
 
 package nop.matthew.osrscalculator.data;
 
+import java.net.URL;
+
 public enum Flags {
     // Construction
 	CARPENTERS_OUTFIT("Carpenter's Outfit", Skills.CONSTRUCTION),
@@ -32,10 +34,18 @@ public enum Flags {
 		this.skill = skill;
 	}
 
-	public Skills getSkill() {
-		return skill;
+	public URL getIconPath() {
+		return getClass().getResource("/Flags/" + this.getName().toLowerCase() + ".png");
 	}
-	
+
+	public String getName() {
+		return this.name;
+	}
+
+	public Skills getSkill() {
+		return this.skill;
+	}
+
 	@Override
 	public String toString() {
 		return this.name;
