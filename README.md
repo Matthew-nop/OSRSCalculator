@@ -35,6 +35,7 @@ The output file jar be located at `out/OSRSCalculator-v*.*-jar-with-dependencies
    - source directory
  - src/main/resources
    - resources directory
+   - `Flags/*` and `Images/*` must have size <= 64x64
  - doc/
    - documentation directory
  - images/
