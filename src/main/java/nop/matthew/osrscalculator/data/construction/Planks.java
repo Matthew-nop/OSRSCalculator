@@ -80,12 +80,12 @@ public enum Planks implements Recipe {
 
 	@Override
 	public boolean flagAffects(Set<Flags> flag) {
-		return false;
+		return flag.contains(Flags.CARPENTERS_OUTFIT);
 	}
 
 	@Override
 	public boolean flagAffects(Flags flag) {
-		return false;
+		return flag.equals(Flags.CARPENTERS_OUTFIT);
 	}
 
 	@Override
