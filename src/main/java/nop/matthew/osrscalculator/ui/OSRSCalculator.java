@@ -46,7 +46,7 @@ public class OSRSCalculator {
 	public static final int RECIPE_IMAGE_SIZE = 64;
 	public static final int RECIPEPANEL_HEIGHT = RECIPE_IMAGE_SIZE + 20;
 	public static final int OUTCOME_WIDTH = RECIPE_IMAGE_SIZE;
-	public static final int EFFICIENCY_WIDTH = 120;
+	public static final int EFFICIENCY_WIDTH = 135;
 	public static final int VERTICAL_SCROLLBAR_WIDTH = (new JScrollPane()).getVerticalScrollBar().getPreferredSize().width;
 	public static final int PROCESS_WIDTH_OFFSET = -(OUTCOME_WIDTH + EFFICIENCY_WIDTH + VERTICAL_SCROLLBAR_WIDTH);
 	public static final int MINIMUM_WIDTH = SKILL_COUNT * SKILL_ICON_LENGTH;
