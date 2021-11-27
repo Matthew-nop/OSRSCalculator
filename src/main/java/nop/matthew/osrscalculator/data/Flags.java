@@ -22,6 +22,9 @@ public enum Flags {
     // Construction
 	CARPENTERS_OUTFIT("Carpenter's Outfit", Skills.CONSTRUCTION),
 
+	// Firemaking
+	PYROMANCER_OUTFIT("Pyromancer Outfit", Skills.FIREMAKING),
+
 	// Herblore
 	AMULET_OF_CHEMISTRY("Amulet of chemistry", Skills.HERBLORE),
 	;
