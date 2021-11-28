@@ -25,6 +25,7 @@ public class Prayer extends Skill {
 
 	private Prayer() {
 		super(Skills.PRAYER);
+		this.methodRecipes.put(Methods.BONES, Bones.values());
 		this.methodRecipes.put(Methods.ASHES, Ashes.values());
 	}
 
