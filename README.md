@@ -13,12 +13,12 @@ This project is still in a very early beta, with many features/skills not implem
  - Compare training options that all utilise the same method 
  - Flags for special effects such as the amulet of chemistry
  - Cross-platform and extremely portable (thanks to Java)
- - Manually enter prices for recipes so you can be certain it's efficient (in a future release)
+ - Manually enter prices for recipes, so you can check your own values (in a future release)
 
 ![Calculator Screenshot](./doc/resources/herblore_screenshot_scaled.png)
 
 
-## Requirements
+## Build Requirements
 You will need to have Java (JDK 11 or newer) installed on your machine to run the .jar file or build the project. <br>
 You will need maven if you want to build the project.
 
