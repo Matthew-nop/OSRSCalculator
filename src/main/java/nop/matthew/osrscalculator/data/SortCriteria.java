@@ -41,18 +41,27 @@ public enum SortCriteria {
 	 */
 	public static Comparator<RecipePanel> getComparator(SortCriteria sortType) {
 		switch (sortType) {
-			case LEVEL:
-				return Comparator.<RecipePanel, Float>
-						comparing(rp -> (float) rp.getRecipe().getLevel())
-						.thenComparing(rp  -> rp.getRecipe().getXp());
-			case NORMALISED_COST:
-				return (rp1, rp2) -> Double.compare(rp2.getNormalisedProfit(), rp1.getNormalisedProfit());
-			case PROFIT:
-				return (rp1, rp2) -> Double.compare(rp2.getProfit(), rp1.getProfit());
-			case NAME:
+			case LEVEL: {
+				return Comparator
+						.comparing(( RecipePanel rp ) -> rp.getRecipe().getLevel())
+						.thenComparing(( RecipePanel rp ) -> rp.getRecipe().getXp());
+			}
+			case NORMALISED_COST: {
+				return Comparator
+						.comparing(RecipePanel::getNormalisedProfit)
+						.thenComparing(RecipePanel::getProfit);
+			}
+			case PROFIT: {
+				return Comparator
+						.comparing(RecipePanel::getProfit)
+						.thenComparing(RecipePanel::getNormalisedProfit);
+			}
+			case NAME: {
 				return (rp1, rp2) -> String.CASE_INSENSITIVE_ORDER.compare(rp1.getRecipe().getName(), rp2.getRecipe().getName());
-			default:
+			}
+			default: {
 				return null;
+			}
 		}
 	}
 
