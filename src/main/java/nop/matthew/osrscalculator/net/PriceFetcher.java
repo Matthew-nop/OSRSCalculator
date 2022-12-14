@@ -33,9 +33,9 @@ import java.util.concurrent.ConcurrentMap;
 public class PriceFetcher {
 	private static final String USER_AGENT = "OSRSCalculator";
 	private static final String BASE_URL = "https://prices.runescape.wiki/api/v1/osrs/latest";
-	private static final int CONNECTION_TIMEOUT_MS = 20000;
-	private static final int READ_TIMEOUT_MS = 60000;
-	private static final int CONNECTION_RETRY_MAX = 2;
+	private static final int CONNECTION_TIMEOUT_MS = 10000;
+	private static final int READ_TIMEOUT_MS = 5000;
+	private static final int CONNECTION_RETRY_MAX = 3;
 
 	/**
 	 * A concurrent map of item id -> price
