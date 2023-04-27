@@ -19,7 +19,7 @@ This project is still in a very early beta, with many features/skills not implem
 
 
 ## Build Requirements
-You will need to have Java (JDK 11 or newer) installed on your machine to run the .jar file or build the project. <br>
+You will need to have Java (JDK 17 or newer) installed on your machine to run the .jar file or build the project. <br>
 You will need maven if you want to build the project.
 
 ## Building
