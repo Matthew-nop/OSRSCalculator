@@ -16,6 +16,7 @@
 
 package nop.matthew.osrscalculator.data.fletching;
 
+import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
 
@@ -24,6 +25,7 @@ public class Fletching extends Skill {
 
 	private Fletching() {
 		super(Skills.FLETCHING);
+		this.methodRecipes.put(Methods.FLETCHING_DARTS, FletchingDarts.values());
 	}
 
 	public static Fletching getInstance() {
