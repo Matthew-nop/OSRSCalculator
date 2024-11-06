@@ -33,6 +33,9 @@ public enum Methods {
 	MAKING_POTIONS("Making potions", Skills.HERBLORE),
 	MAKING_DIVINE_POTIONS("Making divine potions", Skills.HERBLORE),
 
+	// Hunter
+	BOXTRAPS("Boxtraps", Skills.HUNTER),
+
 	// Prayer
 	ASHES("Ashes", Skills.PRAYER),
 	BONES("Bones", Skills.PRAYER),
