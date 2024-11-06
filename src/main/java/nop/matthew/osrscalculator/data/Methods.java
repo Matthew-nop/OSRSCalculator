@@ -20,6 +20,9 @@ public enum Methods {
 	// Construction
 	PLANKS("Using planks", Skills.CONSTRUCTION),
 
+	// Crafting
+	DRAGON_LEATHER("Dragon leather", Skills.CRAFTING),
+
 	// Firemaking
 	BURNING_LOGS("Burning logs", Skills.FIREMAKING),
 	CREMATING_SHADES("Cremating shades", Skills.FIREMAKING),
