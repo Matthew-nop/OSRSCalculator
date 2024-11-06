@@ -332,7 +332,7 @@ public enum DivinePotions implements Recipe {
 	}
 
 	@Override
-	public ItemQuantity[] getIngredients() {
+	public ItemQuantity[] getIngredients(Set<Flags> flags) {
 		return this.ingredients;
 	}
 
@@ -352,13 +352,8 @@ public enum DivinePotions implements Recipe {
 	}
 
 	@Override
-	public boolean flagAffects(Set<Flags> flags) {
-		return (flags.contains(Flags.AMULET_OF_CHEMISTRY)) && (this.amuletItemQuantity != null);
-	}
-
-	@Override
 	public boolean flagAffects(Flags flag) {
-		return (flag == Flags.AMULET_OF_CHEMISTRY) && (this.amuletItemQuantity != null);
+		return (flag == Flags.AMULET_OF_CHEMISTRY && this.amuletItemQuantity != null);
 	}
 
 	@Override

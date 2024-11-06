@@ -55,7 +55,7 @@ public class RecipePanel extends JPanel {
 		this.outcome.setBorder(border);
 		add(BorderLayout.WEST, outcome);
 
-		this.ingredients = new IngredientsPanel(recipe);
+		this.ingredients = new IngredientsPanel(recipe, skill);
 		this.ingredients.setBorder(border);
 		add(BorderLayout.CENTER, ingredients);
 

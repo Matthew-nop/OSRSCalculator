@@ -59,7 +59,7 @@ public enum Planks implements Recipe {
 	}
 
 	@Override
-	public ItemQuantity[] getIngredients() {
+	public ItemQuantity[] getIngredients(Set<Flags> flags) {
 		return new ItemQuantity[]{this.ingredient};
 	}
 
@@ -79,13 +79,8 @@ public enum Planks implements Recipe {
 	}
 
 	@Override
-	public boolean flagAffects(Set<Flags> flag) {
-		return flag.contains(Flags.CARPENTERS_OUTFIT);
-	}
-
-	@Override
 	public boolean flagAffects(Flags flag) {
-		return flag.equals(Flags.CARPENTERS_OUTFIT);
+		return flag == Flags.CARPENTERS_OUTFIT;
 	}
 
 	@Override

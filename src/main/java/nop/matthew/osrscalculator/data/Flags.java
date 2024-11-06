@@ -27,6 +27,10 @@ public enum Flags {
 
 	// Herblore
 	AMULET_OF_CHEMISTRY("Amulet of chemistry", Skills.HERBLORE),
+
+	// Magic
+	INFINITE_ELEMENTAL_RUNE_SOURCE("Infinite elemental rune source", Skills.MAGIC),
+
 	;
 
 	private final String name;

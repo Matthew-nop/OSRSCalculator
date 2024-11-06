@@ -32,7 +32,7 @@ public interface Recipe {
 	 *
 	 * @return the array of ingredients
 	 */
-	ItemQuantity[] getIngredients();
+	ItemQuantity[] getIngredients(Set<Flags> flags);
 
 	/**
 	 * Get the name of this recipe
@@ -55,21 +55,13 @@ public interface Recipe {
 	 */
 	float getXp();
 
-	/**
-	 * Check if any of the given flags affect this recipe
-	 *
-	 * @param flag the given flags
-	 * @return true if this recipe is affected, false if not
-	 */
-	boolean flagAffects(Set<Flags> flag);
-
-	/**
-	 * Check if the given flag affects this recipe;
-	 *
-	 * @param flag the given flag
-	 * @return true if this recipe is affected, false if not
-	 */
-	boolean flagAffects(Flags flag);
+	 /**
+	  * Check if any of the given flags affect this recipe
+	  *
+	  * @param flags the given flags
+	  * @return true if this recipe is affected, false if not
+	  */
+	 boolean flagAffects(Flags flag);
 
 	/**
 	 * Get the filepath for the given recipe's icon

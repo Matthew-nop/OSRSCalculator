@@ -18,6 +18,7 @@ package nop.matthew.osrscalculator.ui;
 
 import nop.matthew.osrscalculator.data.ItemQuantity;
 import nop.matthew.osrscalculator.data.Recipe;
+import nop.matthew.osrscalculator.data.Skill;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,7 +31,7 @@ import java.awt.GridLayout;
 public class IngredientsPanel extends JPanel {
 	private final JLabel costSum;
 
-	public IngredientsPanel(Recipe recipe) {
+	public IngredientsPanel(Recipe recipe, Skill skill) {
 		super(new BorderLayout(0, 0));
 
 		this.costSum = new JLabel();
@@ -39,7 +40,7 @@ public class IngredientsPanel extends JPanel {
 		this.costSum.setBorder(new EmptyBorder(0, OSRSCalculator.TEXT_BORDER_SIZE, 0, OSRSCalculator.TEXT_BORDER_SIZE));
 		JPanel ingredients = new JPanel(new GridLayout(0, 1, 0, 0));
 		ingredients.setBorder(new EmptyBorder(OSRSCalculator.TEXT_BORDER_SIZE, OSRSCalculator.TEXT_BORDER_SIZE, OSRSCalculator.TEXT_BORDER_SIZE, OSRSCalculator.TEXT_BORDER_SIZE));
-		for (ItemQuantity itemQuantity : recipe.getIngredients()) {
+		for (ItemQuantity itemQuantity : recipe.getIngredients(skill.getFlags())) {
 			ingredients.add(new JLabel(((int) itemQuantity.getQuantity()) + "x " + itemQuantity.getName()));
 		}
 		setCost("0");
