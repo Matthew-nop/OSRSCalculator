@@ -29,6 +29,7 @@ import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ItemEvent;
 import java.io.IOException;
+import java.net.URL;
 
 public class FlagsWindow extends JDialog {
 	public FlagsWindow(Window window) {
@@ -57,7 +58,13 @@ public class FlagsWindow extends JDialog {
 				});
 				JLabel flagIcon;
 				try {
-					flagIcon = new JLabel(new ImageIcon(ImageIO.read(flag.getIconPath())));
+					URL flagPath = flag.getIconPath();
+					if(flagPath != null) {
+						flagIcon = new JLabel(new ImageIcon(ImageIO.read(flagPath)));
+					}
+					else {
+						flagIcon = new JLabel();
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 					flagIcon = new JLabel();
