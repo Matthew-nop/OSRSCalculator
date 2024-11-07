@@ -47,16 +47,15 @@ public class OutcomePanel extends JPanel {
 		setXp(df.format(skill.getXp(recipe)));
 
 		// Set up the image label
-		JLabel imageLabel;
+		JLabel imageLabel = new JLabel();
 		try {
 			URL imagePath = recipe.getIconPath();
 			if(imagePath != null) {
-				imageLabel = new JLabel(new ImageIcon(ImageIO.read(imagePath)));
-			} else {
-				imageLabel = new JLabel();
+				ImageIcon image = new ImageIcon(ImageIO.read(imagePath));
+				imageLabel = new JLabel(image);
 			}
 		} catch (IOException ignored) {
-			imageLabel = new JLabel();
+			System.err.println("Exception loading image for recipe: " + recipe.getName());
 		}
 		imageLabel.setToolTipText(recipe.getName());
 		imageLabel.setLayout(new BorderLayout(0, 0));
