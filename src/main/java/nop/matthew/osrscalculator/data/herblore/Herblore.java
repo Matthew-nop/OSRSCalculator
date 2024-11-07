@@ -80,10 +80,12 @@ public class Herblore extends Skill {
 		if(recipe.flagAffects(Flags.AMULET_OF_CHEMISTRY)) {
 			if(flags.contains(Flags.ALCHEMISTS_AMULET)) {
 				// 15% chance to proc, with 1 amulet charge consumed per proc (1 charge = 1/10 amulet of chemistry)
+				// 0.15 * 0.10 = 0.015
 				costs.put(ItemID.AMULET_OF_CHEMISTRY, PriceFetcher.getPrice(ItemID.AMULET_OF_CHEMISTRY) * 0.015f);
 			}
 			else if (flags.contains(Flags.AMULET_OF_CHEMISTRY)) {
-				// 5% chance to proc, with 20% of the amulet consumed per proc
+				// 5% chance to proc, with 1/5 of the amulet consumed per proc
+				// 0.05 * 0.20 = 0.01
 				costs.put(ItemID.AMULET_OF_CHEMISTRY, PriceFetcher.getPrice(ItemID.AMULET_OF_CHEMISTRY) * 0.01f);
 			}
 		}
