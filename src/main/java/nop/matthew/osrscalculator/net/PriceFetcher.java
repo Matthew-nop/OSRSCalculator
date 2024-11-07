@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -93,7 +94,7 @@ public class PriceFetcher {
 	public static void addRecipe(Recipe recipe) {
 		Arrays.stream(recipe.getOutput()).forEach(i -> addItem(i.getId()));
 		// TODO: fix this, Recipe should implement an AllItems method or similar
-		Arrays.stream(recipe.getIngredients(null)).forEach(i -> addItem(i.getId()));
+		Arrays.stream(recipe.getIngredients(new HashSet<>())).forEach(i -> addItem(i.getId()));
 	}
 
 	/**
