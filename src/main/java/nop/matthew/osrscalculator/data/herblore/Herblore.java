@@ -47,11 +47,19 @@ public class Herblore extends Skill {
 	public Map<Integer, Float> getRecipeOutCosts(Recipe recipe) {
 		HashMap<Integer, Float> costs = new HashMap<>();
 		ItemQuantity[] outputs = recipe.getOutput();
+
+		float[] coeff = new float[]{1f, 0f};
 		// If using the amulet of chemistry, and the recipe is affected
-		float[] coeff = 
-			flags.contains(Flags.AMULET_OF_CHEMISTRY) && recipe.flagAffects(Flags.AMULET_OF_CHEMISTRY) 
-			? new float[]{0.95f, 0.05f} 
-			: new float[]{1f, 0f};
+		if(recipe.flagAffects(Flags.AMULET_OF_CHEMISTRY)) {
+			if(flags.contains(Flags.ALCHEMISTS_AMULET)) {
+				// 15% chance to proc
+				coeff = new float[]{0.85f, 0.15f};
+			}
+			else if (flags.contains(Flags.AMULET_OF_CHEMISTRY)) {
+				// 5% chance to proc
+				coeff = new float[]{0.95f, 0.05f};
+			}
+		}
 
 		for (int i = 0; i < outputs.length; i++) {
 			float c = coeff[i];
@@ -69,10 +77,19 @@ public class Herblore extends Skill {
 		HashMap<Integer, Float> costs = new HashMap<>();
 
 		// If using the amulet of chemistry, and the recipe is affected
-		if (flags.contains(Flags.AMULET_OF_CHEMISTRY) && recipe.flagAffects(Flags.AMULET_OF_CHEMISTRY)) {
-			// 5% chance to proc, with 20% of the amulet consumed each proc
-			costs.put(ItemID.AMULET_OF_CHEMISTRY, PriceFetcher.getPrice(ItemID.AMULET_OF_CHEMISTRY) * 0.01f);
+		if(recipe.flagAffects(Flags.AMULET_OF_CHEMISTRY)) {
+			if(flags.contains(Flags.ALCHEMISTS_AMULET)) {
+				// 15% chance to proc, with 1 amulet charge consumed per proc (1 charge = 1/10 amulet of chemistry)
+				// 0.15 * 0.10 = 0.015
+				costs.put(ItemID.AMULET_OF_CHEMISTRY, PriceFetcher.getPrice(ItemID.AMULET_OF_CHEMISTRY) * 0.015f);
+			}
+			else if (flags.contains(Flags.AMULET_OF_CHEMISTRY)) {
+				// 5% chance to proc, with 1/5 of the amulet consumed per proc
+				// 0.05 * 0.20 = 0.01
+				costs.put(ItemID.AMULET_OF_CHEMISTRY, PriceFetcher.getPrice(ItemID.AMULET_OF_CHEMISTRY) * 0.01f);
+			}
 		}
+		
 		for (ItemQuantity i : recipe.getIngredients(flags)) {
 			int id = i.getId();
 			costs.put(id, PriceFetcher.getPrice(id) * i.getQuantity());
