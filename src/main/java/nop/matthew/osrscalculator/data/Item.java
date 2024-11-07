@@ -28,6 +28,8 @@ public enum Item {
 	AMETHYST_DART_TIP("Amethyst dart tip", ItemID.AMETHYST_DART_TIP),
 	AMETHYST_DART("Amethyst dart", ItemID.AMETHYST_DART),
 	AMYLASE_CRYSTAL("Amylase crystal", ItemID.AMYLASE_CRYSTAL),
+	ANCIENT_BREW1("Ancient brew(1)", ItemID.ANCIENT_BREW1),
+	ANCIENT_BREW2("Ancient brew(2)", ItemID.ANCIENT_BREW2),
 	ANCIENT_BREW3("Ancient brew(3)", ItemID.ANCIENT_BREW3),
 	ANCIENT_BREW4("Ancient brew(4)", ItemID.ANCIENT_BREW4),
 	ANCIENT_ESSENCE("Ancient essence", ItemID.ANCIENT_ESSENCE),
