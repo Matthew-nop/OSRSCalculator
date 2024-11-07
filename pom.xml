@@ -9,7 +9,7 @@
 
     <groupId>nop.matthew.osrscalculator</groupId>
     <artifactId>OSRSCalculator</artifactId>
-    <version>0.10</version>
+    <version>0.11</version>
     <packaging>jar</packaging>
 
     <properties>
