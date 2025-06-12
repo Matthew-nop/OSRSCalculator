@@ -46,7 +46,7 @@ public class OutcomePanel extends JPanel {
 				desiredHeight = (int) ((imgHeight / (float) imgWidth) * OSRSCalculator.RECIPE_IMAGE_SIZE);
 			}
 
-			imageLabel = new JLabel(new ImageIcon(image.getScaledInstance(desiredWidth, desiredHeight, Image.SCALE_DEFAULT)));
+			imageLabel = new JLabel(new ImageIcon(image.getScaledInstance(desiredWidth, desiredHeight, Image.SCALE_SMOOTH)));
 		} catch (IOException ignored) {
 			imageLabel = new JLabel();
 		}
