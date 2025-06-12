@@ -18,7 +18,7 @@ public class RecipePanel extends JPanel {
 	private final Methods method;
 	private final Skill skill;
 	private final OutcomePanel outcome;
-	private final ProcessPanel process;
+	private final IngredientsPanel ingredients;
 	private final EfficiencyPanel efficiency;
 	private double profit;
 	private double normalisedProfit;
@@ -37,9 +37,9 @@ public class RecipePanel extends JPanel {
 		this.outcome.setBorder(border);
 		add(BorderLayout.WEST, outcome);
 
-		this.process = new ProcessPanel();
-		this.process.setBorder(border);
-		add(BorderLayout.CENTER, process);
+		this.ingredients = new IngredientsPanel(recipe);
+		this.ingredients.setBorder(border);
+		add(BorderLayout.CENTER, ingredients);
 
 		this.efficiency = new EfficiencyPanel();
 		this.efficiency.setBorder(border);
@@ -60,7 +60,7 @@ public class RecipePanel extends JPanel {
 
 		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
 		this.outcome.setXp(df.format(xp));
-		this.process.setCosts(df.format(costIn));
+		this.ingredients.setCosts(df.format(costIn));
 		this.efficiency.setEfficiency(df.format(profit), df.format(normalisedProfit), "0");
 		repaint();
 	}
@@ -83,6 +83,6 @@ public class RecipePanel extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(outcome.getPreferredSize().width + process.getPreferredSize().width + efficiency.getPreferredSize().width, OSRSCalculator.RECIPEPANEL_HEIGHT);
+		return new Dimension(outcome.getPreferredSize().width + ingredients.getPreferredSize().width + efficiency.getPreferredSize().width, OSRSCalculator.RECIPEPANEL_HEIGHT);
 	}
 }
