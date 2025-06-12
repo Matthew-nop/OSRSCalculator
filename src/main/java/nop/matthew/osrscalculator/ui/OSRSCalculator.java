@@ -26,7 +26,7 @@ public class OSRSCalculator {
 	Magic numbers for UI
 	 */
 	public static final int METHOD_SELECTION_WIDTH = 140;
-	public static final int METHOD_SELECTION_HEIGHT = 50;
+	public static int METHOD_SELECTION_HEIGHT = 40;
 	public static final int RECIPE_IMAGE_SIZE = 64;
 	public static final int RECIPEPANEL_HEIGHT = RECIPE_IMAGE_SIZE + 20;
 	public static final int OUTCOME_WIDTH = RECIPE_IMAGE_SIZE;
@@ -51,6 +51,11 @@ public class OSRSCalculator {
 	public static final int AUTOUPDATE_WAIT_MS = 60 * 1000;
 
 	public static void main(String[] args) throws IOException {
+		String os = System.getProperty("os.name").toLowerCase();
+		if (os.contains("mac")) {
+			METHOD_SELECTION_HEIGHT += 10;
+		}
+
 		Construction construction = Construction.getInstance();
 		Cooking cooking = Cooking.getInstance();
 		Crafting crafting = Crafting.getInstance();
