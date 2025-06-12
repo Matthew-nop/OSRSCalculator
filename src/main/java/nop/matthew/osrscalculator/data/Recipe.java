@@ -7,6 +7,8 @@ public interface Recipe {
 
 	ItemQuantity[] getIngredients();
 
+	String getName();
+
 	int getLevel();
 
 	float getXp();

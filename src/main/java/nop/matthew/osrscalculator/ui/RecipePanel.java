@@ -40,8 +40,7 @@ public class RecipePanel extends JPanel {
 
 		this.outcome = new JPanel(new BorderLayout(0, 0));
 		ItemQuantity[] output = recipe.getOutput();
-		String name = output.length > 0 ? output[0].getName() : "N/A";
-		this.outcome.add(BorderLayout.CENTER, new JLabel(name)); // TODO: place an image
+		this.outcome.add(BorderLayout.CENTER, new JLabel(recipe.getName())); // TODO: place an image
 		this.outcome.add(BorderLayout.SOUTH, new JLabel(recipe.getLevel() + " - " + recipe.getXp()));
 		this.outcome.setPreferredSize(new Dimension(OUTCOME_WIDTH, RECIPEPANEL_HEIGHT));
 		this.outcome.setBorder(border);
