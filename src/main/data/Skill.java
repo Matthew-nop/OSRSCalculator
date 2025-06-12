@@ -8,9 +8,11 @@ import java.util.TreeMap;
 public abstract class Skill {
 	protected PriceFetcher priceFetcher;
 	protected TreeMap<String, Recipe[]> methodRecipes;
+	protected String key;
 
-	public Skill(PriceFetcher priceFetcher) {
+	public Skill(PriceFetcher priceFetcher, String key) {
 		this.priceFetcher = priceFetcher;
+		this.key = key;
 		this.methodRecipes = new TreeMap<>();
 	}
 
@@ -35,5 +37,9 @@ public abstract class Skill {
 
 	public TreeMap<String, Recipe[]> getMethodRecipes() {
 		return this.methodRecipes;
+	}
+
+	public String getKey() {
+		return this.key;
 	}
 }
