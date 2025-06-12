@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.List;
 
-// TODO: the selected method should filter the shown recipes
 public class SelectionPanel extends JPanel {
 	private final JPanel buttons;
 	private final JComboBox<String> selectedMethod;
@@ -39,6 +38,10 @@ public class SelectionPanel extends JPanel {
 		return new Dimension(Math.max(this.getWidth(), this.getMinimumSize().width), this.getMinimumSize().height);
 	}
 
+	public JComboBox<String> getSelectedMethod() {
+		return selectedMethod;
+	}
+
 	public void addButton(JButton button) {
 		button.setMinimumSize(new Dimension(OSRSCalculator.SKILL_ICON_LENGTH, OSRSCalculator.SKILL_ICON_LENGTH));
 		buttons.add(button);
@@ -46,6 +49,7 @@ public class SelectionPanel extends JPanel {
 
 	public void setMethods(List<Methods> methods) {
 		this.selectedMethod.removeAllItems();
+		selectedMethod.addItem("All");
 		for (Methods method : methods) {
 			this.selectedMethod.addItem(method.getName());
 		}

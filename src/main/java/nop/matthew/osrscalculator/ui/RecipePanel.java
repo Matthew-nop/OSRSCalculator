@@ -50,7 +50,7 @@ public class RecipePanel extends JPanel {
 		this.process.add(BorderLayout.NORTH, this.outputs);
 		this.inputs = new JLabel("0");
 		this.process.add(BorderLayout.SOUTH, this.inputs);
-		this.process.setMinimumSize(new Dimension(OSRSCalculator.MINIMUM_WIDTH - OUTCOME_WIDTH - COST_WIDTH, RECIPEPANEL_HEIGHT));
+		this.process.setPreferredSize(new Dimension(OSRSCalculator.calculator.getWidth() - OUTCOME_WIDTH - COST_WIDTH, RECIPEPANEL_HEIGHT));
 		this.process.setBorder(border);
 		add(BorderLayout.CENTER, process);
 
@@ -84,6 +84,10 @@ public class RecipePanel extends JPanel {
 
 	public Recipe getRecipe() {
 		return this.recipe;
+	}
+
+	public Methods getMethod() {
+		return method;
 	}
 
 	@Override

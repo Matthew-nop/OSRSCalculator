@@ -1,5 +1,6 @@
 package nop.matthew.osrscalculator.ui;
 
+import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Skills;
 
 import javax.swing.JPanel;
@@ -44,6 +45,11 @@ class ResultPanel extends JPanel {
 			this.activeSkills = null;
 			setVisible(false);
 		}
+	}
+
+	public void setMethod(Methods method) {
+		if (activeSkills != null)
+			skillPanels.get(activeSkills).setMethod(method);
 	}
 
 	public Skills getActiveSkills() {
