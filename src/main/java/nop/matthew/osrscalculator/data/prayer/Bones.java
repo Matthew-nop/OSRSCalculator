@@ -74,7 +74,6 @@ public enum Bones implements Recipe {
 
 	@Override
 	public URL getIconPath() {
-		System.out.println("/Items/" + this.ingredient.getId() + " - " + this.getName().toLowerCase() + " detail.png");
 		return getClass().getResource("/Items/" + this.ingredient.getId() + " - " + this.getName().toLowerCase() + " detail.png");
 	}
 }
