@@ -40,18 +40,15 @@ public class FlagsWindow extends JDialog {
 					}
 					skillPanel.updateCosts();
 				});
-				JLabel flagIcon;
+				JLabel flagIcon = new JLabel();
 				try {
 					URL flagPath = flag.getIconPath();
 					if(flagPath != null) {
-						flagIcon = new JLabel(new ImageIcon(ImageIO.read(flagPath)));
-					}
-					else {
-						flagIcon = new JLabel();
+						ImageIcon image = new ImageIcon(ImageIO.read(flagPath));
+						flagIcon = new JLabel(image);
 					}
 				} catch (IOException e) {
-					e.printStackTrace();
-					flagIcon = new JLabel();
+					System.err.println("Exception loading image for flag: " + flag.getName());
 				}
 				contentPanel.add(flagIcon);
 				contentPanel.add(checkBox);
