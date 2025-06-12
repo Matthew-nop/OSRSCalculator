@@ -16,8 +16,7 @@ public enum Flags {
 	public static Set<Flags> getFlags(int val) {
 		Flags[] flags = Flags.values();
 		Set<Flags> flagsSet = new HashSet<Flags>(flags.length);
-		for (Flags f : flags)
-		{
+		for (Flags f : flags) {
 			if ((val & f.getVal()) != 0)
 				flagsSet.add(f);
 		}

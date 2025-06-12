@@ -34,11 +34,15 @@ public class PriceFetcher {
 
 		for (Integer id : prices.keySet()) {
 			JSONObject item = null;
+			float price = 0f;
 			try {
-				 item = data.getJSONObject(id.toString());
-			} catch (JSONException ignored) {}
-			float price = readPrice(item);
-			System.out.println("Fetched price of " + price + " for item id " + id);
+				item = data.getJSONObject(id.toString());
+				price = readPrice(item);
+			} catch (JSONException ignored) {
+				System.out.println("itemID: " + id + " was not found with the prices API");
+			}
+
+			System.out.println("itemID: " + id + " fetched price of " + price);
 			prices.put(id, price);
 		}
 	}
@@ -86,11 +90,11 @@ public class PriceFetcher {
 		return this.prices;
 	}
 
-	private int connect() throws IOException {
-		return connect(0);
+	private void connect() throws IOException {
+		connect(0);
 	}
 
-	private int connect(int attempt) throws IOException  {
+	private int connect(int attempt) throws IOException {
 		this.conn = new URL(endpoint).openConnection();
 		this.conn.setRequestProperty("User-Agent", "OSRSCalculator");
 		this.conn.setConnectTimeout(CONNECTION_TIMEOUT_MS);
@@ -118,8 +122,7 @@ public class PriceFetcher {
 			sb.append(line);
 		}
 
-		JSONObject data = new JSONObject(sb.toString()).getJSONObject("data");
-		return data;
+		return new JSONObject(sb.toString()).getJSONObject("data");
 	}
 
 	private float readPrice(JSONObject item) {
@@ -143,8 +146,9 @@ public class PriceFetcher {
 
 		if (high >= 0 && low >= 0) {
 			// Return the average of the low and high prices
-			return (high + low)/2f;
-		} else {
+			return (high + low) / 2f;
+		}
+		else {
 			// If there's only data for low or high, use it instead of the average
 			return (high < 0) ? low : high;
 		}

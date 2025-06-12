@@ -68,7 +68,7 @@ public class RecipePanel extends JPanel {
 		this.outputs.setText("Output: " + df.format(sumOut));
 		this.inputs.setText("Input: " + df.format(sumIn));
 		this.profit.setText("Profit: " + df.format(sumOut - sumIn));
-		this.profitNormalised.setText("GP/XP: " + df.format((sumOut - sumIn)/this.recipe.getXp()));
+		this.profitNormalised.setText("GP/XP: " + df.format((sumOut - sumIn) / this.recipe.getXp()));
 		repaint();
 	}
 
