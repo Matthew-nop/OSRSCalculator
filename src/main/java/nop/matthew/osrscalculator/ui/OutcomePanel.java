@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.IOException;
+import java.net.URL;
 import java.text.DecimalFormat;
 
 public class OutcomePanel extends JPanel {
@@ -32,7 +33,12 @@ public class OutcomePanel extends JPanel {
 		// Set up the image label
 		JLabel imageLabel;
 		try {
-			imageLabel = new JLabel(new ImageIcon(ImageIO.read(recipe.getIconPath())));
+			URL imagePath = recipe.getIconPath();
+			if(imagePath != null) {
+				imageLabel = new JLabel(new ImageIcon(ImageIO.read(imagePath)));
+			} else {
+				imageLabel = new JLabel();
+			}
 		} catch (IOException ignored) {
 			imageLabel = new JLabel();
 		}
