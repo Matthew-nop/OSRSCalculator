@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,6 +25,7 @@ public class OutcomePanel extends JPanel {
 		this.xpLabel = new JLabel();
 		this.xpLabel.setBackground(Color.LIGHT_GRAY);
 		this.xpLabel.setOpaque(true);
+		this.xpLabel.setBorder(new EmptyBorder(0, OSRSCalculator.TEXT_BORDER_SIZE, 0, OSRSCalculator.TEXT_BORDER_SIZE));
 		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
 		setXp(df.format(skill.getXp(recipe)));
 
@@ -39,6 +41,7 @@ public class OutcomePanel extends JPanel {
 		JLabel levelLabel = new JLabel("Lvl " + recipe.getLevel());
 		Font defaultFont = imageLabel.getFont();
 		levelLabel.setFont(new Font(defaultFont.getFontName(), Font.BOLD, 16));
+		levelLabel.setBorder(new EmptyBorder(OSRSCalculator.TEXT_BORDER_SIZE, OSRSCalculator.TEXT_BORDER_SIZE, OSRSCalculator.TEXT_BORDER_SIZE, OSRSCalculator.TEXT_BORDER_SIZE));
 		imageLabel.add(BorderLayout.NORTH, levelLabel);
 
 		add(BorderLayout.CENTER, imageLabel);
