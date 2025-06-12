@@ -1,9 +1,11 @@
 package nop.matthew.osrscalculator.data.herblore;
 
-import nop.matthew.osrscalculator.data.ItemQuantity;
 import nop.matthew.osrscalculator.data.ItemID;
+import nop.matthew.osrscalculator.data.ItemQuantity;
+import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Recipe;
 import nop.matthew.osrscalculator.data.Skill;
+import nop.matthew.osrscalculator.data.Skills;
 import nop.matthew.osrscalculator.net.PriceFetcher;
 
 import java.util.HashMap;
@@ -11,8 +13,8 @@ import java.util.Map;
 
 public class Herblore extends Skill {
 	public Herblore(PriceFetcher priceFetcher) {
-		super(priceFetcher, "Herblore");
-		this.methodRecipes.put("Making Potions", Potions.values());
+		super(Skills.HERBLORE, priceFetcher);
+		this.methodRecipes.put(Methods.MAKING_POTIONS, Potions.values());
 	}
 
 	@Override
@@ -24,8 +26,10 @@ public class Herblore extends Skill {
 
 		for (int i = 0; i < outputs.length; i++) {
 			float c = coeff[i];
-			if (c > 0)
-				costs.put(outputs[i].getId(), priceFetcher.getPrice(outputs[i].getId()) * c);
+			if (c > 0) {
+				int id = outputs[i].getId();
+				costs.put(id, priceFetcher.getPrice(id) * c);
+			}
 		}
 
 		return costs;

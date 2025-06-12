@@ -1,5 +1,6 @@
 package nop.matthew.osrscalculator.ui;
 
+import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Recipe;
 import nop.matthew.osrscalculator.data.Skill;
 
@@ -8,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class SkillPanel extends JPanel {
 	private final Skill skill;
@@ -18,9 +20,9 @@ public class SkillPanel extends JPanel {
 		super(new GridLayout(0, 1));
 		this.skill = skill;
 		recipePanels = new ArrayList<RecipePanel>();
-		for (Recipe[] recipes : skill.getMethodRecipes().values()) {
-			for (Recipe recipe : recipes) {
-				RecipePanel recipePanel = new RecipePanel(recipe);
+		for (Map.Entry<Methods, Recipe[]> entry : skill.getMethodRecipes().entrySet()) {
+			for (Recipe recipe : entry.getValue()) {
+				RecipePanel recipePanel = new RecipePanel(recipe, entry.getKey());
 				recipePanels.add(recipePanel);
 				add(recipePanel);
 			}
