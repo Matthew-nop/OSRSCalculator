@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.text.DecimalFormat;
 
 public class OutcomePanel extends JPanel {
 	private final JLabel levelLabel;
@@ -15,15 +16,16 @@ public class OutcomePanel extends JPanel {
 	public OutcomePanel(Recipe recipe, Skill skill) {
 		super(new BorderLayout(0, 0));
 		this.level = recipe.getLevel();
-		this.levelLabel = new JLabel(this.level + " - " + skill.getXp(recipe));
-		
-		add(BorderLayout.CENTER, new JLabel(recipe.getName())); // TODO: place an image
+		this.levelLabel = new JLabel();
 		setXp(skill.getXp(recipe));
+
+		add(BorderLayout.CENTER, new JLabel(recipe.getName())); // TODO: place an image
 		add(BorderLayout.SOUTH, this.levelLabel);
 	}
 
 	public void setXp(double xp) {
-		this.levelLabel.setText("Lvl " + this.level + " - " + xp + "xp");
+		DecimalFormat df = new DecimalFormat("#.#");
+		this.levelLabel.setText("Lvl " + this.level + " - " + df.format(xp) + "xp");
 	}
 
 	@Override
