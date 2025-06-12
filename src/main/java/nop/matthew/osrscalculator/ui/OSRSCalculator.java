@@ -26,7 +26,7 @@ public class OSRSCalculator {
 	Magic numbers for UI
 	 */
 	public static final int METHOD_SELECTION_WIDTH = 140;
-	public static final int METHOD_SELECTION_HEIGHT = 40;
+	public static final int METHOD_SELECTION_HEIGHT = 50;
 	public static final int RECIPE_IMAGE_SIZE = 64;
 	public static final int RECIPEPANEL_HEIGHT = RECIPE_IMAGE_SIZE + 20;
 	public static final int OUTCOME_WIDTH = RECIPE_IMAGE_SIZE;
