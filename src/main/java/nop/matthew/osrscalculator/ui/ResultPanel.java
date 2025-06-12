@@ -2,6 +2,7 @@ package nop.matthew.osrscalculator.ui;
 
 import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Skills;
+import nop.matthew.osrscalculator.data.SortCriteria;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -49,6 +50,16 @@ class ResultPanel extends JPanel {
 	public void setMethod(Methods method) {
 		if (currentPanel != null)
 			currentPanel.setMethod(method);
+	}
+
+	/** Sort the active skill's list of RecipePanels
+	 *
+	 * @param sortCriteria the SortCriteria to sort by
+	 */
+	public void sortBy(SortCriteria sortCriteria) {
+		if (currentPanel != null)
+			currentPanel.sortBy(sortCriteria);
+		repaint();
 	}
 
 	public SkillPanel getCurrentPanel() {

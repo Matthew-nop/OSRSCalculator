@@ -1,6 +1,7 @@
 package nop.matthew.osrscalculator.ui;
 
 import nop.matthew.osrscalculator.data.Skills;
+import nop.matthew.osrscalculator.data.SortCriteria;
 import nop.matthew.osrscalculator.data.construction.Construction;
 import nop.matthew.osrscalculator.data.cooking.Cooking;
 import nop.matthew.osrscalculator.data.crafting.Crafting;
@@ -26,7 +27,6 @@ public class OSRSCalculator {
 	 */
 	public static final int METHOD_SELECTION_HEIGHT = 40;
 	public static final int METHOD_SELECTION_WIDTH = 160;
-	public static final int DEFAULT_RESULTPANEL_HEIGHT = 400;
 	public final static int RECIPEPANEL_HEIGHT = 50;
 	public final static int OUTCOME_WIDTH = 100;
 	public final static int COST_WIDTH = 100;
@@ -34,8 +34,14 @@ public class OSRSCalculator {
 	public final static int PROCESS_WIDTH_OFFSET = -(OUTCOME_WIDTH + COST_WIDTH + VERTICAL_SCROLLBAR_WIDTH);
 	public static final int MINIMUM_WIDTH = SKILL_COUNT * SKILL_ICON_LENGTH;
 	public static final int MINIMUM_HEIGHT = SKILL_ICON_LENGTH + METHOD_SELECTION_HEIGHT;
+
+	/*
+	Defaults for UI
+	 */
 	public static final int DEFAULT_WIDTH = MINIMUM_WIDTH;
 	public static final int DEFAULT_HEIGHT = 600;
+	public static final Skills DEFAULT_SKILL = Skills.HERBLORE;
+	public static final SortCriteria DEFAULT_SORTCRITERIA = SortCriteria.LEVEL;
 
 	protected static Calculator calculator;
 
@@ -84,8 +90,6 @@ public class OSRSCalculator {
 	}
 
 	public static void openSwing() {
-		calculator.setup(DEFAULT_WIDTH, DEFAULT_HEIGHT, Skills.HERBLORE);
-		calculator.pack();
-		calculator.setVisible(true);
+		calculator.openSwing(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 }

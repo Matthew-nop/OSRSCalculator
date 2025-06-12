@@ -3,19 +3,17 @@ package nop.matthew.osrscalculator.ui;
 import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
+import nop.matthew.osrscalculator.data.SortCriteria;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -23,8 +21,10 @@ import java.util.stream.Collectors;
 public class Calculator extends JFrame {
 	private final JPanel contentPane;
 	private final BorderLayout mainLayout;
+	private final JMenuBar menuBar;
 	private final SelectionPanel selectionPanel;
 	private final ResultPanel resultPanel;
+	private SortCriteria sortCriteria;
 
 	public Calculator() {
 		super("OSRS Calculator");
@@ -37,11 +37,57 @@ public class Calculator extends JFrame {
 		JFrame.setDefaultLookAndFeelDecorated(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		this.menuBar = new JMenuBar();
 		this.selectionPanel = new SelectionPanel();
 		this.resultPanel = new ResultPanel();
+		this.sortCriteria = OSRSCalculator.DEFAULT_SORTCRITERIA;
+
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent componentEvent) {
+				resultPanel.getCurrentPanel().revalidate();
+				pack();
+			}
+		});
 	}
 
-	public void setup(int width, int height, Skills defaultSkill) {
+	public void openSwing(int width, int height) {
+		// Set up the menu bar
+		// Sorting
+		JMenu sort = new JMenu("Sort");
+		ButtonGroup sortGroup = new ButtonGroup();
+		JRadioButtonMenuItem levelSort = new JRadioButtonMenuItem(SortCriteria.LEVEL.toString(), true);
+		levelSort.addItemListener(e -> {
+			if (e.getStateChange() == ItemEvent.SELECTED)
+			sortRecipes(SortCriteria.LEVEL);
+		});
+		sortGroup.add(levelSort);
+		sort.add(levelSort);
+		JRadioButtonMenuItem normalisedCostSort = new JRadioButtonMenuItem(SortCriteria.NORMALISED_COST.toString());
+		normalisedCostSort.addItemListener(e -> {
+			if (e.getStateChange() == ItemEvent.SELECTED)
+			sortRecipes(SortCriteria.NORMALISED_COST);
+		});
+		sortGroup.add(normalisedCostSort);
+		sort.add(normalisedCostSort);
+		JRadioButtonMenuItem profitSort = new JRadioButtonMenuItem(SortCriteria.PROFIT.toString());
+		profitSort.addItemListener(e -> {
+			if (e.getStateChange() == ItemEvent.SELECTED)
+				sortRecipes(SortCriteria.PROFIT);
+		});
+		sortGroup.add(profitSort);
+		sort.add(profitSort);
+		JRadioButtonMenuItem nameSort = new JRadioButtonMenuItem(SortCriteria.NAME.toString());
+		nameSort.addItemListener(e -> {
+			if (e.getStateChange() == ItemEvent.SELECTED)
+				sortRecipes(SortCriteria.NAME);
+		});
+		sortGroup.add(nameSort);
+		sort.add(nameSort);
+		this.menuBar.add(sort);
+
+		setJMenuBar(this.menuBar);
+
 		// Set up the selection panel
 		contentPane.add(BorderLayout.NORTH, this.selectionPanel);
 		this.selectionPanel.setup();
@@ -54,19 +100,16 @@ public class Calculator extends JFrame {
 			revalidate();
 		});
 
+
 		// Set up the results panel
 		contentPane.add(BorderLayout.CENTER, this.resultPanel);
-		selectSkill(defaultSkill);
+		selectSkill(OSRSCalculator.DEFAULT_SKILL);
+		sortRecipes(SortCriteria.LEVEL);
 
-		addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentResized(ComponentEvent componentEvent) {
-				resultPanel.getCurrentPanel().revalidate();
-				pack();
-			}
-		});
 		setSize(width, height);
 		validate();
+		repaint();
+		pack();
 		setVisible(true);
 	}
 
@@ -93,9 +136,15 @@ public class Calculator extends JFrame {
 		System.out.println("Selected calculator panel for " + skills);
 		this.resultPanel.setActiveSkills(skills);
 		this.selectionPanel.setMethods(Arrays.stream(Methods.values()).filter(m -> m.getSkill().equals(skills)).collect(Collectors.toList()));
+		this.resultPanel.sortBy(this.sortCriteria);
 		pack();
 		repaint();
 		revalidate();
+	}
+
+	private void sortRecipes(SortCriteria criteria) {
+		this.sortCriteria = criteria;
+		this.resultPanel.sortBy(criteria);
 	}
 
 	@Override
