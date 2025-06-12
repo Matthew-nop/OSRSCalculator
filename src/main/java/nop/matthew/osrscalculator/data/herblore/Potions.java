@@ -137,7 +137,7 @@ public enum Potions implements Recipe {
 			60,
 			new Item[]{
 					new Item(ItemID.VOLCANIC_ASH, 1),
-					new Item(ItemID.HARRALANDER_POTION_UNF,1)
+					new Item(ItemID.HARRALANDER_POTION_UNF, 1)
 			},
 			ItemID.COMPOST_POTION4),
 	DEFENCE_POTION(
@@ -512,8 +512,8 @@ public enum Potions implements Recipe {
 			50,
 			112.5f,
 			new Item[]{
-				new Item(ItemID.AVANTOE_POTION_UNF, 1),
-				new Item(ItemID.SNAPE_GRASS, 1)
+					new Item(ItemID.AVANTOE_POTION_UNF, 1),
+					new Item(ItemID.SNAPE_GRASS, 1)
 			},
 			ItemID.FISHING_POTION4),
 	GUTHIX_REST(
@@ -796,11 +796,12 @@ public enum Potions implements Recipe {
 			ItemID.ZAMORAK_BREW4),
 	;
 
+	// TODO: refactor id, idAmulet to be an instance of Item
 	// if (id >= 0) then (id exists)
 	private final int id;
 	private final int level;
 	private final float xp;
-	private Item[] ingredients;
+	private final Item[] ingredients;
 	// The id of a potion given an amulet proc (e.g. 3-dose id -> 4-dose id)
 	// if (idAmulet >= 0) then (idAmulet exists)
 	private final int idAmulet;
