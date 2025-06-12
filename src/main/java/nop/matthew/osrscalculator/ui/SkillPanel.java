@@ -6,8 +6,6 @@ import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,7 +17,6 @@ import java.util.stream.Collectors;
 public class SkillPanel extends JPanel {
 	private final Skill skill;
 	private final ArrayList<RecipePanel> recipePanels;
-	private final JScrollPane scrollPane;
 	private int count;
 
 	public SkillPanel(Skill skill) {
@@ -49,12 +46,6 @@ public class SkillPanel extends JPanel {
 
 		this.recipePanels.trimToSize();
 		validate();
-		scrollPane = new JScrollPane(this, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER) {
-			@Override
-			public Dimension getPreferredSize() {
-				return this.viewport.getPreferredSize();
-			}
-		};
 	}
 
 	/** Update recipe panel information
@@ -103,12 +94,8 @@ public class SkillPanel extends JPanel {
 		return skill.getSkills();
 	}
 
-	public JScrollPane getScrollPane() {
-		return scrollPane;
-	}
-
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(OSRSCalculator.calculator.getWidth() - OSRSCalculator.VERTICAL_SCROLLBAR_WIDTH, OSRSCalculator.RECIPEPANEL_HEIGHT*this.recipePanels.size());
+		return new Dimension(OSRSCalculator.calculator.getWidth() - OSRSCalculator.VERTICAL_SCROLLBAR_WIDTH, OSRSCalculator.RECIPEPANEL_HEIGHT*this.count);
 	}
 }

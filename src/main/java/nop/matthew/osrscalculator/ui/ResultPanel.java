@@ -4,6 +4,7 @@ import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Skills;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -26,7 +27,7 @@ class ResultPanel extends JPanel {
 	 * @return the added SkillPanel
 	 */
 	public Component add(SkillPanel skillPanel) {
-		super.add(skillPanel.getSkills().toString(), skillPanel.getScrollPane());
+		super.add(skillPanel.getSkills().toString(), new JScrollPane(new ScrollSkillPanel(skillPanel), JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
 		this.skillPanels.put(skillPanel.getSkills(), skillPanel);
 		return skillPanel;
 	}
@@ -50,8 +51,12 @@ class ResultPanel extends JPanel {
 			currentPanel.setMethod(method);
 	}
 
+	public SkillPanel getCurrentPanel() {
+		return this.currentPanel;
+	}
+
 	public Skills getActiveSkills() {
-		return currentPanel.getSkills();
+		return this.currentPanel.getSkills();
 	}
 
 	@Override
