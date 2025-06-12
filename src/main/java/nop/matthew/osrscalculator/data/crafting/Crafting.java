@@ -9,6 +9,7 @@ public class Crafting extends Skill {
 
 	private Crafting() {
 		super(Skills.CRAFTING);
+		this.methodRecipes.put(Methods.BATTLESTAVES, Battlestaves.values());
 		this.methodRecipes.put(Methods.DRAGON_LEATHER, Dragonleather.values());
 	}
 

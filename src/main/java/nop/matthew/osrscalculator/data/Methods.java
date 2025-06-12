@@ -5,6 +5,7 @@ public enum Methods {
 	PLANKS("Using planks", Skills.CONSTRUCTION),
 
 	// Crafting
+	BATTLESTAVES("Battlestaves", Skills.CRAFTING),
 	DRAGON_LEATHER("Dragon leather", Skills.CRAFTING),
 
 	// Firemaking
