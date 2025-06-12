@@ -74,7 +74,7 @@ public enum Logs implements Recipe {
 	}
 
 	@Override
-	public ItemQuantity[] getIngredients() {
+	public ItemQuantity[] getIngredients(Set<Flags> flags) {
 		return new ItemQuantity[]{ingredient};
 	}
 
@@ -94,13 +94,8 @@ public enum Logs implements Recipe {
 	}
 
 	@Override
-	public boolean flagAffects(Set<Flags> flag) {
-		return flag.contains(Flags.PYROMANCER_OUTFIT);
-	}
-
-	@Override
 	public boolean flagAffects(Flags flag) {
-		return flag.equals(Flags.PYROMANCER_OUTFIT);
+		return flag == Flags.PYROMANCER_OUTFIT;
 	}
 
 	@Override

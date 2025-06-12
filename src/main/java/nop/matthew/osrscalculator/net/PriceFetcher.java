@@ -76,7 +76,8 @@ public class PriceFetcher {
 	 */
 	public static void addRecipe(Recipe recipe) {
 		Arrays.stream(recipe.getOutput()).forEach(i -> addItem(i.getId()));
-		Arrays.stream(recipe.getIngredients()).forEach(i -> addItem(i.getId()));
+		// TODO: fix this, Recipe should implement an AllItems method or similar
+		Arrays.stream(recipe.getIngredients(null)).forEach(i -> addItem(i.getId()));
 	}
 
 	/**

@@ -32,7 +32,7 @@ public enum Ashes implements Recipe {
 	}
 
 	@Override
-	public ItemQuantity[] getIngredients() {
+	public ItemQuantity[] getIngredients(Set<Flags> flags) {
 		return new ItemQuantity[]{this.ingredient};
 	}
 
@@ -49,11 +49,6 @@ public enum Ashes implements Recipe {
 	@Override
 	public float getXp() {
 		return this.xp;
-	}
-
-	@Override
-	public boolean flagAffects(Set<Flags> flag) {
-		return false;
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public enum PyreLogs implements Recipe {
 	}
 
 	@Override
-	public ItemQuantity[] getIngredients() {
+	public ItemQuantity[] getIngredients(Set<Flags> flags) {
 		return new ItemQuantity[]{this.ingredient};
 	}
 
@@ -56,13 +56,8 @@ public enum PyreLogs implements Recipe {
 	}
 
 	@Override
-	public boolean flagAffects(Set<Flags> flag) {
-		return false;
-	}
-
-	@Override
 	public boolean flagAffects(Flags flag) {
-		return false;
+		return flag == Flags.PYROMANCER_OUTFIT;
 	}
 
 	@Override

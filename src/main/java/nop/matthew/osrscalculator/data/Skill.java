@@ -76,7 +76,7 @@ public abstract class Skill {
 	public Map<Integer, Float> getRecipeInCosts(Recipe recipe) {
 		HashMap<Integer, Float> costs = new HashMap<>();
 
-		for (ItemQuantity item : recipe.getIngredients()) {
+		for (ItemQuantity item : recipe.getIngredients(flags)) {
 			int id = item.getId();
 			costs.put(id, PriceFetcher.getPrice(id) * item.getQuantity());
 		}
