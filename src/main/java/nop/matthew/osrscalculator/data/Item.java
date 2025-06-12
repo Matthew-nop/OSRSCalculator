@@ -1,6 +1,7 @@
 package nop.matthew.osrscalculator.data;
 
 public enum Item {
+	ABYSSAL_ASHES("Abyssal ashes", ItemID.ABYSSAL_ASHES),
 	ACHEY_TREE_LOGS("Achey tree logs", ItemID.ACHEY_TREE_LOGS),
 	AGILITY_POTION3("Agility Potion(3)", ItemID.AGILITY_POTION3),
 	AGILITY_POTION4("Agility Potion(4)", ItemID.AGILITY_POTION4),
@@ -100,6 +101,7 @@ public enum Item {
 	EXTENDED_SUPER_ANTIFIRE3("Extended super antifire(3)", ItemID.EXTENDED_SUPER_ANTIFIRE3),
 	EXTENDED_SUPER_ANTIFIRE4("Extended super antifire(4)", ItemID.EXTENDED_SUPER_ANTIFIRE4),
 	EYE_OF_NEWT("Eye of newt", ItemID.EYE_OF_NEWT),
+	FIENDISH_ASHES("Fiendish ashes", ItemID.FIENDISH_ASHES),
 	FISHING_POTION3("Fishing potion(3)", ItemID.FISHING_POTION3),
 	FISHING_POTION4("Fishing potion(4)", ItemID.FISHING_POTION4),
 	GOAT_HORN_DUST("Goat horn dust", ItemID.GOAT_HORN_DUST),
@@ -126,6 +128,7 @@ public enum Item {
 	HARRALANDER_TAR("Harrandler tar", ItemID.HARRALANDER_TAR),
 	HUNTER_POTION3("Hunter potion(3)", ItemID.HUNTER_POTION3),
 	HUNTER_POTION4("Hunter potion(4)", ItemID.HUNTER_POTION4),
+	INFERNAL_ASHES("Infernal ashes", ItemID.INFERNAL_ASHES),
 	IRIT_LEAF("Irit leaf", ItemID.IRIT_LEAF),
 	IRIT_POTION_UNF("Irit potion (unf)", ItemID.IRIT_POTION_UNF),
 	JANGERBERRIES("Jangerberries", ItemID.JANGERBERRIES),
@@ -147,6 +150,7 @@ public enum Item {
 	MAGIC_ROOTS("Magic roots", ItemID.MAGIC_ROOTS),
 	MAHOGANY_LOGS("Mahogany logs", ItemID.MAHOGANY_LOGS),
 	MAHOGANY_PLANK("Mahogany plank", ItemID.MAHOGANY_PLANK),
+	MALICIOUS_ASHES("Malicious ashes", ItemID.MALICIOUS_ASHES),
 	MAPLE_LOGS("Maple logs", ItemID.MAPLE_LOGS),
 	MARRENTILL("Marrentill", ItemID.MARRENTILL),
 	MARRENTILL_POTION_UNF("Marrentill potion (unf)", ItemID.MARRENTILL_POTION_UNF),
@@ -231,6 +235,7 @@ public enum Item {
 	TORSTOL("Torstol", ItemID.TORSTOL),
 	UNFINISHED_POTION("Unfinished potion (Rogue's Purse)", ItemID.UNFINISHED_POTION_4840),
 	UNICORN_HORN_DUST("Unicorn horn dust", ItemID.UNICORN_HORN_DUST),
+	VILE_ASHES("Vile ashes", ItemID.VILE_ASHES),
 	VOLCANIC_ASH("Volcanic ash", ItemID.VOLCANIC_ASH),
 	WEAPON_POISON_PLUS_PLUS("Weapon poison(++)", ItemID.WEAPON_POISON_5940),
 	WEAPON_POISON_PLUS("Weapon poison(+)", ItemID.WEAPON_POISON_5937),
