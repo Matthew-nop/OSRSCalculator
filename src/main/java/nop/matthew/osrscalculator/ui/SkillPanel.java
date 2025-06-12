@@ -1,5 +1,6 @@
 package nop.matthew.osrscalculator.ui;
 
+import nop.matthew.osrscalculator.data.Flags;
 import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Recipe;
 import nop.matthew.osrscalculator.data.Skill;
@@ -114,6 +115,23 @@ public class SkillPanel extends JPanel {
 
 		this.shownPanels.sort(comparator);
 		setShownPanels(this.shownPanels);
+	}
+
+	/**
+	 * Set the given flag for this panel's skill
+	 *
+	 * @param flag the given flag
+	 */
+	public void setFlag(Flags flag) {
+		this.skill.setFlag(flag);
+	}
+
+	/** Unset the given flag for this panel's skill
+	 *
+	 * @param flag the given flag
+	 */
+	public void unsetFlag(Flags flag) {
+		this.skill.unsetFlag(flag);
 	}
 
 	public Skills getSkills() {

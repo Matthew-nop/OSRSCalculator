@@ -5,6 +5,7 @@ import nop.matthew.osrscalculator.data.Methods;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -13,6 +14,7 @@ import java.util.List;
 public class SelectionPanel extends JPanel {
 	private final JPanel buttons;
 	private final JComboBox<String> selectedMethod;
+	private final JButton flagsButton;
 
 	public SelectionPanel() {
 		super();
@@ -29,11 +31,14 @@ public class SelectionPanel extends JPanel {
 				return new Dimension(OSRSCalculator.METHOD_SELECTION_WIDTH, OSRSCalculator.METHOD_SELECTION_HEIGHT);
 			}
 		};
+		this.flagsButton = new JButton("Flags");
+		this.flagsButton.addActionListener(e -> new FlagsWindow(SwingUtilities.getWindowAncestor(this)));
 	}
 
 	public void setup() {
 		add(BorderLayout.NORTH, buttons);
 		add(BorderLayout.EAST, selectedMethod);
+		add(BorderLayout.WEST, this.flagsButton);
 
 		setMinimumSize(getMinimumSize());
 		setVisible(true);
@@ -48,7 +53,7 @@ public class SelectionPanel extends JPanel {
 	 *
 	 * @param button the button to add
 	 */
-	public void addButton(JButton button) {
+	public void addSkillButton(JButton button) {
 		button.setMinimumSize(new Dimension(OSRSCalculator.SKILL_ICON_LENGTH, OSRSCalculator.SKILL_ICON_LENGTH));
 		buttons.add(button);
 	}
