@@ -14,26 +14,23 @@ import java.awt.GridLayout;
 import java.util.List;
 
 public class SelectionPanel extends JPanel {
-	private final JPanel buttons;
-	private final JComboBox<String> selectedMethod;
+	private static final JPanel buttons = new JPanel(new GridLayout(1, 11)) {
+		@Override
+		public Dimension getPreferredSize() {
+			return new Dimension(OSRSCalculator.MINIMUM_WIDTH * this.getComponentCount(), OSRSCalculator.SKILL_ICON_LENGTH);
+		}
+	};
+	private static final JComboBox<String> selectedMethod = new JComboBox<>() {
+		@Override
+		public Dimension getPreferredSize() {
+			return new Dimension(OSRSCalculator.METHOD_SELECTION_WIDTH, OSRSCalculator.METHOD_SELECTION_HEIGHT);
+		}
+	};
 
 	public SelectionPanel() {
 		super();
 		setLayout(new BorderLayout(0, 0));
-		this.buttons = new JPanel(new GridLayout(1, 11)) {
-			@Override
-			public Dimension getPreferredSize() {
-				return new Dimension(OSRSCalculator.MINIMUM_WIDTH * this.getComponentCount(), OSRSCalculator.SKILL_ICON_LENGTH);
-			}
-		};
-
-		this.selectedMethod = new JComboBox<>() {
-			@Override
-			public Dimension getPreferredSize() {
-				return new Dimension(OSRSCalculator.METHOD_SELECTION_WIDTH, OSRSCalculator.METHOD_SELECTION_HEIGHT);
-			}
-		};
-		this.selectedMethod.addActionListener(e -> {
+		selectedMethod.addActionListener(e -> {
 			Object selected = selectedMethod.getSelectedItem();
 			if (selected != null) {
 				Calculator.getResultPanel().setMethod(Methods.getFromName(selected.toString()));
@@ -82,7 +79,7 @@ public class SelectionPanel extends JPanel {
 	 *
 	 * @param button the button to add
 	 */
-	public void addSkillButton(JButton button) {
+	public static void addSkillButton(JButton button) {
 		button.setMinimumSize(new Dimension(OSRSCalculator.SKILL_ICON_LENGTH, OSRSCalculator.SKILL_ICON_LENGTH));
 		buttons.add(button);
 	}
@@ -92,11 +89,11 @@ public class SelectionPanel extends JPanel {
 	 *
 	 * @param methods The list of methods
 	 */
-	public void setMethods(List<Methods> methods) {
-		this.selectedMethod.removeAllItems();
+	public static void setMethods(List<Methods> methods) {
+		selectedMethod.removeAllItems();
 		selectedMethod.addItem("All");
 		for (Methods method : methods) {
-			this.selectedMethod.addItem(method.getName());
+			selectedMethod.addItem(method.getName());
 		}
 	}
 
@@ -107,6 +104,6 @@ public class SelectionPanel extends JPanel {
 
 	@Override
 	public Dimension getMinimumSize() {
-		return new Dimension(OSRSCalculator.MINIMUM_WIDTH, this.buttons.getPreferredSize().height + this.selectedMethod.getPreferredSize().height);
+		return new Dimension(OSRSCalculator.MINIMUM_WIDTH, buttons.getPreferredSize().height + selectedMethod.getPreferredSize().height);
 	}
 }
