@@ -22,6 +22,9 @@ public enum Methods {
 
 	// Hunter
 	BOXTRAPS("Boxtraps", Skills.HUNTER),
+	
+	// Magic
+	ENCHANTING_BOLTS("Enchanting bolts", Skills.MAGIC),
 
 	// Prayer
 	ASHES("Ashes", Skills.PRAYER),
@@ -52,8 +55,9 @@ public enum Methods {
 	 */
 	public static Methods getFromName(String name) {
 		for (Methods m : Methods.values()) {
-			if (m.toString().equals(name))
+			if (m.toString().equals(name)) {
 				return m;
+			}
 		}
 
 		return null;
