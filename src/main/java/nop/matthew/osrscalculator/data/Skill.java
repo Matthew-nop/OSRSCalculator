@@ -37,7 +37,7 @@ public abstract class Skill {
 	/*
 	Add all items which are not in a recipe, but require prices to be tracked
 	 */
-	public abstract void addTertiaryPrices();
+	protected abstract void addTertiaryPrices();
 
 	public Map<Integer, Float> getRecipeOutCosts(Recipe r) {
 		HashMap<Integer, Float> costs = new HashMap<Integer, Float>();

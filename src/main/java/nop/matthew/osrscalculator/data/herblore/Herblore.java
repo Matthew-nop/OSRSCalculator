@@ -55,7 +55,7 @@ public class Herblore extends Skill {
 
 
 	@Override
-	public void addTertiaryPrices() {
+	protected void addTertiaryPrices() {
 		this.priceFetcher.addItem(ItemID.AMULET_OF_CHEMISTRY);
 	}
 }
