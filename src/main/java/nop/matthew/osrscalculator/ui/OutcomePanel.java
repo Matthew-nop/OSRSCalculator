@@ -17,15 +17,15 @@ public class OutcomePanel extends JPanel {
 		super(new BorderLayout(0, 0));
 		this.level = recipe.getLevel();
 		this.levelLabel = new JLabel();
-		setXp(skill.getXp(recipe));
+		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
+		setXp(df.format(skill.getXp(recipe)));
 
 		add(BorderLayout.CENTER, new JLabel(recipe.getName())); // TODO: place an image
 		add(BorderLayout.SOUTH, this.levelLabel);
 	}
 
-	public void setXp(double xp) {
-		DecimalFormat df = new DecimalFormat("#.#");
-		this.levelLabel.setText("Lvl " + this.level + " - " + df.format(xp) + "xp");
+	public void setXp(String xp) {
+		this.levelLabel.setText("Lvl " + this.level + " - " + xp  + "xp");
 	}
 
 	@Override

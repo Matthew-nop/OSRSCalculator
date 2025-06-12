@@ -21,6 +21,7 @@ import java.io.IOException;
 public class OSRSCalculator {
 	public static final int SKILL_ICON_LENGTH = 40;
 	public static final int SKILL_COUNT = 11;
+	public static final String DECIMAL_FORMAT_STRING = "#.#";
 
 	/*
 	Magic numbers for UI
