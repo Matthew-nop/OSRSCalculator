@@ -13,7 +13,8 @@ public final class Experience {
 		}
 	}
 
-	/** Get the minimum XP value needed for a given level
+	/**
+	 * Get the minimum XP value needed for a given level
 	 *
 	 * @param level the given level
 	 * @return the minimum XP value needed
@@ -25,7 +26,8 @@ public final class Experience {
 		return LEVEL_XP[level];
 	}
 
-	/** Get the minimum level needed for a given XP value
+	/**
+	 * Get the minimum level needed for a given XP value
 	 *
 	 * @param xp the given XP value
 	 * @return the minimum level needed
