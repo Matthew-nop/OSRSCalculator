@@ -28,8 +28,8 @@ public class SelectionPanel extends JPanel {
 			return new Dimension(OSRSCalculator.METHOD_SELECTION_WIDTH, OSRSCalculator.METHOD_SELECTION_HEIGHT);
 		}
 	};
-	private final JTextField startBox = new JTextField();
-	private final JTextField endBox = new JTextField();
+	private final JTextField startBox = new JTextField("1");
+	private final JTextField endBox = new JTextField("1");
 	private final JButton goalsButton = new JButton("Update");
 
 	private SelectionPanel() {
@@ -83,6 +83,9 @@ public class SelectionPanel extends JPanel {
 			try {
 				int start = Integer.parseInt(startBox.getText());
 				int end = Integer.parseInt(endBox.getText());
+				if (end < start) {
+					end = start;
+				}
 				if (calculator.goalIsLevel()) {
 					resultPanel.updateActionsLvl(start, end);
 				}
