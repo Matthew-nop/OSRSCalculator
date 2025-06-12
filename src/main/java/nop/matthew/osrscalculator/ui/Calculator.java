@@ -16,6 +16,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -52,9 +53,6 @@ public class Calculator extends JFrame {
 		this.selectionPanel = SelectionPanel.getInstance();
 		this.resultPanel = ResultPanel.getInstance();
 
-		if (this.autoUpdatePrices)
-			startPriceAutoUpdate();
-
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent componentEvent) {
@@ -68,7 +66,7 @@ public class Calculator extends JFrame {
 		return calculator;
 	}
 
-	public void openSwing(int width, int height) {
+	public void start(int width, int height) {
 		// Set up the menu bar
 		// Sorting
 		JMenu sort = new JMenu("Sort");
@@ -140,6 +138,9 @@ public class Calculator extends JFrame {
 		this.selectionPanel.setup();
 		this.contentPane.add(BorderLayout.NORTH, this.selectionPanel);
 
+		if (this.autoUpdatePrices)
+			startPriceAutoUpdate();
+
 		setSize(width, height);
 		setLocationRelativeTo(null);
 		validate();
@@ -198,7 +199,7 @@ public class Calculator extends JFrame {
 						Thread.sleep(wait);
 					updatePriceFetcher();
 					System.out.println("Auto updated prices with system time: " + this.lastPriceUpdate);
-					this.resultPanel.updateCosts();
+					SwingUtilities.invokeLater(() -> ResultPanel.getInstance().updateCosts());
 					// If the sorting is affected by cost, re-sort the result panel
 					switch (this.sortCriteria) {
 						case LEVEL:
@@ -206,7 +207,8 @@ public class Calculator extends JFrame {
 							break;
 						case PROFIT:
 						case NORMALISED_COST:
-							this.resultPanel.sortBy(this.sortCriteria);
+							SwingUtilities.invokeLater(() -> ResultPanel.getInstance().sortBy(this.sortCriteria));
+							break;
 					}
 				} catch (InterruptedException | IOException e) {
 					synchronized (this.autoUpdatePricesLock) {
