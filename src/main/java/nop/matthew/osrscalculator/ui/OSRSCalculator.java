@@ -32,8 +32,6 @@ public class OSRSCalculator {
 	public final static int COST_WIDTH = 100;
 	public final static int VERTICAL_SCROLLBAR_WIDTH = (new JScrollPane()).getVerticalScrollBar().getPreferredSize().width;
 	public final static int PROCESS_WIDTH_OFFSET = -(OUTCOME_WIDTH + COST_WIDTH + VERTICAL_SCROLLBAR_WIDTH);
-	public final static int BONUSESWINDOW_WIDTH = 500;
-	public final static int BONUSESWINDOW_HEIGHT = 500;
 	public static final int MINIMUM_WIDTH = SKILL_COUNT * SKILL_ICON_LENGTH;
 	public static final int MINIMUM_HEIGHT = SKILL_ICON_LENGTH + METHOD_SELECTION_HEIGHT;
 

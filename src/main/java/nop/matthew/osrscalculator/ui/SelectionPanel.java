@@ -78,6 +78,6 @@ public class SelectionPanel extends JPanel {
 
 	@Override
 	public Dimension getMinimumSize() {
-		return new Dimension(OSRSCalculator.calculator.getMinimumSize().width, this.buttons.getPreferredSize().height + this.selectedMethod.getPreferredSize().height);
+		return new Dimension(OSRSCalculator.MINIMUM_WIDTH, this.buttons.getPreferredSize().height + this.selectedMethod.getPreferredSize().height);
 	}
 }
