@@ -125,7 +125,8 @@ public class SkillPanel extends JPanel {
 		this.skill.setFlag(flag);
 	}
 
-	/** Unset the given flag for this panel's skill
+	/**
+	 * Unset the given flag for this panel's skill
 	 *
 	 * @param flag the given flag
 	 */

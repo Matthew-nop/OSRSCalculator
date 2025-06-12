@@ -1,8 +1,5 @@
 package nop.matthew.osrscalculator.ui;
 
-import nop.matthew.osrscalculator.data.Recipe;
-import nop.matthew.osrscalculator.data.Skill;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;

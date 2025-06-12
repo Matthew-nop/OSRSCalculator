@@ -19,6 +19,6 @@ public class Construction extends Skill {
 
 	@Override
 	public double getXp(Recipe recipe) {
-		return this.flags.contains(Flags.CARPENTERS_OUTFIT) ? super.getXp(recipe) * 1.025d: super.getXp(recipe);
+		return this.flags.contains(Flags.CARPENTERS_OUTFIT) ? super.getXp(recipe) * 1.025d : super.getXp(recipe);
 	}
 }
