@@ -16,8 +16,8 @@ import java.util.Map;
 
 public class RecipePanel extends JPanel {
 	public final static int RECIPEPANEL_HEIGHT = 50;
-	public final static int OUTCOME_WIDTH = 150;
-	public final static int COST_WIDTH = 150;
+	public final static int OUTCOME_WIDTH = 100;
+	public final static int COST_WIDTH = 100;
 
 	private Recipe recipe;
 	private Methods method;
@@ -33,7 +33,6 @@ public class RecipePanel extends JPanel {
 	public RecipePanel(Recipe recipe, Methods method) {
 		super();
 		setLayout(new BorderLayout(0, 0));
-		setMinimumSize(new Dimension(Calculator.MINIMUM_WIDTH, RECIPEPANEL_HEIGHT));
 		Border border = BorderFactory.createLineBorder(Color.black);
 		this.recipe = recipe;
 		this.method = method;
@@ -51,7 +50,7 @@ public class RecipePanel extends JPanel {
 		this.process.add(BorderLayout.NORTH, this.outputs);
 		this.inputs = new JLabel("0");
 		this.process.add(BorderLayout.SOUTH, this.inputs);
-		this.process.setMinimumSize(new Dimension(Calculator.MINIMUM_WIDTH - OUTCOME_WIDTH - COST_WIDTH, RECIPEPANEL_HEIGHT));
+		this.process.setMinimumSize(new Dimension(OSRSCalculator.MINIMUM_WIDTH - OUTCOME_WIDTH - COST_WIDTH, RECIPEPANEL_HEIGHT));
 		this.process.setBorder(border);
 		add(BorderLayout.CENTER, process);
 
@@ -85,5 +84,10 @@ public class RecipePanel extends JPanel {
 
 	public Recipe getRecipe() {
 		return this.recipe;
+	}
+
+	@Override
+	public Dimension getMinimumSize() {
+		return new Dimension(OSRSCalculator.calculator.getWidth(), RECIPEPANEL_HEIGHT);
 	}
 }
