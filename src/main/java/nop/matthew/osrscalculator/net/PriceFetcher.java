@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class PriceFetcher {
-	private static final String USER_AGENT = "OSRSCalculator";
+	private static final String USER_AGENT = "OSRSCalculator - https://github.com/Matthew-nop/OSRSCalculator";
 	private static final String BASE_URL = "https://prices.runescape.wiki/api/v1/osrs/latest";
 	private static final int CONNECTION_TIMEOUT_MS = 10000;
 	private static final int READ_TIMEOUT_MS = 5000;
