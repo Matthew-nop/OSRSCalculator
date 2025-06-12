@@ -134,6 +134,16 @@ public class SkillPanel extends JPanel {
 		this.skill.unsetFlag(flag);
 	}
 
+	/**
+	 * Check if the given flag is set
+	 *
+	 * @param flag the given flag
+	 * @return true if the flag is set, false if not
+	 */
+	public boolean checkFlag(Flags flag) {
+		return this.skill.checkFlag(flag);
+	}
+
 	public Skills getSkills() {
 		return skill.getSkills();
 	}

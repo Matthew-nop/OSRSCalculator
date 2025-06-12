@@ -25,7 +25,7 @@ public class FlagsWindow extends JDialog {
 		int count = 0;
 		for (Flags flag : flags) {
 			if (flag.getSkill().equals(skillPanel.getSkills())) {
-				JCheckBox checkBox = new JCheckBox(flag.toString());
+				JCheckBox checkBox = new JCheckBox(flag.toString(), skillPanel.checkFlag(flag));
 				checkBox.addItemListener(e -> {
 					if (e.getStateChange() == ItemEvent.SELECTED)
 						skillPanel.setFlag(flag);
