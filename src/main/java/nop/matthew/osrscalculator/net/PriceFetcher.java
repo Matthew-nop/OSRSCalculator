@@ -1,7 +1,7 @@
-package net;
+package nop.matthew.osrscalculator.net;
 
-import data.Item;
-import data.Recipe;
+import nop.matthew.osrscalculator.data.Item;
+import nop.matthew.osrscalculator.data.Recipe;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -149,7 +149,7 @@ public class PriceFetcher {
 			return (high + low) / 2f;
 		}
 		else {
-			// If there's only data for low or high, use it instead of the average
+			// If there's only nop.matthew.osrscalculator.data for low or high, use it instead of the average
 			return (high < 0) ? low : high;
 		}
 	}

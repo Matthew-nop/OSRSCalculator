@@ -1,4 +1,4 @@
-package ui;
+package nop.matthew.osrscalculator.ui;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;

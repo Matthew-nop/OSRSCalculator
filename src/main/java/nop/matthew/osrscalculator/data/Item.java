@@ -1,4 +1,4 @@
-package data;
+package nop.matthew.osrscalculator.data;
 
 public class Item {
 	private final int id;

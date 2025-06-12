@@ -1,6 +1,6 @@
-package ui;
+package nop.matthew.osrscalculator.ui;
 
-import data.Skill;
+import nop.matthew.osrscalculator.data.Skill;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -65,7 +65,7 @@ public class Calculator {
 		this.resultPanel.add(key, panel.getScrollPane());
 
 		JButton button = new JButton(new ImageIcon(ImageIO
-				.read(new File("res/SkillIcons/" + key.toLowerCase() + ".png"))
+				.read(getClass().getResource("/SkillIcons/" + key.toLowerCase() + ".png"))
 				.getScaledInstance(SKILL_ICON_LENGTH, SKILL_ICON_LENGTH, Image.SCALE_DEFAULT)));
 		button.setToolTipText(key);
 		button.addActionListener(e -> {

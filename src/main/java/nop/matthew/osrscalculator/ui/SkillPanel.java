@@ -1,7 +1,7 @@
-package ui;
+package nop.matthew.osrscalculator.ui;
 
-import data.Recipe;
-import data.Skill;
+import nop.matthew.osrscalculator.data.Recipe;
+import nop.matthew.osrscalculator.data.Skill;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;

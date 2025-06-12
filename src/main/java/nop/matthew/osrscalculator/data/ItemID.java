@@ -1,4 +1,4 @@
-package data;
+package nop.matthew.osrscalculator.data;
 
 public final class ItemID {
 	public static final int DWARF_REMAINS = 0;

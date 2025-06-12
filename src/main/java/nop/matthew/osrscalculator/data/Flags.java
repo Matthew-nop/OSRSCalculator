@@ -1,4 +1,4 @@
-package data;
+package nop.matthew.osrscalculator.data;
 
 import java.util.HashSet;
 import java.util.Set;
