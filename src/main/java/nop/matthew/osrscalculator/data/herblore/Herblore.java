@@ -15,6 +15,7 @@ public class Herblore extends Skill {
 	public Herblore(PriceFetcher priceFetcher) {
 		super(Skills.HERBLORE, priceFetcher);
 		this.methodRecipes.put(Methods.MAKING_POTIONS, Potions.values());
+		this.methodRecipes.put(Methods.CLEANING_HERBS, Herbs.values());
 	}
 
 	@Override
