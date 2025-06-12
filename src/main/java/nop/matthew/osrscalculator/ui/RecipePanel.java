@@ -61,7 +61,7 @@ public class RecipePanel extends JPanel {
 		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
 		this.outcome.setXp(df.format(xp));
 		this.ingredients.setCosts(df.format(costIn));
-		this.efficiency.setEfficiency(df.format(profit), df.format(normalisedProfit), "0");
+		this.efficiency.setEfficiency(normalisedProfit, profit, "0");
 		repaint();
 	}
 
