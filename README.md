@@ -25,10 +25,9 @@ You will need maven if you want to build the project.
 ## Building
 To build a .jar file, in the project root directory run the following commands:
 ```
-mvn compiler:compile 
-mvn assembly:single
+mvn clean package
 ```
-The output file jar be located at `out/OSRSCalculator-v*.*-jar-with-dependencies.jar`
+The output file jar be located at `out/OSRSCalculator-jar-with-dependencies.jar`
 
 ## File Layout
  - src/main/java
