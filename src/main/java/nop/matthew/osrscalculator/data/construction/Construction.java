@@ -7,9 +7,15 @@ import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
 
 public class Construction extends Skill {
-	public Construction() {
+	private static final Construction construction = new Construction();
+
+	private Construction() {
 		super(Skills.CONSTRUCTION);
 		this.methodRecipes.put(Methods.PLANKS, Planks.values());
+	}
+
+	public static Construction getInstance() {
+		return construction;
 	}
 
 	@Override

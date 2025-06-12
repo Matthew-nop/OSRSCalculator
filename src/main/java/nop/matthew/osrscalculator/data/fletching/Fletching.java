@@ -4,8 +4,14 @@ import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
 
 public class Fletching extends Skill {
-	public Fletching() {
+	private static final Fletching fletching = new Fletching();
+
+	private Fletching() {
 		super(Skills.FLETCHING);
+	}
+
+	public static Fletching getInstance() {
+		return fletching;
 	}
 
 	@Override

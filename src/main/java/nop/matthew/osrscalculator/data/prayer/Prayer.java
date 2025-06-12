@@ -5,9 +5,15 @@ import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
 
 public class Prayer extends Skill {
-	public Prayer() {
+	private static final Prayer prayer = new Prayer();
+
+	private Prayer() {
 		super(Skills.PRAYER);
 		this.methodRecipes.put(Methods.ASHES, Ashes.values());
+	}
+
+	public static Prayer getInstance() {
+		return prayer;
 	}
 
 	@Override
