@@ -12,7 +12,9 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class SkillPanel extends JPanel {
 	private final Skill skill;
@@ -72,30 +74,24 @@ public class SkillPanel extends JPanel {
 		removeAll();
 		GridBagConstraints constraints = new GridBagConstraints();
 
-		int size = this.recipePanels.size();
 		int count = 0;
 		constraints.anchor = GridBagConstraints.NORTHEAST;
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		constraints.gridwidth = 1;
 		constraints.weighty = 0;
-		if (method != null) {
-			for (int i = 0; i < size; i++, count++) {
-				RecipePanel recipePanel = this.recipePanels.get(i);
-				if (recipePanel.getMethod().equals(method)) {
-					constraints.gridx = 0;
-					constraints.gridy = count;
-					add(recipePanel, constraints);
-				}
-			}
+		List<RecipePanel> panels = this.recipePanels;
+		if (method != null)
+			panels = panels.stream()
+					.filter(r -> r.getMethod().equals(method))
+					.collect(Collectors.toList());
+		int size = panels.size();
+		for (int i = 0; i < size; i++, count++) {
+			RecipePanel recipePanel = panels.get(i);
+			constraints.gridx = 0;
+			constraints.gridy = count;
+			add(recipePanel, constraints);
 		}
-		else {
-			for (int i = 0; i < size; i++, count++) {
-				RecipePanel recipePanel = this.recipePanels.get(i);
-				constraints.gridx = 0;
-				constraints.gridy = count;
-				add(recipePanel, constraints);
-			}
-		}
+
 		constraints.fill = GridBagConstraints.VERTICAL;
 		constraints.weighty = 1;
 		add(new JPanel(), constraints);
