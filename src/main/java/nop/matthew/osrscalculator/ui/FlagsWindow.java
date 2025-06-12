@@ -21,7 +21,6 @@ public class FlagsWindow extends JDialog {
 		setLayout(layoutManager);
 		setModal(true);
 
-
 		Flags[] flags = Flags.values();
 		int count = 0;
 		for (Flags flag : flags) {
@@ -38,6 +37,12 @@ public class FlagsWindow extends JDialog {
 				count++;
 			}
 		}
+
+		if (count == 0) {
+			dispose();
+			return;
+		}
+
 		layoutManager.setRows(2);
 		layoutManager.setColumns(count / 2 + 1);
 
