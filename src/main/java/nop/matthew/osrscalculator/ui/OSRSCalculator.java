@@ -85,6 +85,6 @@ public class OSRSCalculator {
 		calculator.addSkill(prayer);
 		calculator.addSkill(smithing);
 
-		calculator.openSwing(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		calculator.start(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 }
