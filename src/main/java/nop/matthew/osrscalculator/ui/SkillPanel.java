@@ -86,18 +86,21 @@ public class SkillPanel extends JPanel {
 	/**
 	 * Update recipe panel action count information
 	 *
-	 * @param start the starting value
-	 * @param end   the target value
-	 * @param level true if the values represent levels,
-	 *              false if they are xp values
+	 * @param startXp the starting xp value
+	 * @param endXp   the target xp value
 	 */
-	public void updateActions(int start, int end, boolean level) {
-		if (level) {
-			this.recipePanels.forEach(rp -> rp.updateActionLevel(start, end));
-		}
-		else {
-			this.recipePanels.forEach(rp -> rp.updateActionXp(start, end));
-		}
+	public void updateActionsXp(int startXp, int endXp) {
+		this.recipePanels.forEach(rp -> rp.updateActionsXp(startXp, endXp));
+	}
+
+	/**
+	 * Update recipe panel action count information
+	 *
+	 * @param startLvl the starting level
+	 * @param endLvl   the target level
+	 */
+	public void updateActionsLvl(int startLvl, int endLvl) {
+		this.recipePanels.forEach(rp -> rp.updateActionsLevel(startLvl, endLvl));
 	}
 
 	/**

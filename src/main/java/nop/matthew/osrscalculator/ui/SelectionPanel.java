@@ -83,7 +83,12 @@ public class SelectionPanel extends JPanel {
 			try {
 				int start = Integer.parseInt(startBox.getText());
 				int end = Integer.parseInt(endBox.getText());
-				resultPanel.getCurrentPanel().updateActions(start, end, calculator.goalIsLevel());
+				if (calculator.goalIsLevel()) {
+					resultPanel.updateActionsLvl(start, end);
+				}
+				else {
+					resultPanel.updateActionsXP(start, end);
+				}
 			} catch (NumberFormatException exception) {
 				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Invalid input for start/end values.\nPlease input integers within range.");
 			}

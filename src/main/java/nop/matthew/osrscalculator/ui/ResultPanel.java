@@ -85,6 +85,30 @@ class ResultPanel extends JPanel {
 		repaint();
 	}
 
+	/**
+	 * Update the current panel's action counts from the given XP values
+	 *
+	 * @param startXp the given starting XP
+	 * @param endXp   the given target XP
+	 */
+	public void updateActionsXP(int startXp, int endXp) {
+		if (this.currentPanel != null) {
+			this.currentPanel.updateActionsXp(startXp, endXp);
+		}
+	}
+
+	/**
+	 * Update the current panel's action counts
+	 *
+	 * @param startLvl the given starting level
+	 * @param endLvl   the given target level
+	 */
+	public void updateActionsLvl(int startLvl, int endLvl) {
+		if (this.currentPanel != null) {
+			this.currentPanel.updateActionsLvl(startLvl, endLvl);
+		}
+	}
+
 	public SkillPanel getCurrentPanel() {
 		return this.currentPanel;
 	}
