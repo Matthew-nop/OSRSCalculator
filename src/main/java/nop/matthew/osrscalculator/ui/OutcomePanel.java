@@ -24,7 +24,6 @@ public class OutcomePanel extends JPanel {
 		setXp(df.format(skill.getXp(recipe)));
 
 		JLabel imageLabel = new JLabel();
-		int level = recipe.getLevel();
 		imageLabel.setToolTipText(recipe.getName());
 		imageLabel.setLayout(new BorderLayout(0, 0));
 		JLabel levelLabel = new JLabel("Lvl " + recipe.getLevel());

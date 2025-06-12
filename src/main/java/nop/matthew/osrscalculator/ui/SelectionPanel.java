@@ -4,7 +4,9 @@ import nop.matthew.osrscalculator.data.Methods;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -14,7 +16,6 @@ import java.util.List;
 public class SelectionPanel extends JPanel {
 	private final JPanel buttons;
 	private final JComboBox<String> selectedMethod;
-	private final JButton flagsButton;
 
 	public SelectionPanel() {
 		super();
@@ -25,27 +26,55 @@ public class SelectionPanel extends JPanel {
 				return new Dimension(OSRSCalculator.MINIMUM_WIDTH * this.getComponentCount(), OSRSCalculator.SKILL_ICON_LENGTH);
 			}
 		};
+
 		this.selectedMethod = new JComboBox<>() {
 			@Override
 			public Dimension getPreferredSize() {
 				return new Dimension(OSRSCalculator.METHOD_SELECTION_WIDTH, OSRSCalculator.METHOD_SELECTION_HEIGHT);
 			}
 		};
-		this.flagsButton = new JButton("Flags");
-		this.flagsButton.addActionListener(e -> new FlagsWindow(SwingUtilities.getWindowAncestor(this)));
-	}
+		this.selectedMethod.addActionListener(e -> {
+			Object selected = selectedMethod.getSelectedItem();
+			if (selected != null) {
+				Calculator.getResultPanel().setMethod(Methods.getFromName(selected.toString()));
+				Calculator.getResultPanel().sortBy(Calculator.getSortCriteria());
+			}
+			repaint();
+			revalidate();
+		});
 
-	public void setup() {
+		JPanel goalsPanel = new JPanel(new BorderLayout(0, 0));
+		JTextField startBox = new JTextField();
+		JTextField endBox = new JTextField();
+		JPanel labelPanel = new JPanel(new BorderLayout(0, 0));
+		labelPanel.add(BorderLayout.NORTH, new JLabel("Start: "));
+		labelPanel.add(BorderLayout.SOUTH, new JLabel("Target: "));
+		JPanel textBoxPanel = new JPanel(new BorderLayout(0, 0));
+		textBoxPanel.add(BorderLayout.NORTH, startBox);
+		textBoxPanel.add(BorderLayout.SOUTH, endBox);
+		JButton goalsButton = new JButton("Update");
+		goalsButton.addActionListener(e -> {
+			int start, end;
+			try {
+				start = Integer.parseInt(startBox.getText());
+				end = Integer.parseInt(endBox.getText());
+			} catch (NumberFormatException exception) {
+				return;
+			}
+			Calculator.getResultPanel().getCurrentPanel().updateActions(start, end, false);
+		});
+		goalsPanel.add(BorderLayout.WEST, labelPanel);
+		goalsPanel.add(BorderLayout.CENTER, textBoxPanel);
+		goalsPanel.add(BorderLayout.EAST, goalsButton);
+
+		JButton flagsButton = new JButton("Flags");
+		flagsButton.addActionListener(e -> new FlagsWindow(SwingUtilities.getWindowAncestor(this)));
+
 		add(BorderLayout.NORTH, buttons);
 		add(BorderLayout.EAST, selectedMethod);
-		add(BorderLayout.WEST, this.flagsButton);
-
+		add(BorderLayout.WEST, flagsButton);
+		add(BorderLayout.CENTER, goalsPanel);
 		setMinimumSize(getMinimumSize());
-		setVisible(true);
-	}
-
-	public JComboBox<String> getSelectedMethod() {
-		return selectedMethod;
 	}
 
 	/**

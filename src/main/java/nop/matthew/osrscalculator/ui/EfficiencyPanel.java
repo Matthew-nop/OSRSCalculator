@@ -18,7 +18,8 @@ public class EfficiencyPanel extends JPanel {
 		this.normalisedProfitLabel = new JLabel();
 		this.profitLabel = new JLabel();
 		this.actionCountLabel = new JLabel();
-		setEfficiency(0d, 0d, "0");
+		setProfits(0d, 0d);
+		setActionCount("0");
 
 		add(this.normalisedProfitLabel);
 		add(this.profitLabel);
@@ -30,7 +31,7 @@ public class EfficiencyPanel extends JPanel {
 	 *
 	 * @param normalisedProfit the normalised profit to display
 	 */
-	public void setEfficiency(double normalisedProfit, double profit, String actionCount) {
+	public void setProfits(double normalisedProfit, double profit) {
 		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
 		this.profitLabel.setText(" Profit: " + df.format(profit));
 		this.normalisedProfitLabel.setText(" GP/XP: " + df.format(normalisedProfit));
@@ -42,6 +43,9 @@ public class EfficiencyPanel extends JPanel {
 			this.profitLabel.setForeground(Color.RED);
 			this.normalisedProfitLabel.setForeground(Color.RED);
 		}
+	}
+
+	public void setActionCount(String actionCount) {
 		this.actionCountLabel.setText(" Actions: " + actionCount);
 	}
 

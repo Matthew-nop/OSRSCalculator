@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -28,25 +27,22 @@ import java.util.stream.Collectors;
 
 public class Calculator extends JFrame {
 	private final JPanel contentPane;
-	private final JMenuBar menuBar;
-	private final SelectionPanel selectionPanel;
-	private final ResultPanel resultPanel;
-	private SortCriteria sortCriteria;
+	private static final JMenuBar menuBar = new JMenuBar();
+	private static final SelectionPanel selectionPanel = new SelectionPanel();
+	private static final ResultPanel resultPanel = new ResultPanel();
+	private static SortCriteria sortCriteria;
 
 	public Calculator() {
 		super("OSRS Calculator");
 		LayoutManager layoutManager = new BorderLayout(0, 0);
-		this.contentPane = new JPanel(layoutManager);
+		contentPane = new JPanel(layoutManager);
 		setLayout(layoutManager);
 		setContentPane(contentPane);
 		setResizable(true);
 		setMinimumSize(getMinimumSize());
 		JFrame.setDefaultLookAndFeelDecorated(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.menuBar = new JMenuBar();
-		this.selectionPanel = new SelectionPanel();
-		this.resultPanel = new ResultPanel();
-		this.sortCriteria = OSRSCalculator.DEFAULT_SORTCRITERIA;
+		sortCriteria = OSRSCalculator.DEFAULT_SORTCRITERIA;
 
 		addComponentListener(new ComponentAdapter() {
 			@Override
@@ -90,27 +86,16 @@ public class Calculator extends JFrame {
 		});
 		sortGroup.add(nameSort);
 		sort.add(nameSort);
-		this.menuBar.add(sort);
+		menuBar.add(sort);
 
-		setJMenuBar(this.menuBar);
+		setJMenuBar(menuBar);
 
 		// Set up the selection panel
-		contentPane.add(BorderLayout.NORTH, this.selectionPanel);
-		this.selectionPanel.setup();
-		JComboBox<String> selectedMethod = this.selectionPanel.getSelectedMethod();
-		selectedMethod.addActionListener(e -> {
-			Object selected = selectedMethod.getSelectedItem();
-			if (selected != null) {
-				this.resultPanel.setMethod(Methods.getFromName(selected.toString()));
-				this.resultPanel.sortBy(this.sortCriteria);
-			}
-			repaint();
-			revalidate();
-		});
+		contentPane.add(BorderLayout.NORTH, selectionPanel);
 
 
 		// Set up the results panel
-		contentPane.add(BorderLayout.CENTER, this.resultPanel);
+		contentPane.add(BorderLayout.CENTER, resultPanel);
 		selectSkill(OSRSCalculator.DEFAULT_SKILL);
 		sortRecipes(SortCriteria.LEVEL);
 
@@ -132,7 +117,7 @@ public class Calculator extends JFrame {
 	public void addSkill(Skill skill) throws IOException {
 		Skills key = skill.getKey();
 		SkillPanel panel = new SkillPanel(skill);
-		this.resultPanel.add(panel);
+		resultPanel.add(panel);
 
 		// Create a JButton with the given skill's image to swap to it
 		JButton button = new JButton(new ImageIcon(ImageIO
@@ -140,30 +125,34 @@ public class Calculator extends JFrame {
 				.getScaledInstance(OSRSCalculator.SKILL_ICON_LENGTH, OSRSCalculator.SKILL_ICON_LENGTH, Image.SCALE_DEFAULT)));
 		button.setToolTipText(key.toString());
 		button.addActionListener(e -> selectSkill(key));
-		this.selectionPanel.addSkillButton(button);
+		selectionPanel.addSkillButton(button);
 	}
 
 	private void selectSkill(Skills skills) {
 		System.out.println("Selected calculator panel for " + skills);
-		this.resultPanel.setActiveSkills(skills);
-		this.selectionPanel.setMethods(Arrays.stream(Methods.values()).filter(m -> m.getSkill().equals(skills)).collect(Collectors.toList()));
-		this.resultPanel.sortBy(this.sortCriteria);
+		resultPanel.setActiveSkills(skills);
+		selectionPanel.setMethods(Arrays.stream(Methods.values()).filter(m -> m.getSkill().equals(skills)).collect(Collectors.toList()));
+		resultPanel.sortBy(sortCriteria);
 		pack();
 		repaint();
 		revalidate();
 	}
 
 	private void sortRecipes(SortCriteria criteria) {
-		this.sortCriteria = criteria;
-		this.resultPanel.sortBy(criteria);
+		sortCriteria = criteria;
+		resultPanel.sortBy(criteria);
 	}
 
-	public SelectionPanel getSelectionPanel() {
-		return this.selectionPanel;
+	public static SelectionPanel getSelectionPanel() {
+		return selectionPanel;
 	}
 
-	public ResultPanel getResultPanel() {
-		return this.resultPanel;
+	public static ResultPanel getResultPanel() {
+		return resultPanel;
+	}
+
+	public static SortCriteria getSortCriteria() {
+		return sortCriteria;
 	}
 
 	@Override
