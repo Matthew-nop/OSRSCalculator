@@ -21,6 +21,11 @@ public class ProcessPanel extends JPanel {
 		add(BorderLayout.SOUTH, this.inputs);
 	}
 
+	/** Update the panel's information
+	 *
+	 * @param costOut The sum of costs for outputs
+	 * @param costIn The sum of costs for inputs
+	 */
 	public void setCosts(double costOut, double costIn) {
 		DecimalFormat df = new DecimalFormat("#.#");
 		this.outputs.setText("Output: " + df.format(costOut));

@@ -39,6 +39,11 @@ public class RecipePanel extends JPanel {
 		add(BorderLayout.EAST, cost);
 	}
 
+	/** Set the costs for this panel
+	 *
+	 * @param out the output cost map
+	 * @param in the input cost map
+	 */
 	public void setCosts(Map<Integer, Float> out, Map<Integer, Float> in) {
 		double costOut = out.values().stream().mapToDouble(v -> v).sum();
 		double costIn = in.values().stream().mapToDouble(v -> v).sum();

@@ -20,11 +20,11 @@ public class Herblore extends Skill {
 	}
 
 	@Override
-	public Map<Integer, Float> getRecipeOutCosts(Recipe r) {
+	public Map<Integer, Float> getRecipeOutCosts(Recipe recipe) {
 		HashMap<Integer, Float> costs = new HashMap<Integer, Float>();
-		ItemQuantity[] outputs = r.getOutput();
+		ItemQuantity[] outputs = recipe.getOutput();
 		// If using the amulet of chemistry, and the recipe is affected
-		float[] coeff = r.flagsAffect(flags) ? new float[]{0.95f, 0.05f} : new float[]{1f, 0f};
+		float[] coeff = recipe.flagsAffect(flags) ? new float[]{0.95f, 0.05f} : new float[]{1f, 0f};
 
 		for (int i = 0; i < outputs.length; i++) {
 			float c = coeff[i];
@@ -38,15 +38,15 @@ public class Herblore extends Skill {
 	}
 
 	@Override
-	public Map<Integer, Float> getRecipeInCosts(Recipe r) {
+	public Map<Integer, Float> getRecipeInCosts(Recipe recipe) {
 		HashMap<Integer, Float> costs = new HashMap<Integer, Float>();
 
 		// If using the amulet of chemistry, and the recipe is affected
-		if (r.flagsAffect(flags)) {
+		if (recipe.flagsAffect(flags)) {
 			// 5% chance to proc, with 20% of the amulet consumed each proc
 			costs.put(ItemID.AMULET_OF_CHEMISTRY, priceFetcher.getPrice(ItemID.AMULET_OF_CHEMISTRY)*0.01f);
 		}
-		for (ItemQuantity i : r.getIngredients()) {
+		for (ItemQuantity i : recipe.getIngredients()) {
 			int id = i.getId();
 			costs.put(id, priceFetcher.getPrice(id)*i.getQuantity());
 		}

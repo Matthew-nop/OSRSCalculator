@@ -28,6 +28,10 @@ public class PriceFetcher {
 		this.endpoint = baseUrl;
 	}
 
+	/** Update the current stored item prices
+	 *
+	 * @throws IOException If either the connection or JSON parsing fails
+	 */
 	public void updatePrices() throws IOException {
 		this.endpoint = baseUrl;
 		JSONObject data = readData();
@@ -47,7 +51,11 @@ public class PriceFetcher {
 		}
 	}
 
-	// Avoid repeatedly calling fetchID to minimise API requests
+	/** Immediately fetch the current price of an item
+	 *
+	 * @param id the item's id
+	 * @throws IOException If either the connection or JSON parsing fails
+	 */
 	public void fetchID(int id) throws IOException {
 		this.endpoint = baseUrl + "?id=" + id;
 		JSONObject data = readData();
@@ -59,20 +67,28 @@ public class PriceFetcher {
 		prices.put(id, price);
 	}
 
-	public void addItem(int id, float price) {
-		prices.put(id, price);
-	}
-
+	/** Add an item to start fetching prices for
+	 *
+	 * @param id the item's id
+	 */
 	public void addItem(int id) {
-		addItem(id, 0f);
+		this.prices.put(id, 0f);
 	}
 
+	/** Add items to start fetching prices for
+	 *
+	 * @param ids for these ids, start fetching their prices
+	 */
 	public void addItems(int[] ids) {
 		for (int id : ids) {
 			addItem(id);
 		}
 	}
 
+	/** Add the components from a recipe to start fetching prices for
+	 *
+	 * @param recipe the recipe
+	 */
 	public void addRecipe(Recipe recipe) {
 		for (ItemQuantity itemQuantity : recipe.getOutput()) {
 			prices.put(itemQuantity.getId(), 0f);
@@ -82,6 +98,11 @@ public class PriceFetcher {
 		}
 	}
 
+	/** Get the current cached price of an item
+	 *
+	 * @param id the item's id
+	 * @return the price of the item
+	 */
 	public Float getPrice(int id) {
 		return prices.get(id);
 	}

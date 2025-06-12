@@ -25,6 +25,10 @@ public class CostPanel extends JPanel {
 		add(BorderLayout.SOUTH, this.profitNormalised);
 	}
 
+	/** Update the panel's information
+	 *
+	 * @param profit the profit to display
+	 */
 	public void setProfit(double profit) {
 		DecimalFormat df = new DecimalFormat("#.#");
 		this.profit.setText("Profit: " + df.format(profit));

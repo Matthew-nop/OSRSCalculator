@@ -54,6 +54,9 @@ public class SkillPanel extends JPanel {
 		};
 	}
 
+	/** Update recipe panel information
+	 *
+	 */
 	public void update() {
 		for (RecipePanel panel : recipePanels) {
 			Recipe r = panel.getRecipe();
@@ -61,6 +64,10 @@ public class SkillPanel extends JPanel {
 		}
 	}
 
+	/** Set the method by which this skill's recipes will be filtered
+	 *
+	 * @param method the method to filter by
+	 */
 	public void setMethod(Methods method) {
 		removeAll();
 		GridBagConstraints constraints = new GridBagConstraints();
