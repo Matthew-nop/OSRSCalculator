@@ -10,6 +10,7 @@ public enum Flags {
 	PYROMANCER_OUTFIT("Pyromancer Outfit", Skills.FIREMAKING),
 
 	// Herblore
+	ALCHEMISTS_AMULET("Alchemist's amulet", Skills.HERBLORE),
 	AMULET_OF_CHEMISTRY("Amulet of chemistry", Skills.HERBLORE),
 
 	// Magic
