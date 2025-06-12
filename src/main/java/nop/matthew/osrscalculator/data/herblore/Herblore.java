@@ -1,6 +1,6 @@
 package nop.matthew.osrscalculator.data.herblore;
 
-import nop.matthew.osrscalculator.data.Item;
+import nop.matthew.osrscalculator.data.ItemQuantity;
 import nop.matthew.osrscalculator.data.ItemID;
 import nop.matthew.osrscalculator.data.Recipe;
 import nop.matthew.osrscalculator.data.Skill;
@@ -18,14 +18,14 @@ public class Herblore extends Skill {
 	@Override
 	public Map<Integer, Float> getRecipeOutCosts(Recipe r) {
 		HashMap<Integer, Float> costs = new HashMap<Integer, Float>();
-		int[] outputs = r.getOutput();
+		ItemQuantity[] outputs = r.getOutput();
 		// If using the amulet of chemistry, and the recipe is affected
 		float[] coeff = r.flagsAffect(flags) ? new float[]{0.95f, 0.05f} : new float[]{1f, 0f};
 
 		for (int i = 0; i < outputs.length; i++) {
 			float c = coeff[i];
 			if (c > 0)
-				costs.put(outputs[i], priceFetcher.getPrice(outputs[i]) * c);
+				costs.put(outputs[i].getId(), priceFetcher.getPrice(outputs[i].getId()) * c);
 		}
 
 		return costs;
@@ -40,7 +40,7 @@ public class Herblore extends Skill {
 			// 5% chance to proc, with 20% of the amulet consumed each proc
 			costs.put(ItemID.AMULET_OF_CHEMISTRY, priceFetcher.getPrice(ItemID.AMULET_OF_CHEMISTRY)*0.01f);
 		}
-		for (Item i : r.getIngredients()) {
+		for (ItemQuantity i : r.getIngredients()) {
 			int id = i.getId();
 			costs.put(id, priceFetcher.getPrice(id)*i.getQuantity());
 		}
