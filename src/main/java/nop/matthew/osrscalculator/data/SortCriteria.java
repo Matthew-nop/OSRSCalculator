@@ -26,7 +26,9 @@ public enum SortCriteria {
 	public static Comparator<RecipePanel> getComparator(SortCriteria sortType) {
 		switch (sortType) {
 			case LEVEL:
-				return Comparator.comparingInt(rp -> rp.getRecipe().getLevel());
+				return Comparator.<RecipePanel, Float>
+						comparing(rp -> (float) rp.getRecipe().getLevel())
+						.thenComparing(rp  -> rp.getRecipe().getXp());
 			case NORMALISED_COST:
 				return (rp1, rp2) -> Double.compare(rp2.getNormalisedProfit(), rp1.getNormalisedProfit());
 			case PROFIT:
