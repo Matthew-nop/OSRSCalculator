@@ -38,7 +38,7 @@ public enum Planks implements Recipe {
 
 	@Override
 	public ItemQuantity[] getOutput() {
-		return new ItemQuantity[]{};
+		return new ItemQuantity[0];
 	}
 
 	@Override
