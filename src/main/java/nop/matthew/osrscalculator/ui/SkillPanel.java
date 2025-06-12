@@ -165,6 +165,6 @@ public class SkillPanel extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(OSRSCalculator.calculator.getWidth() - OSRSCalculator.VERTICAL_SCROLLBAR_WIDTH, OSRSCalculator.RECIPEPANEL_HEIGHT * this.count);
+		return new Dimension(Calculator.getInstance().getWidth() - OSRSCalculator.VERTICAL_SCROLLBAR_WIDTH, OSRSCalculator.RECIPEPANEL_HEIGHT * this.count);
 	}
 }

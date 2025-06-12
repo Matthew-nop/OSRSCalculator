@@ -11,14 +11,12 @@ import java.util.TreeMap;
 
 public abstract class Skill {
 	protected Skills skills;
-	protected PriceFetcher priceFetcher;
 	protected TreeMap<Methods, Recipe[]> methodRecipes;
 	protected Set<Flags> flags;
 
 
-	public Skill(Skills skills, PriceFetcher priceFetcher) {
+	public Skill(Skills skills) {
 		this.skills = skills;
-		this.priceFetcher = priceFetcher;
 		this.methodRecipes = new TreeMap<>();
 		this.flags = new HashSet<>();
 	}
@@ -29,7 +27,7 @@ public abstract class Skill {
 	public void addRecipePrices() {
 		for (Recipe[] recipes : methodRecipes.values()) {
 			for (Recipe recipe : recipes) {
-				priceFetcher.addRecipe(recipe);
+				PriceFetcher.addRecipe(recipe);
 			}
 		}
 
@@ -48,12 +46,12 @@ public abstract class Skill {
 	 * @return the map of costs
 	 */
 	public Map<Integer, Float> getRecipeOutCosts(Recipe recipe) {
-		HashMap<Integer, Float> costs = new HashMap<Integer, Float>();
+		HashMap<Integer, Float> costs = new HashMap<>();
 		ItemQuantity[] outputs = recipe.getOutput();
 
 		for (ItemQuantity item : outputs) {
 			int id = item.getId();
-			costs.put(id, priceFetcher.getPrice(id) * item.getQuantity());
+			costs.put(id, PriceFetcher.getPrice(id) * item.getQuantity());
 		}
 
 		return costs;
@@ -76,11 +74,11 @@ public abstract class Skill {
 	 * @return the map of costs
 	 */
 	public Map<Integer, Float> getRecipeInCosts(Recipe recipe) {
-		HashMap<Integer, Float> costs = new HashMap<Integer, Float>();
+		HashMap<Integer, Float> costs = new HashMap<>();
 
 		for (ItemQuantity item : recipe.getIngredients()) {
 			int id = item.getId();
-			costs.put(id, priceFetcher.getPrice(id) * item.getQuantity());
+			costs.put(id, PriceFetcher.getPrice(id) * item.getQuantity());
 		}
 
 		return costs;

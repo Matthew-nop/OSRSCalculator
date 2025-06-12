@@ -14,42 +14,69 @@ import java.awt.GridLayout;
 import java.util.List;
 
 public class SelectionPanel extends JPanel {
-	private static final JPanel buttons = new JPanel(new GridLayout(1, 11)) {
+	private static SelectionPanel selectionPanel = null;
+	private final JPanel buttons = new JPanel(new GridLayout(1, 11)) {
 		@Override
 		public Dimension getPreferredSize() {
 			return new Dimension(OSRSCalculator.MINIMUM_WIDTH * this.getComponentCount(), OSRSCalculator.SKILL_ICON_LENGTH);
 		}
 	};
-	private static final JComboBox<String> selectedMethod = new JComboBox<>() {
+	private final JComboBox<String> selectedMethod = new JComboBox<>() {
 		@Override
 		public Dimension getPreferredSize() {
 			return new Dimension(OSRSCalculator.METHOD_SELECTION_WIDTH, OSRSCalculator.METHOD_SELECTION_HEIGHT);
 		}
 	};
+	private final JTextField startBox = new JTextField();
+	private final JTextField endBox = new JTextField();
+	private final JButton goalsButton = new JButton("Update");
 
-	public SelectionPanel() {
+	private SelectionPanel() {
 		super();
 		setLayout(new BorderLayout(0, 0));
-		selectedMethod.addActionListener(e -> {
-			Object selected = selectedMethod.getSelectedItem();
-			if (selected != null) {
-				Calculator.getResultPanel().setMethod(Methods.getFromName(selected.toString()));
-				Calculator.getResultPanel().sortBy(Calculator.getSortCriteria());
-			}
-			repaint();
-			revalidate();
-		});
 
+		// Set up the goals panel
 		JPanel goalsPanel = new JPanel(new BorderLayout(0, 0));
-		JTextField startBox = new JTextField();
-		JTextField endBox = new JTextField();
 		JPanel labelPanel = new JPanel(new BorderLayout(0, 0));
 		labelPanel.add(BorderLayout.NORTH, new JLabel("Start: "));
 		labelPanel.add(BorderLayout.SOUTH, new JLabel("Target: "));
 		JPanel textBoxPanel = new JPanel(new BorderLayout(0, 0));
 		textBoxPanel.add(BorderLayout.NORTH, startBox);
 		textBoxPanel.add(BorderLayout.SOUTH, endBox);
-		JButton goalsButton = new JButton("Update");
+		goalsPanel.add(BorderLayout.WEST, labelPanel);
+		goalsPanel.add(BorderLayout.CENTER, textBoxPanel);
+		goalsPanel.add(BorderLayout.EAST, goalsButton);
+
+		// Set up the flags button
+		JButton flagsButton = new JButton("Flags");
+		flagsButton.addActionListener(e -> new FlagsWindow(SwingUtilities.getWindowAncestor(this)));
+
+		// Finish
+		add(BorderLayout.NORTH, buttons);
+		add(BorderLayout.EAST, selectedMethod);
+		add(BorderLayout.WEST, flagsButton);
+		add(BorderLayout.CENTER, goalsPanel);
+		setMinimumSize(getMinimumSize());
+	}
+
+	synchronized public static SelectionPanel getInstance() {
+		if (selectionPanel == null)
+			selectionPanel = new SelectionPanel();
+		return selectionPanel;
+	}
+
+	public void setup() {
+		Calculator calculator = Calculator.getInstance();
+		ResultPanel resultPanel = ResultPanel.getInstance();
+		selectedMethod.addActionListener(e -> {
+			Object selected = selectedMethod.getSelectedItem();
+			if (selected != null) {
+				resultPanel.setMethod(Methods.getFromName(selected.toString()));
+				resultPanel.sortBy(calculator.getSortCriteria());
+			}
+			repaint();
+			revalidate();
+		});
 		goalsButton.addActionListener(e -> {
 			int start, end;
 			try {
@@ -58,20 +85,8 @@ public class SelectionPanel extends JPanel {
 			} catch (NumberFormatException exception) {
 				return;
 			}
-			Calculator.getResultPanel().getCurrentPanel().updateActions(start, end, Calculator.goalIsLevel());
+			resultPanel.getCurrentPanel().updateActions(start, end, calculator.goalIsLevel());
 		});
-		goalsPanel.add(BorderLayout.WEST, labelPanel);
-		goalsPanel.add(BorderLayout.CENTER, textBoxPanel);
-		goalsPanel.add(BorderLayout.EAST, goalsButton);
-
-		JButton flagsButton = new JButton("Flags");
-		flagsButton.addActionListener(e -> new FlagsWindow(SwingUtilities.getWindowAncestor(this)));
-
-		add(BorderLayout.NORTH, buttons);
-		add(BorderLayout.EAST, selectedMethod);
-		add(BorderLayout.WEST, flagsButton);
-		add(BorderLayout.CENTER, goalsPanel);
-		setMinimumSize(getMinimumSize());
 	}
 
 	/**
@@ -79,7 +94,7 @@ public class SelectionPanel extends JPanel {
 	 *
 	 * @param button the button to add
 	 */
-	public static void addSkillButton(JButton button) {
+	public void addSkillButton(JButton button) {
 		button.setMinimumSize(new Dimension(OSRSCalculator.SKILL_ICON_LENGTH, OSRSCalculator.SKILL_ICON_LENGTH));
 		buttons.add(button);
 	}
@@ -89,7 +104,7 @@ public class SelectionPanel extends JPanel {
 	 *
 	 * @param methods The list of methods
 	 */
-	public static void setMethods(List<Methods> methods) {
+	public void setMethods(List<Methods> methods) {
 		selectedMethod.removeAllItems();
 		selectedMethod.addItem("All");
 		for (Methods method : methods) {
@@ -99,7 +114,7 @@ public class SelectionPanel extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(OSRSCalculator.calculator.getWidth(), this.getMinimumSize().height);
+		return new Dimension(Calculator.getInstance().getWidth(), this.getMinimumSize().height);
 	}
 
 	@Override

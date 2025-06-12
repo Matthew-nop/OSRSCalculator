@@ -4,11 +4,13 @@ import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
 import nop.matthew.osrscalculator.data.SortCriteria;
+import nop.matthew.osrscalculator.net.PriceFetcher;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -17,7 +19,6 @@ import javax.swing.JRadioButtonMenuItem;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.LayoutManager;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ItemEvent;
@@ -26,25 +27,33 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class Calculator extends JFrame {
-	private final JPanel contentPane;
-	private static final JMenuBar menuBar = new JMenuBar();
-	private static final SelectionPanel selectionPanel = new SelectionPanel();
-	private static final ResultPanel resultPanel = new ResultPanel();
-	private static SortCriteria sortCriteria;
-	private static boolean goalIsLevel;
+	private static final Calculator calculator = new Calculator();
+	private final JPanel contentPane = new JPanel(new BorderLayout(0, 0));
+	private final JMenuBar menuBar = new JMenuBar();
+	private final ResultPanel resultPanel;
+	private final SelectionPanel selectionPanel;
+	private SortCriteria sortCriteria;
+	private boolean goalIsLevel;
+	private Thread priceFetcherThread;
+	private final Object autoUpdatePricesLock = new Object();
+	private boolean autoUpdatePrices;
+	private long lastPriceUpdate;
 
-	public Calculator() {
+	private Calculator() {
 		super("OSRS Calculator");
-		LayoutManager layoutManager = new BorderLayout(0, 0);
-		contentPane = new JPanel(layoutManager);
-		setLayout(layoutManager);
 		setContentPane(contentPane);
 		setResizable(true);
 		setMinimumSize(getMinimumSize());
 		JFrame.setDefaultLookAndFeelDecorated(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		sortCriteria = OSRSCalculator.DEFAULT_SORTCRITERIA;
-		goalIsLevel = OSRSCalculator.GOAL_IS_LEVEL_DEFAULT;
+		this.sortCriteria = OSRSCalculator.DEFAULT_SORTCRITERIA;
+		this.goalIsLevel = OSRSCalculator.GOAL_IS_LEVEL_DEFAULT;
+		this.autoUpdatePrices = OSRSCalculator.AUTOUPDATE_PRICES_DEFAULT;
+		this.selectionPanel = SelectionPanel.getInstance();
+		this.resultPanel = ResultPanel.getInstance();
+
+		if (this.autoUpdatePrices)
+			startPriceAutoUpdate();
 
 		addComponentListener(new ComponentAdapter() {
 			@Override
@@ -55,64 +64,81 @@ public class Calculator extends JFrame {
 		});
 	}
 
+	public static Calculator getInstance() {
+		return calculator;
+	}
+
 	public void openSwing(int width, int height) {
 		// Set up the menu bar
 		// Sorting
 		JMenu sort = new JMenu("Sort");
 		ButtonGroup sortGroup = new ButtonGroup();
-		JRadioButtonMenuItem levelSort = new JRadioButtonMenuItem(SortCriteria.LEVEL.toString(), true);
+		JRadioButtonMenuItem levelSort, normalisedCostSort, profitSort, nameSort;
+		levelSort = new JRadioButtonMenuItem(SortCriteria.LEVEL.toString(), sortCriteria.equals(SortCriteria.LEVEL));
 		levelSort.addItemListener(e -> {
 			if (e.getStateChange() == ItemEvent.SELECTED)
 				sortRecipes(SortCriteria.LEVEL);
 		});
 		sortGroup.add(levelSort);
 		sort.add(levelSort);
-		JRadioButtonMenuItem normalisedCostSort = new JRadioButtonMenuItem(SortCriteria.NORMALISED_COST.toString());
+		normalisedCostSort = new JRadioButtonMenuItem(SortCriteria.NORMALISED_COST.toString(), sortCriteria.equals(SortCriteria.NORMALISED_COST));
 		normalisedCostSort.addItemListener(e -> {
 			if (e.getStateChange() == ItemEvent.SELECTED)
 				sortRecipes(SortCriteria.NORMALISED_COST);
 		});
 		sortGroup.add(normalisedCostSort);
 		sort.add(normalisedCostSort);
-		JRadioButtonMenuItem profitSort = new JRadioButtonMenuItem(SortCriteria.PROFIT.toString());
+		profitSort = new JRadioButtonMenuItem(SortCriteria.PROFIT.toString(), sortCriteria.equals(SortCriteria.PROFIT));
 		profitSort.addItemListener(e -> {
 			if (e.getStateChange() == ItemEvent.SELECTED)
 				sortRecipes(SortCriteria.PROFIT);
 		});
 		sortGroup.add(profitSort);
 		sort.add(profitSort);
-		JRadioButtonMenuItem nameSort = new JRadioButtonMenuItem(SortCriteria.NAME.toString());
+		nameSort = new JRadioButtonMenuItem(SortCriteria.NAME.toString(), sortCriteria.equals(SortCriteria.NAME));
 		nameSort.addItemListener(e -> {
 			if (e.getStateChange() == ItemEvent.SELECTED)
 				sortRecipes(SortCriteria.NAME);
 		});
 		sortGroup.add(nameSort);
 		sort.add(nameSort);
-		menuBar.add(sort);
+		this.menuBar.add(sort);
+
+		// Prices
+		JMenu prices = new JMenu("Prices");
+		JCheckBoxMenuItem autoUpdateCheckbox = new JCheckBoxMenuItem("AutoUpdate", this.autoUpdatePrices);
+		autoUpdateCheckbox.addItemListener(e -> {
+			if (e.getStateChange() == ItemEvent.SELECTED)
+				startPriceAutoUpdate();
+			else if (e.getStateChange() == ItemEvent.DESELECTED)
+				stopPriceAutoUpdate();
+		});
+		prices.add(autoUpdateCheckbox);
+		this.menuBar.add(prices);
 
 		// Goals
 		JMenu goals = new JMenu("Goals");
 		ButtonGroup goalTypeGroup = new ButtonGroup();
-		JRadioButtonMenuItem goalTypeLevel = new JRadioButtonMenuItem("Level", true);
-		goalTypeLevel.addItemListener(e -> goalIsLevel = (e.getStateChange() == ItemEvent.SELECTED));
+		JRadioButtonMenuItem goalTypeLevel = new JRadioButtonMenuItem("Level", this.goalIsLevel);
+		goalTypeLevel.addItemListener(e -> this.goalIsLevel = (e.getStateChange() == ItemEvent.SELECTED));
 		goalTypeGroup.add(goalTypeLevel);
 		goals.add(goalTypeLevel);
-		JRadioButtonMenuItem goalTypeXp = new JRadioButtonMenuItem("XP", false);
-		goalTypeXp.addItemListener(e -> goalIsLevel = (e.getStateChange() != ItemEvent.SELECTED));
+		JRadioButtonMenuItem goalTypeXp = new JRadioButtonMenuItem("XP", this.goalIsLevel);
+		goalTypeXp.addItemListener(e -> this.goalIsLevel = (e.getStateChange() != ItemEvent.SELECTED));
 		goalTypeGroup.add(goalTypeXp);
 		goals.add(goalTypeXp);
-		menuBar.add(goals);
+		this.menuBar.add(goals);
 
-		setJMenuBar(menuBar);
-
-		// Set up the selection panel
-		contentPane.add(BorderLayout.NORTH, selectionPanel);
-
+		setJMenuBar(this.menuBar);
 
 		// Set up the results panel
-		contentPane.add(BorderLayout.CENTER, resultPanel);
+		this.contentPane.add(BorderLayout.CENTER, this.resultPanel);
 		selectSkill(OSRSCalculator.DEFAULT_SKILL);
 		sortRecipes(SortCriteria.LEVEL);
+
+		// Set up the selection panel
+		this.selectionPanel.setup();
+		this.contentPane.add(BorderLayout.NORTH, this.selectionPanel);
 
 		setSize(width, height);
 		setLocationRelativeTo(null);
@@ -132,7 +158,7 @@ public class Calculator extends JFrame {
 	public void addSkill(Skill skill) throws IOException {
 		Skills key = skill.getKey();
 		SkillPanel panel = new SkillPanel(skill);
-		resultPanel.add(panel);
+		this.resultPanel.add(panel);
 
 		// Create a JButton with the given skill's image to swap to it
 		JButton button = new JButton(new ImageIcon(ImageIO
@@ -140,38 +166,76 @@ public class Calculator extends JFrame {
 				.getScaledInstance(OSRSCalculator.SKILL_ICON_LENGTH, OSRSCalculator.SKILL_ICON_LENGTH, Image.SCALE_DEFAULT)));
 		button.setToolTipText(key.toString());
 		button.addActionListener(e -> selectSkill(key));
-		SelectionPanel.addSkillButton(button);
+		this.selectionPanel.addSkillButton(button);
 	}
 
 	private void selectSkill(Skills skills) {
 		System.out.println("Selected calculator panel for " + skills);
-		resultPanel.setActiveSkills(skills);
-		SelectionPanel.setMethods(Arrays.stream(Methods.values()).filter(m -> m.getSkill().equals(skills)).collect(Collectors.toList()));
-		resultPanel.sortBy(sortCriteria);
+		this.resultPanel.setActiveSkills(skills);
+		this.selectionPanel.setMethods(Arrays.stream(Methods.values()).filter(m -> m.getSkill().equals(skills)).collect(Collectors.toList()));
+		this.resultPanel.sortBy(sortCriteria);
 		pack();
 		repaint();
 		revalidate();
 	}
 
 	private void sortRecipes(SortCriteria criteria) {
-		sortCriteria = criteria;
-		resultPanel.sortBy(criteria);
+		this.sortCriteria = criteria;
+		this.resultPanel.sortBy(criteria);
 	}
 
-	public static SelectionPanel getSelectionPanel() {
-		return selectionPanel;
+	private void startPriceAutoUpdate() {
+		synchronized (this.autoUpdatePricesLock) {
+			this.autoUpdatePrices = true;
+		}
+		this.priceFetcherThread = new Thread(() -> {
+			System.out.println("PriceFetcher AutoUpdate thread started.");
+			boolean autoUpdate = true;
+			while (autoUpdate)
+				try {
+					long wait = this.lastPriceUpdate + OSRSCalculator.AUTOUPDATE_WAIT_MS - System.currentTimeMillis();
+					if (wait > 0)
+						Thread.sleep(wait);
+					updatePriceFetcher();
+					System.out.println("Auto updated prices with system time: " + this.lastPriceUpdate);
+					this.resultPanel.updateCosts();
+					// If the sorting is affected by cost, re-sort the result panel
+					switch (this.sortCriteria) {
+						case LEVEL:
+						case NAME:
+							break;
+						case PROFIT:
+						case NORMALISED_COST:
+							this.resultPanel.sortBy(this.sortCriteria);
+					}
+				} catch (InterruptedException | IOException e) {
+					synchronized (this.autoUpdatePricesLock) {
+						autoUpdate = this.autoUpdatePrices;
+					}
+				}
+			System.out.println("PriceFetcher AutoUpdate thread stopped.");
+		});
+		this.priceFetcherThread.start();
 	}
 
-	public static ResultPanel getResultPanel() {
-		return resultPanel;
+	private void stopPriceAutoUpdate() {
+		synchronized (this.autoUpdatePricesLock) {
+			this.autoUpdatePrices = false;
+		}
+		this.priceFetcherThread.interrupt();
 	}
 
-	public static SortCriteria getSortCriteria() {
-		return sortCriteria;
+	private void updatePriceFetcher() throws IOException {
+		PriceFetcher.updatePrices();
+		this.lastPriceUpdate = System.currentTimeMillis();
 	}
 
-	public static boolean goalIsLevel() {
-		return goalIsLevel;
+	public SortCriteria getSortCriteria() {
+		return this.sortCriteria;
+	}
+
+	public boolean goalIsLevel() {
+		return this.goalIsLevel;
 	}
 
 	@Override
