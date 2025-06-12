@@ -6,6 +6,7 @@ import nop.matthew.osrscalculator.data.Skill;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.text.DecimalFormat;
@@ -17,6 +18,8 @@ public class OutcomePanel extends JPanel {
 		super(new BorderLayout(0, 0));
 
 		this.xpLabel = new JLabel();
+		this.xpLabel.setBackground(Color.LIGHT_GRAY);
+		this.xpLabel.setOpaque(true);
 		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
 		setXp(df.format(skill.getXp(recipe)));
 
