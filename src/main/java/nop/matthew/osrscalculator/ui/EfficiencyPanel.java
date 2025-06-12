@@ -33,8 +33,12 @@ public class EfficiencyPanel extends JPanel {
 	 */
 	public void setProfits(double normalisedProfit, double profit) {
 		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
-		this.profitLabel.setText(" Profit: " + df.format(profit));
-		this.normalisedProfitLabel.setText(" GP/XP: " + df.format(normalisedProfit));
+		String profitString = df.format(profit);
+		String normalisedProfitString = df.format(normalisedProfit);
+		this.profitLabel.setText(" Profit: " + profitString);
+		this.profitLabel.setToolTipText(profitString);
+		this.normalisedProfitLabel.setText(" GP/XP: " + normalisedProfitString);
+		this.normalisedProfitLabel.setToolTipText(normalisedProfitString);
 		if (profit >= 0) {
 			this.profitLabel.setForeground(new Color(0x00AB66));
 			this.normalisedProfitLabel.setForeground(new Color(0x00AB66));
@@ -47,6 +51,7 @@ public class EfficiencyPanel extends JPanel {
 
 	public void setActionCount(String actionCount) {
 		this.actionCountLabel.setText(" Actions: " + actionCount);
+		this.actionCountLabel.setToolTipText(actionCount);
 	}
 
 	@Override
