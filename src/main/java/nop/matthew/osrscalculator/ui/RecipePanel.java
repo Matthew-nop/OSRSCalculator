@@ -19,8 +19,8 @@ public class RecipePanel extends JPanel {
 	public final static int OUTCOME_WIDTH = 100;
 	public final static int COST_WIDTH = 100;
 
-	private Recipe recipe;
-	private Methods method;
+	private final Recipe recipe;
+	private final Methods method;
 	private JPanel outcome;
 	private JPanel process;
 	private JPanel cost;
@@ -91,7 +91,7 @@ public class RecipePanel extends JPanel {
 	}
 
 	@Override
-	public Dimension getMinimumSize() {
+	public Dimension getPreferredSize() {
 		return new Dimension(OSRSCalculator.calculator.getWidth(), RECIPEPANEL_HEIGHT);
 	}
 }

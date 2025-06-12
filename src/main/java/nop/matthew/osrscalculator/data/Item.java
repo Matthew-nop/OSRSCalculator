@@ -262,7 +262,7 @@ public enum Item {
 		return this.id;
 	}
 
-	public Item getFromID(int id) {
+	public static Item getFromID(int id) {
 		for (Item i : Item.values()) {
 			if (i.getId() == id)
 				return i;
@@ -271,7 +271,7 @@ public enum Item {
 		return null;
 	}
 
-	public Item getFromName(String name) {
+	public static Item getFromName(String name) {
 		for (Item i : Item.values()) {
 			if (i.toString().equals(name))
 				return i;

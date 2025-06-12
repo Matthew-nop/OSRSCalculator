@@ -73,7 +73,7 @@ public class OSRSCalculator {
 	}
 
 	public static void openSwing() {
-		calculator.setup(MINIMUM_WIDTH, MINIMUM_HEIGHT, null);
+		calculator.setup(null);
 		calculator.pack();
 		calculator.setVisible(true);
 	}
