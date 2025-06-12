@@ -70,6 +70,7 @@ public class SelectionPanel extends JPanel {
 	public void setup() {
 		Calculator calculator = Calculator.getInstance();
 		ResultPanel resultPanel = ResultPanel.getInstance();
+		boolean goalIsLevel = calculator.goalIsLevel();
 		selectedMethod.addActionListener(e -> {
 			Object selected = selectedMethod.getSelectedItem();
 			if (selected != null) {
@@ -79,23 +80,27 @@ public class SelectionPanel extends JPanel {
 			repaint();
 			revalidate();
 		});
-		goalsButton.addActionListener(e -> {
-			try {
-				int start = Integer.parseInt(startBox.getText());
-				int end = Integer.parseInt(endBox.getText());
-				if (end < start) {
-					end = start;
-				}
-				if (calculator.goalIsLevel()) {
-					resultPanel.updateActionsLvl(start, end);
-				}
-				else {
-					resultPanel.updateActionsXP(start, end);
-				}
-			} catch (NumberFormatException exception) {
-				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Invalid input for start/end values.\nPlease input integers within range.");
+		goalsButton.addActionListener(e -> updateActions(resultPanel, goalIsLevel));
+		startBox.addActionListener(e -> updateActions(resultPanel, goalIsLevel));
+		endBox.addActionListener(e -> updateActions(resultPanel, goalIsLevel));
+	}
+
+	private void updateActions(ResultPanel resultPanel, boolean goalIsLevel) {
+		try {
+			int start = Integer.parseInt(startBox.getText());
+			int end = Integer.parseInt(endBox.getText());
+			if (end < start) {
+				end = start;
 			}
-		});
+			if (goalIsLevel) {
+				resultPanel.updateActionsLvl(start, end);
+			}
+			else {
+				resultPanel.updateActionsXP(start, end);
+			}
+		} catch (NumberFormatException exception) {
+			JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Invalid input for start/end values.\nPlease input integers within range.");
+		}
 	}
 
 	/**
