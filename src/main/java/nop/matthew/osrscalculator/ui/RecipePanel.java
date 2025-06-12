@@ -70,25 +70,61 @@ public class RecipePanel extends JPanel {
 	/**
 	 * Update this panel's action count from the given xp values
 	 *
-	 * @param start the starting xp value
-	 * @param end   the ending xp value
+	 * @param startXp the starting xp value
+	 * @param endXp   the ending xp value
 	 */
-	public void updateActionXp(int start, int end) {
-		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
-		int count = (int) Math.ceil((end - start) / xp);
-		this.efficiency.setActionCount(df.format(count));
+	public void updateActionXp(int startXp, int endXp) {
+		SelectionPanel selectionPanel = SelectionPanel.getInstance();
+		if (startXp < 0) {
+			startXp = 0;
+		}
+		else if (startXp > Experience.MAX_EXPERIENCE) {
+			startXp = Experience.MAX_EXPERIENCE;
+		}
+		if (endXp < 0) {
+			endXp = 0;
+		}
+		else if (endXp > Experience.MAX_EXPERIENCE) {
+			endXp = Experience.MAX_EXPERIENCE;
+		}
+
+		selectionPanel.setStartBoxText(String.valueOf(startXp));
+		selectionPanel.setEndBoxText(String.valueOf(endXp));
+		updateActions(startXp, endXp);
 	}
 
 	/**
 	 * Update this panel's action count from the given player level
 	 *
-	 * @param start the starting level
-	 * @param end   the ending level
+	 * @param startLvl the starting level
+	 * @param endLvl   the ending level
 	 */
-	public void updateActionLevel(int start, int end) {
-		int startXp = Experience.getXpFromLevel(start);
-		int endXp = Experience.getXpFromLevel(end);
-		updateActionXp(startXp, endXp);
+	public void updateActionLevel(int startLvl, int endLvl) {
+		SelectionPanel selectionPanel = SelectionPanel.getInstance();
+		if (startLvl < 0) {
+			startLvl = 0;
+		}
+		else if (startLvl > Experience.LEVEL_MAX_VIRT) {
+			startLvl = Experience.LEVEL_MAX_VIRT;
+		}
+		if (endLvl < 0) {
+			endLvl = 0;
+		}
+		else if (endLvl > Experience.LEVEL_MAX_VIRT) {
+			endLvl = Experience.LEVEL_MAX_VIRT;
+		}
+
+		selectionPanel.setStartBoxText(String.valueOf(startLvl));
+		selectionPanel.setEndBoxText(String.valueOf(endLvl));
+		int startXp = Experience.getXpFromLevel(startLvl);
+		int endXp = Experience.getXpFromLevel(endLvl);
+		updateActions(startXp, endXp);
+	}
+
+	private void updateActions(int startXp, int endXp) {
+		DecimalFormat df = new DecimalFormat(OSRSCalculator.DECIMAL_FORMAT_STRING);
+		int count = (int) Math.ceil((endXp - startXp) / xp);
+		this.efficiency.setActionCount(df.format(count));
 	}
 
 	public Recipe getRecipe() {

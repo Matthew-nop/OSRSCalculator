@@ -1,8 +1,10 @@
 package nop.matthew.osrscalculator.data;
 
 public final class Experience {
-	private static final int LEVEL_MAX = 99;
-	private static final int LEVEL_MAX_VIRT = 126;
+	public static final int LEVEL_MAX = 99;
+	public static final int LEVEL_MAX_VIRT = 126;
+	public static final int MAX_EXPERIENCE = 200000000;
+
 	private static final int[] LEVEL_XP = new int[LEVEL_MAX_VIRT];
 
 	static {
@@ -24,7 +26,7 @@ public final class Experience {
 			throw new IllegalArgumentException("level must be from [1, 126], received: " + level);
 		}
 
-		return LEVEL_XP[level];
+		return LEVEL_XP[level - 1];
 	}
 
 	/**
@@ -38,26 +40,29 @@ public final class Experience {
 		if (xp < 0) {
 			throw new IllegalArgumentException("XP must be positive, received: " + xp);
 		}
+		else if (xp > MAX_EXPERIENCE) {
+			throw new IllegalArgumentException("XP cannot be > " + MAX_EXPERIENCE + ", received " + xp);
+		}
 
-		return getLevelFromXp(xp, 1, LEVEL_XP.length - 1);
+		return getLevelFromXp(xp, 0, LEVEL_XP.length);
 	}
 
 	private static int getLevelFromXp(int xp, int low, int high) {
-		if (low == high) {
-			return low;
+		if (low >= high) {
+			return high;
 		}
 
 		int mid = low + ((high - low) / 2);
 		int levelXp = LEVEL_XP[mid];
 
 		if (xp < levelXp) {
-			high = mid - 1;
+			high = mid + 1;
 		}
 		else if (xp > levelXp) {
 			low = mid + 1;
 		}
 		else {
-			return mid;
+			return mid + 1;
 		}
 
 		return getLevelFromXp(xp, low, high);
