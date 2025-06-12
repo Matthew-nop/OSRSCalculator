@@ -75,8 +75,8 @@ public class SkillPanel extends JPanel {
 		this.shownPanels = panels;
 	}
 
-	/** Update recipe panel information
-	 *
+	/**
+	 * Update recipe panel information
 	 */
 	public void update() {
 		for (RecipePanel panel : this.recipePanels) {
@@ -85,7 +85,8 @@ public class SkillPanel extends JPanel {
 		}
 	}
 
-	/** Set the method by which this skill's recipes will be filtered
+	/**
+	 * Set the method by which this skill's recipes will be filtered
 	 *
 	 * @param method the method to filter by
 	 */
@@ -98,7 +99,8 @@ public class SkillPanel extends JPanel {
 		setShownPanels(panels);
 	}
 
-	/** Set the sorting criteria for the list of shown recipes
+	/**
+	 * Set the sorting criteria for the list of shown recipes
 	 *
 	 * @param sortCriteria the sorting criteria
 	 */
@@ -120,6 +122,6 @@ public class SkillPanel extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(OSRSCalculator.calculator.getWidth() - OSRSCalculator.VERTICAL_SCROLLBAR_WIDTH, OSRSCalculator.RECIPEPANEL_HEIGHT*this.count);
+		return new Dimension(OSRSCalculator.calculator.getWidth() - OSRSCalculator.VERTICAL_SCROLLBAR_WIDTH, OSRSCalculator.RECIPEPANEL_HEIGHT * this.count);
 	}
 }

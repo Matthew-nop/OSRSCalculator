@@ -23,7 +23,8 @@ public class CostPanel extends JPanel {
 		add(BorderLayout.SOUTH, this.normalisedProfitLabel);
 	}
 
-	/** Update the panel's information
+	/**
+	 * Update the panel's information
 	 *
 	 * @param normalisedProfit the normalised profit to display
 	 */

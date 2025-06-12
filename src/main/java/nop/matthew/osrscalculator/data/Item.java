@@ -262,6 +262,12 @@ public enum Item {
 		return this.id;
 	}
 
+	/**
+	 * Returns the first Item which matches the given id
+	 *
+	 * @param id the given id
+	 * @return the first matching Item
+	 */
 	public static Item getFromID(int id) {
 		for (Item i : Item.values()) {
 			if (i.getId() == id)
@@ -271,6 +277,12 @@ public enum Item {
 		return null;
 	}
 
+	/**
+	 * Returns the first Item which matches the given name
+	 *
+	 * @param name the given name
+	 * @return the first matching Item
+	 */
 	public static Item getFromName(String name) {
 		for (Item i : Item.values()) {
 			if (i.toString().equals(name))

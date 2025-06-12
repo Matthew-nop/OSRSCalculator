@@ -17,13 +17,13 @@ public class SelectionPanel extends JPanel {
 	public SelectionPanel() {
 		super();
 		setLayout(new BorderLayout(0, 0));
-		this.buttons = new JPanel(new GridLayout(1, 11)){
+		this.buttons = new JPanel(new GridLayout(1, 11)) {
 			@Override
-			public Dimension getPreferredSize(){
-				return new Dimension(OSRSCalculator.MINIMUM_WIDTH*this.getComponentCount(), OSRSCalculator.SKILL_ICON_LENGTH);
+			public Dimension getPreferredSize() {
+				return new Dimension(OSRSCalculator.MINIMUM_WIDTH * this.getComponentCount(), OSRSCalculator.SKILL_ICON_LENGTH);
 			}
 		};
-		this.selectedMethod = new JComboBox<>(){
+		this.selectedMethod = new JComboBox<>() {
 			@Override
 			public Dimension getPreferredSize() {
 				return new Dimension(OSRSCalculator.METHOD_SELECTION_WIDTH, OSRSCalculator.METHOD_SELECTION_HEIGHT);
@@ -43,7 +43,8 @@ public class SelectionPanel extends JPanel {
 		return selectedMethod;
 	}
 
-	/** Add a button to the panel for selecting skills
+	/**
+	 * Add a button to the panel for selecting skills
 	 *
 	 * @param button the button to add
 	 */
@@ -52,7 +53,8 @@ public class SelectionPanel extends JPanel {
 		buttons.add(button);
 	}
 
-	/** Set the list of methods which the filter combobox should display
+	/**
+	 * Set the list of methods which the filter combobox should display
 	 *
 	 * @param methods The list of methods
 	 */
