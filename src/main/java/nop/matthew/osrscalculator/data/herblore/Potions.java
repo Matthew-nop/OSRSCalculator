@@ -18,6 +18,15 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.TOADS_LEGS, 1)
 			},
 			new ItemQuantity(Item.AGILITY_POTION4, 1)),
+	ANCIENT_BREW(
+			new ItemQuantity(Item.ANCIENT_BREW3, 1),
+			85,
+			190,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.DWARF_WEED_POTION_UNF, 1),
+					new ItemQuantity(Item.NIHIL_DUST, 80),
+			},
+			new ItemQuantity(Item.ANCIENT_BREW4, 1)),
 	ANTIDOTE_PLUS(
 			new ItemQuantity(Item.ANTIDOTE_PLUS4, 1),
 			68,
@@ -195,6 +204,41 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.ANTIFIRE_POTION4, 1),
 					new ItemQuantity(Item.LAVA_SCALE_SHARD, 4)
 			}),
+	EXTENDED_ANTIVENOM_PLUS1(
+			new ItemQuantity(Item.EXTENDED_ANTIVENOM_PLUS1, 1),
+			94,
+			20,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.ANTIVENOM_PLUS1, 1),
+					new ItemQuantity(Item.ARAXYTE_VENOM_SACK, 1)
+			},
+			new ItemQuantity(Item.EXTENDED_ANTIVENOM_PLUS2, 1)),
+	EXTENDED_ANTIVENOM_PLUS2(
+			new ItemQuantity(Item.EXTENDED_ANTIVENOM_PLUS2, 1),
+			94,
+			40,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.ANTIVENOM_PLUS2, 1),
+					new ItemQuantity(Item.ARAXYTE_VENOM_SACK, 2)
+			},
+			new ItemQuantity(Item.EXTENDED_ANTIVENOM_PLUS3, 1)),
+	EXTENDED_ANTIVENOM_PLUS3(
+			new ItemQuantity(Item.EXTENDED_ANTIVENOM_PLUS3, 1),
+			94,
+			60,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.ANTIVENOM_PLUS3, 1),
+					new ItemQuantity(Item.ARAXYTE_VENOM_SACK, 3)
+			},
+			new ItemQuantity(Item.EXTENDED_ANTIVENOM_PLUS4, 1)),
+	EXTENDED_ANTIVENOM_PLUS4(
+			new ItemQuantity(Item.EXTENDED_ANTIVENOM_PLUS4, 1),
+			94,
+			80,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.ANTIVENOM_PLUS4, 1),
+					new ItemQuantity(Item.ARAXYTE_VENOM_SACK, 4)
+			}),
 	EXTENDED_SUPER_ANTIFIRE1(
 			new ItemQuantity(Item.EXTENDED_SUPER_ANTIFIRE1, 1),
 			98,
@@ -239,6 +283,50 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.SNAPE_GRASS, 1)
 			},
 			new ItemQuantity(Item.FISHING_POTION4, 1)),
+	FORGOTTEN_BREW1(
+			new ItemQuantity(Item.FORGOTTEN_BREW1, 1),
+			91,
+			36,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.ANCIENT_BREW1, 1),
+					new ItemQuantity(Item.ANCIENT_ESSENCE, 20),
+			},
+			new ItemQuantity(Item.FORGOTTEN_BREW2, 1)),
+	FORGOTTEN_BREW2(
+			new ItemQuantity(Item.FORGOTTEN_BREW2, 1),
+			91,
+			72,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.ANCIENT_BREW2, 1),
+					new ItemQuantity(Item.ANCIENT_ESSENCE, 40),
+			},
+			new ItemQuantity(Item.FORGOTTEN_BREW3, 1)),
+	FORGOTTEN_BREW3(
+			new ItemQuantity(Item.FORGOTTEN_BREW3, 1),
+			91,
+			108,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.ANCIENT_BREW3, 1),
+					new ItemQuantity(Item.ANCIENT_ESSENCE, 60),
+			},
+			new ItemQuantity(Item.FORGOTTEN_BREW4, 1)),
+	FORGOTTEN_BREW4(
+			new ItemQuantity(Item.FORGOTTEN_BREW4, 1),
+			91,
+			145,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.ANCIENT_BREW4, 1),
+					new ItemQuantity(Item.ANCIENT_ESSENCE, 80),
+			}),
+	GOADING_POTION(
+			new ItemQuantity(Item.GOADING_POTION3, 1),
+			54,
+			132,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.HARRALANDER_POTION_UNF, 1),
+					new ItemQuantity(Item.ALDARIUM, 1),
+			},
+			new ItemQuantity(Item.GOADING_POTION4, 1)),
 	GUTHIX_BALANCE1(
 			new ItemQuantity(Item.GUTHIX_BALANCE1, 1),
 			22,
@@ -314,6 +402,15 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.LANTADYME_POTION_UNF, 1)
 			},
 			new ItemQuantity(Item.MAGIC_POTION4, 1)),
+	MENAPHITE_REMEDY(
+			new ItemQuantity(Item.MENAPHITE_REMEDY3, 1),
+			88,
+			200,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.DWARF_WEED_POTION_UNF, 1),
+					new ItemQuantity(Item.LILY_OF_THE_SANDS, 1)
+			},
+			new ItemQuantity(Item.MENAPHITE_REMEDY4, 1)),
 	PRAYER_POTION(
 			new ItemQuantity(Item.PRAYER_POTION3, 1),
 			38,
@@ -323,6 +420,15 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.RANARR_POTION_UNF, 1)
 			},
 			new ItemQuantity(Item.PRAYER_POTION4, 1)),
+	PRAYER_REGENERATION_POTION(
+			new ItemQuantity(Item.PRAYER_REGENERATION_POTION3, 1),
+			58,
+			132,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.HUASCA_POTION_UNF, 1),
+					new ItemQuantity(Item.ALDARIUM, 1)
+			},
+			new ItemQuantity(Item.PRAYER_REGENERATION_POTION4, 1)),
 	RANGING_POTION(
 			new ItemQuantity(Item.RANGING_POTION3, 1),
 			72,
