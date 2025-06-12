@@ -129,11 +129,13 @@ public class PriceFetcher {
 
 	private static JSONObject readData(String endpoint) throws IOException {
 		URLConnection conn = connect(endpoint);
-		if (conn == null)
+		if (conn == null) {
 			throw new IOException("Update attempted with null connection");
+		}
 		InputStream inputStream = conn.getInputStream();
-		if (inputStream == null)
+		if (inputStream == null) {
 			throw new IOException("Update attempted while collection input stream is null");
+		}
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		StringBuilder sb = new StringBuilder();
@@ -147,8 +149,9 @@ public class PriceFetcher {
 
 	private static float readPrice(JSONObject item) {
 		// If the item isn't traded, let the price equal 0
-		if (item == null)
+		if (item == null) {
 			return 0;
+		}
 
 		int high, low;
 		try {

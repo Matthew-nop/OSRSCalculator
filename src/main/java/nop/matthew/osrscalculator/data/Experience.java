@@ -20,8 +20,9 @@ public final class Experience {
 	 * @return the minimum XP value needed
 	 */
 	public static int getXpFromLevel(int level) {
-		if (level > LEVEL_MAX_VIRT)
+		if (level > LEVEL_MAX_VIRT) {
 			throw new IllegalArgumentException("level must be from [1, 126], received: " + level);
+		}
 
 		return LEVEL_XP[level];
 	}
@@ -34,8 +35,9 @@ public final class Experience {
 	 */
 	public static int getLevelFromXp(int xp) {
 		// Binary search array to get the lowest level with >= xp
-		if (xp < 0)
+		if (xp < 0) {
 			throw new IllegalArgumentException("XP must be positive, received: " + xp);
+		}
 
 		return getLevelFromXp(xp, 1, LEVEL_XP.length - 1);
 	}

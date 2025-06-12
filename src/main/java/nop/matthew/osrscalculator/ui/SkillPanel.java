@@ -108,8 +108,9 @@ public class SkillPanel extends JPanel {
 	public void setMethod(Methods method) {
 		removeAll();
 		ArrayList<RecipePanel> panels = new ArrayList<>(recipePanels);
-		if (method != null)
+		if (method != null) {
 			panels.removeIf(p -> !p.getMethod().equals(method));
+		}
 
 		setShownPanels(panels);
 	}
@@ -120,12 +121,14 @@ public class SkillPanel extends JPanel {
 	 * @param sortCriteria the sorting criteria
 	 */
 	public void sortBy(SortCriteria sortCriteria) {
-		if (sortCriteria == null)
+		if (sortCriteria == null) {
 			return;
+		}
 
 		Comparator<RecipePanel> comparator = SortCriteria.getComparator(sortCriteria);
-		if (comparator == null)
+		if (comparator == null) {
 			return;
+		}
 
 		this.shownPanels.sort(comparator);
 		setShownPanels(this.shownPanels);
