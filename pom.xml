@@ -35,7 +35,7 @@
     <build>
         <directory>out</directory>
         <outputDirectory>out/classes</outputDirectory>
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <finalName>${project.artifactId}-v${project.version}</finalName>
         <testOutputDirectory>out/test-classes</testOutputDirectory>
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
