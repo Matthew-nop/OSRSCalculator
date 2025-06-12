@@ -56,6 +56,7 @@ public class FlagsWindow extends JDialog {
 			dispose();
 		}
 		else {
+			setMinimumSize(getMinimumSize());
 			pack();
 			setLocationRelativeTo(null);
 			setVisible(true);
@@ -63,9 +64,7 @@ public class FlagsWindow extends JDialog {
 	}
 
 	@Override
-	public Dimension getPreferredSize() {
-		return new Dimension(
-				Math.max(OSRSCalculator.FLAG_DIALOG_MIN_WIDTH, getWidth()),
-				Math.max(OSRSCalculator.FLAG_DIALOG_MIN_HEIGHT, getHeight()));
+	public Dimension getMinimumSize() {
+		return new Dimension(OSRSCalculator.FLAG_DIALOG_MIN_WIDTH, OSRSCalculator.FLAG_DIALOG_MIN_HEIGHT);
 	}
 }
