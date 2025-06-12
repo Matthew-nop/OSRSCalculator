@@ -24,29 +24,22 @@ public enum SortCriteria {
 	 * @return a Comparator for the given criteria
 	 */
 	public static Comparator<RecipePanel> getComparator(SortCriteria sortType) {
-		switch (sortType) {
-			case LEVEL: {
-				return Comparator
-						.comparing(( RecipePanel rp ) -> rp.getRecipe().getLevel())
-						.thenComparing(( RecipePanel rp ) -> rp.getRecipe().getXp());
-			}
-			case NORMALISED_COST: {
-				return Comparator
-						.comparing(RecipePanel::getNormalisedProfit)
-						.thenComparing(RecipePanel::getProfit);
-			}
-			case PROFIT: {
-				return Comparator
-						.comparing(RecipePanel::getProfit)
-						.thenComparing(RecipePanel::getNormalisedProfit);
-			}
-			case NAME: {
-				return (rp1, rp2) -> String.CASE_INSENSITIVE_ORDER.compare(rp1.getRecipe().getName(), rp2.getRecipe().getName());
-			}
-			default: {
-				return null;
-			}
-		}
+		return switch (sortType) {
+			case LEVEL -> Comparator
+					.comparing((RecipePanel rp) -> rp.getRecipe().getLevel())
+					.thenComparing((RecipePanel rp) -> rp.getRecipe().getXp());
+			case NORMALISED_COST -> Comparator
+					.comparing(RecipePanel::getNormalisedProfit)
+					.thenComparing(RecipePanel::getProfit)
+					.reversed();
+			case PROFIT -> Comparator
+					.comparing(RecipePanel::getProfit)
+					.thenComparing(RecipePanel::getNormalisedProfit)
+					.reversed();
+			case NAME ->
+					(rp1, rp2) -> String.CASE_INSENSITIVE_ORDER.compare(rp1.getRecipe().getName(), rp2.getRecipe().getName());
+			default -> null;
+		};
 	}
 
 	/**
