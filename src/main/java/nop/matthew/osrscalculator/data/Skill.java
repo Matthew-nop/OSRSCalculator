@@ -2,6 +2,7 @@ package nop.matthew.osrscalculator.data;
 
 import nop.matthew.osrscalculator.net.PriceFetcher;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,6 +14,7 @@ public abstract class Skill {
 	protected PriceFetcher priceFetcher;
 	protected TreeMap<Methods, Recipe[]> methodRecipes;
 	protected Set<Flags> flags;
+
 
 	public Skill(Skills skills, PriceFetcher priceFetcher) {
 		this.skills = skills;
@@ -82,6 +84,10 @@ public abstract class Skill {
 		}
 
 		return costs;
+	}
+
+	public URL getIconPath() {
+		return getClass().getResource("/SkillIcons/" + getKey().toString().toLowerCase() + ".png");
 	}
 
 	public Skills getSkills() {
