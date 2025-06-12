@@ -1,6 +1,7 @@
 package nop.matthew.osrscalculator.ui;
 
 import nop.matthew.osrscalculator.data.Recipe;
+import nop.matthew.osrscalculator.data.Skill;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,7 +13,7 @@ public class CostPanel extends JPanel {
 	private JLabel profitLabel;
 	private JLabel normalisedProfitLabel;
 
-	public CostPanel(Recipe recipe) {
+	public CostPanel() {
 		super(new BorderLayout(0, 0));
 		this.profitLabel = new JLabel();
 		this.normalisedProfitLabel = new JLabel();

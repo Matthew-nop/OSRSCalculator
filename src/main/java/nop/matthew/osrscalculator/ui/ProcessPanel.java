@@ -1,7 +1,5 @@
 package nop.matthew.osrscalculator.ui;
 
-import nop.matthew.osrscalculator.data.Recipe;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -12,7 +10,7 @@ public class ProcessPanel extends JPanel {
 	JLabel outputs;
 	JLabel inputs;
 
-	public ProcessPanel(Recipe recipe) {
+	public ProcessPanel() {
 		super(new BorderLayout(0, 0));
 
 		this.outputs = new JLabel("0");

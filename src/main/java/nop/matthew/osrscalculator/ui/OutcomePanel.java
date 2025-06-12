@@ -1,6 +1,7 @@
 package nop.matthew.osrscalculator.ui;
 
 import nop.matthew.osrscalculator.data.Recipe;
+import nop.matthew.osrscalculator.data.Skill;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -8,12 +9,21 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 public class OutcomePanel extends JPanel {
+	private final JLabel levelLabel;
+	private final int level;
 
-	public OutcomePanel(Recipe recipe) {
+	public OutcomePanel(Recipe recipe, Skill skill) {
 		super(new BorderLayout(0, 0));
+		this.level = recipe.getLevel();
+		this.levelLabel = new JLabel(this.level + " - " + skill.getXp(recipe));
 		
 		add(BorderLayout.CENTER, new JLabel(recipe.getName())); // TODO: place an image
-		add(BorderLayout.SOUTH, new JLabel(recipe.getLevel() + " - " + recipe.getXp()));
+		setXp(skill.getXp(recipe));
+		add(BorderLayout.SOUTH, this.levelLabel);
+	}
+
+	public void setXp(double xp) {
+		this.levelLabel.setText("Lvl " + this.level + " - " + xp + "xp");
 	}
 
 	@Override

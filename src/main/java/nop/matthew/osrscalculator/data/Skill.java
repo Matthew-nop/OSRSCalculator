@@ -57,6 +57,15 @@ public abstract class Skill {
 		return costs;
 	}
 
+	/** Returns the xp gained per the  given recipe's action
+	 *
+	 * @param recipe the recipe
+	 * @return The xp gained
+	 */
+	public double getXp(Recipe recipe) {
+		return recipe.getXp();
+	}
+
 	/**
 	 * Get a map of (ItemID -> total cost) for recipe inputs
 	 *

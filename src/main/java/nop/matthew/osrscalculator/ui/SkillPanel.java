@@ -36,7 +36,7 @@ public class SkillPanel extends JPanel {
 			Methods method = entry.getKey();
 			Recipe[] recipes = entry.getValue();
 			for (int i = 0; i < recipes.length; i++, this.count++) {
-				RecipePanel recipePanel = new RecipePanel(recipes[i], method);
+				RecipePanel recipePanel = new RecipePanel(recipes[i], method, skill);
 				this.recipePanels.add(recipePanel);
 
 				constraints.gridx = 0;
@@ -81,8 +81,7 @@ public class SkillPanel extends JPanel {
 	 */
 	public void update() {
 		for (RecipePanel panel : this.recipePanels) {
-			Recipe r = panel.getRecipe();
-			panel.setCosts(this.skill.getRecipeOutCosts(r), this.skill.getRecipeInCosts(r));
+			panel.updatePanel();
 		}
 	}
 
