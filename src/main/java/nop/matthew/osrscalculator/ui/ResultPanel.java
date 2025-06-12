@@ -17,7 +17,7 @@ class ResultPanel extends JPanel {
 
 	public ResultPanel() {
 		super(new CardLayout(0, 0));
-		this.cardLayout = (CardLayout) super.getLayout();
+		this.cardLayout = (CardLayout) getLayout();
 		this.skillPanels = new HashMap<>(OSRSCalculator.SKILL_COUNT);
 		this.lastHeight = OSRSCalculator.DEFAULT_RESULTPANEL_HEIGHT;
 	}
