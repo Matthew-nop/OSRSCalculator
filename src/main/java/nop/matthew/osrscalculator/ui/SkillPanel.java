@@ -8,7 +8,8 @@ import nop.matthew.osrscalculator.data.Skills;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -18,17 +19,32 @@ public class SkillPanel extends JPanel {
 	private final JScrollPane scrollPane;
 
 	public SkillPanel(Skill skill) {
-		super(new GridLayout(0, 1));
+		super(new GridBagLayout());
+		GridBagConstraints constraints = new GridBagConstraints();
 		this.skill = skill;
-		recipePanels = new ArrayList<RecipePanel>();
+		this.recipePanels = new ArrayList<RecipePanel>();
+		int count = 0;
+		constraints.anchor = GridBagConstraints.NORTH;
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.gridwidth = 1;
+		constraints.weighty = 0;
 		for (Map.Entry<Methods, Recipe[]> entry : skill.getMethodRecipes().entrySet()) {
-			for (Recipe recipe : entry.getValue()) {
-				RecipePanel recipePanel = new RecipePanel(recipe, entry.getKey());
-				recipePanels.add(recipePanel);
-				add(recipePanel);
+			Methods method = entry.getKey();
+			Recipe[] recipes = entry.getValue();
+			for (int i = 0; i < recipes.length; i++, count++) {
+				RecipePanel recipePanel = new RecipePanel(recipes[i], method);
+				this.recipePanels.add(recipePanel);
+
+				constraints.gridx = 0;
+				constraints.gridy = count;
+				add(recipePanel, constraints);
 			}
 		}
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.weighty = 1;
+		add(new JPanel(), constraints);
 
+		this.recipePanels.trimToSize();
 		scrollPane = new JScrollPane(this, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	}
 
@@ -41,10 +57,35 @@ public class SkillPanel extends JPanel {
 
 	public void setMethod(Methods method) {
 		removeAll();
-		if (method != null)
-			this.recipePanels.stream().filter(r -> r.getMethod().equals(method)).forEach(this::add);
-		else
-			this.recipePanels.forEach(this::add);
+		GridBagConstraints constraints = new GridBagConstraints();
+
+		int size = this.recipePanels.size();
+		int count = 0;
+		constraints.anchor = GridBagConstraints.NORTH;
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.gridwidth = 1;
+		constraints.weighty = 0;
+		if (method != null) {
+			for (int i = 0; i < size; i++, count++) {
+				RecipePanel recipePanel = this.recipePanels.get(i);
+				if (recipePanel.getMethod().equals(method)) {
+					constraints.gridx = 0;
+					constraints.gridy = count;
+					add(recipePanel, constraints);
+				}
+			}
+		}
+		else {
+			for (int i = 0; i < size; i++, count++) {
+				RecipePanel recipePanel = this.recipePanels.get(i);
+				constraints.gridx = 0;
+				constraints.gridy = count;
+				add(recipePanel, constraints);
+			}
+		}
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.weighty = 1;
+		add(new JPanel(), constraints);
 
 		repaint();
 		revalidate();
