@@ -11,6 +11,9 @@ public enum Methods {
 	BURNING_LOGS("Burning logs", Skills.FIREMAKING),
 	CREMATING_SHADES("Cremating shades", Skills.FIREMAKING),
 
+	// Fletching
+	FLETCHING_DARTS("Darts", Skills.FLETCHING),
+
 	// Herblore
 	CLEANING_HERBS("Cleaning herbs", Skills.HERBLORE),
 	MAKING_TAR("Making tar", Skills.HERBLORE),
