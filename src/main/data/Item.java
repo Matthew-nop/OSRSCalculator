@@ -1,10 +1,10 @@
 package data;
 
-public class Ingredient {
+public class Item {
 	private final int id;
-	private final int quantity;
+	private final float quantity;
 
-	public Ingredient(int id, int quantity) {
+	public Item(int id, float quantity) {
 		this.id = id;
 		this.quantity = quantity;
 	}
@@ -13,7 +13,7 @@ public class Ingredient {
 		return this.id;
 	}
 
-	public int getQuantity() {
+	public float getQuantity() {
 		return this.quantity;
 	}
 }
