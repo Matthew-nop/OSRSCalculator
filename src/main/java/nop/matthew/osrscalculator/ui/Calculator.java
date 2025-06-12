@@ -31,6 +31,7 @@ public class Calculator extends JFrame {
 	private static final SelectionPanel selectionPanel = new SelectionPanel();
 	private static final ResultPanel resultPanel = new ResultPanel();
 	private static SortCriteria sortCriteria;
+	private static boolean goalIsLevel;
 
 	public Calculator() {
 		super("OSRS Calculator");
@@ -43,6 +44,7 @@ public class Calculator extends JFrame {
 		JFrame.setDefaultLookAndFeelDecorated(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		sortCriteria = OSRSCalculator.DEFAULT_SORTCRITERIA;
+		goalIsLevel = OSRSCalculator.GOAL_IS_LEVEL_DEFAULT;
 
 		addComponentListener(new ComponentAdapter() {
 			@Override
@@ -87,6 +89,19 @@ public class Calculator extends JFrame {
 		sortGroup.add(nameSort);
 		sort.add(nameSort);
 		menuBar.add(sort);
+
+		// Goals
+		JMenu goals = new JMenu("Goals");
+		ButtonGroup goalTypeGroup = new ButtonGroup();
+		JRadioButtonMenuItem goalTypeLevel = new JRadioButtonMenuItem("Level", true);
+		goalTypeLevel.addItemListener(e -> goalIsLevel = (e.getStateChange() == ItemEvent.SELECTED));
+		goalTypeGroup.add(goalTypeLevel);
+		goals.add(goalTypeLevel);
+		JRadioButtonMenuItem goalTypeXp = new JRadioButtonMenuItem("XP", false);
+		goalTypeXp.addItemListener(e -> goalIsLevel = (e.getStateChange() != ItemEvent.SELECTED));
+		goalTypeGroup.add(goalTypeXp);
+		goals.add(goalTypeXp);
+		menuBar.add(goals);
 
 		setJMenuBar(menuBar);
 
@@ -153,6 +168,10 @@ public class Calculator extends JFrame {
 
 	public static SortCriteria getSortCriteria() {
 		return sortCriteria;
+	}
+
+	public static boolean goalIsLevel() {
+		return goalIsLevel;
 	}
 
 	@Override

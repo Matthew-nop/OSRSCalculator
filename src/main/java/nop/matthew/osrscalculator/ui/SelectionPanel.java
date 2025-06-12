@@ -58,7 +58,7 @@ public class SelectionPanel extends JPanel {
 			} catch (NumberFormatException exception) {
 				return;
 			}
-			Calculator.getResultPanel().getCurrentPanel().updateActions(start, end, false);
+			Calculator.getResultPanel().getCurrentPanel().updateActions(start, end, Calculator.goalIsLevel());
 		});
 		goalsPanel.add(BorderLayout.WEST, labelPanel);
 		goalsPanel.add(BorderLayout.CENTER, textBoxPanel);

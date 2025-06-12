@@ -44,6 +44,7 @@ public class OSRSCalculator {
 	public static final int DEFAULT_HEIGHT = 600;
 	public static final Skills DEFAULT_SKILL = Skills.HERBLORE;
 	public static final SortCriteria DEFAULT_SORTCRITERIA = SortCriteria.LEVEL;
+	public static final boolean GOAL_IS_LEVEL_DEFAULT = true;
 
 	protected static Calculator calculator;
 
