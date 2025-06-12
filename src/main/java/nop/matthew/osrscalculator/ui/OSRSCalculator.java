@@ -1,5 +1,6 @@
 package nop.matthew.osrscalculator.ui;
 
+import nop.matthew.osrscalculator.data.construction.Construction;
 import nop.matthew.osrscalculator.data.herblore.Herblore;
 import nop.matthew.osrscalculator.net.PriceFetcher;
 
@@ -13,10 +14,14 @@ public class OSRSCalculator {
 
 	public static void main(String[] args) throws IOException {
 		PriceFetcher priceFetcher = new PriceFetcher();
+
 		Herblore herblore = new Herblore(priceFetcher);
+		Construction construction = new Construction(priceFetcher);
 
 
 		herblore.addRecipePrices();
+		construction.addRecipePrices();
+
 		priceFetcher.updatePrices();
 
 		Calculator calculator = new Calculator();
@@ -24,7 +29,7 @@ public class OSRSCalculator {
 		Until all skills are implemented, add an
 		equal amount of buttons using duplicate skills
 		 */
-		calculator.addSkill(herblore);
+		calculator.addSkill(construction);
 		calculator.addSkill(herblore);
 		calculator.addSkill(herblore);
 		calculator.addSkill(herblore);
