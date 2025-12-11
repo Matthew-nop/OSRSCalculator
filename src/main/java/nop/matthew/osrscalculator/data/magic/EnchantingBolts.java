@@ -316,6 +316,6 @@ public enum EnchantingBolts implements Recipe {
 
 	@Override
 	public URL getIconPath() {
-		return getClass().getResource("/Items/" + this.output.getId() + " - " + this.output.getName().toLowerCase() + " detail.png");
+		return getClass().getResource("/Items/" + this.output.getId() + ".png");
 	}
 }
