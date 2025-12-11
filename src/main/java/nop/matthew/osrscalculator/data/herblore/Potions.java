@@ -239,6 +239,45 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.ANTIVENOM_PLUS4, 1),
 					new ItemQuantity(Item.ARAXYTE_VENOM_SACK, 4)
 			}),
+	EXTENDED_STAMINA1(
+			new ItemQuantity(Item.EXTENDED_STAMINA_POTION1, 1),
+			85,
+			27.5f,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.STAMINA_POTION1, 1),
+					new ItemQuantity(Item.MARLIN_SCALES, 1)
+			},
+			new ItemQuantity(Item.EXTENDED_STAMINA_POTION2, 1)
+	),
+	EXTENDED_STAMINA2(
+			new ItemQuantity(Item.EXTENDED_STAMINA_POTION2, 1),
+			85,
+			55,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.STAMINA_POTION2, 1),
+					new ItemQuantity(Item.MARLIN_SCALES, 2)
+			},
+			new ItemQuantity(Item.EXTENDED_STAMINA_POTION3, 1)
+	),
+	EXTENDED_STAMINA3(
+			new ItemQuantity(Item.EXTENDED_STAMINA_POTION3, 1),
+			85,
+			82.5f,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.STAMINA_POTION3, 1),
+					new ItemQuantity(Item.MARLIN_SCALES, 3)
+			},
+			new ItemQuantity(Item.EXTENDED_STAMINA_POTION4, 1)
+	),
+	EXTENDED_STAMINA4(
+			new ItemQuantity(Item.EXTENDED_STAMINA_POTION4, 1),
+			85,
+			110,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.STAMINA_POTION4, 1),
+					new ItemQuantity(Item.MARLIN_SCALES, 4)
+			}
+	),
 	EXTENDED_SUPER_ANTIFIRE1(
 			new ItemQuantity(Item.EXTENDED_SUPER_ANTIFIRE1, 1),
 			98,
@@ -274,6 +313,45 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.SUPER_ANTIFIRE_POTION4, 1),
 					new ItemQuantity(Item.LAVA_SCALE_SHARD, 4)
 			}),
+	EXTREME_ENERGY_POTION1(
+			new ItemQuantity(Item.EXTREME_ENERGY_POTION1, 1),
+			66,
+			21,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.SUPER_ENERGY4, 1),
+					new ItemQuantity(Item.YELLOW_FIN, 1)
+			},
+			new ItemQuantity(Item.EXTREME_ENERGY_POTION2, 1)
+	),
+	EXTREME_ENERGY_POTION2(
+			new ItemQuantity(Item.EXTREME_ENERGY_POTION2, 1),
+			66,
+			42,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.SUPER_ENERGY4, 1),
+					new ItemQuantity(Item.YELLOW_FIN, 2)
+			},
+			new ItemQuantity(Item.EXTREME_ENERGY_POTION3, 1)
+	),
+	EXTREME_ENERGY_POTION3(
+			new ItemQuantity(Item.EXTREME_ENERGY_POTION3, 1),
+			66,
+			63,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.SUPER_ENERGY4, 1),
+					new ItemQuantity(Item.YELLOW_FIN, 3)
+			},
+			new ItemQuantity(Item.EXTREME_ENERGY_POTION4, 1)
+	),
+	EXTREME_ENERGY_POTION4(
+			new ItemQuantity(Item.EXTREME_ENERGY_POTION4, 1),
+			66,
+			84,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.SUPER_ENERGY4, 1),
+					new ItemQuantity(Item.YELLOW_FIN, 4)
+			}
+	),
 	FISHING_POTION(
 			new ItemQuantity(Item.FISHING_POTION3, 1),
 			50,
@@ -357,6 +435,7 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.SILVER_DUST, 1)
 			},
 			new ItemQuantity(Item.GUTHIX_BALANCE4, 1)),
+
 	GUTHIX_BALANCE4(
 			new ItemQuantity(Item.GUTHIX_BALANCE4, 1),
 			22,
@@ -385,14 +464,15 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.AVANTOE_POTION_UNF, 1)
 			},
 			new ItemQuantity(Item.HUNTER_POTION4, 1)),
-	MAGIC_ESSENCE_POTION( // TODO: Does this work with the amulet of chemistry?
+	MAGIC_ESSENCE_POTION(
 			new ItemQuantity(Item.MAGIC_ESSENCE3, 1),
 			57,
 			130,
 			new ItemQuantity[]{
 					new ItemQuantity(Item.MAGIC_ESSENCE_UNF, 1),
 					new ItemQuantity(Item.GORAK_CLAW_POWDER, 1)
-			}),
+			}) // TODO: Does this work with the amulet of chemistry?
+	,
 	MAGIC_POTION(
 			new ItemQuantity(Item.MAGIC_POTION3, 1),
 			76,
@@ -429,6 +509,7 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.ALDARIUM, 1)
 			},
 			new ItemQuantity(Item.PRAYER_REGENERATION_POTION4, 1)),
+
 	RANGING_POTION(
 			new ItemQuantity(Item.RANGING_POTION3, 1),
 			72,
@@ -456,7 +537,7 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.HARRALANDER_POTION_UNF, 1)
 			},
 			new ItemQuantity(Item.RESTORE_POTION4, 1)),
-	SANFEW_SERUM1( // TODO: Does this work with the amulet of chemistry?
+	SANFEW_SERUM1(
 			new ItemQuantity(Item.SANFEW_SERUM1, 1),
 			65,
 			160,
@@ -465,7 +546,8 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.UNICORN_HORN_DUST, 1),
 					new ItemQuantity(Item.NAIL_BEAST_NAILS, 1),
 					new ItemQuantity(Item.SNAKE_WEED, 1)
-			}),
+			}) // TODO: Does this work with the amulet of chemistry?
+	,
 	SANFEW_SERUM2(
 			new ItemQuantity(Item.SANFEW_SERUM2, 1),
 			65,
@@ -557,14 +639,6 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.TARROMIN_POTION_UNF, 1)
 			},
 			new ItemQuantity(Item.STRENGTH_POTION4, 1)),
-	SUPER_ANTIFIRE4(
-			new ItemQuantity(Item.SUPER_ANTIFIRE_POTION4, 1),
-			92,
-			130,
-			new ItemQuantity[]{
-					new ItemQuantity(Item.ANTIFIRE_POTION4, 1),
-					new ItemQuantity(Item.CRUSHED_SUPERIOR_DRAGON_BONES, 1)
-			}),
 	SUPERANTIPOISON(
 			new ItemQuantity(Item.SUPERANTIPOISON3, 1),
 			48,
@@ -574,6 +648,14 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.IRIT_POTION_UNF, 1)
 			},
 			new ItemQuantity(Item.SUPERANTIPOISON4, 1)),
+	SUPER_ANTIFIRE4(
+			new ItemQuantity(Item.SUPER_ANTIFIRE_POTION4, 1),
+			92,
+			130,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.ANTIFIRE_POTION4, 1),
+					new ItemQuantity(Item.CRUSHED_SUPERIOR_DRAGON_BONES, 1)
+			}),
 	SUPER_ATTACK(
 			new ItemQuantity(Item.SUPER_ATTACK3, 1),
 			45,
@@ -611,6 +693,26 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.AVANTOE_POTION_UNF, 1)
 			},
 			new ItemQuantity(Item.SUPER_ENERGY4, 1)),
+	SUPER_FISHING(
+			new ItemQuantity(Item.SUPER_FISHING_POTION3, 1),
+			62,
+			140.5f,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.PILLAR_POTION_UNF, 1),
+					new ItemQuantity(Item.HADDOCK_EYE, 1)
+			},
+			new ItemQuantity(Item.SUPER_FISHING_POTION4, 1)
+	),
+	SUPER_HUNTER(
+			new ItemQuantity(Item.SUPER_HUNTER_POTION3, 1),
+			62,
+			140.5f,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.PILLAR_POTION_UNF, 1),
+					new ItemQuantity(Item.CRAB_PASTE, 1)
+			},
+			new ItemQuantity(Item.SUPER_HUNTER_POTION4, 1)
+	),
 	SUPER_RESTORE(
 			new ItemQuantity(Item.SUPER_RESTORE3, 1),
 			63,
@@ -629,6 +731,16 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.KWUARM_POTION_UNF, 1)
 			},
 			new ItemQuantity(Item.SUPER_STRENGTH4, 1)),
+	SURGE_POTION(
+			new ItemQuantity(Item.SURGE_POTION3, 1),
+			81,
+			185,
+			new ItemQuantity[]{
+					new ItemQuantity(Item.TORSTOL_POTION_UNF, 1),
+					new ItemQuantity(Item.DEMONIC_TALLOW, 1)
+			},
+			new ItemQuantity(Item.SURGE_POTION4, 1)
+	),
 	WEAPON_POISON(
 			new ItemQuantity(Item.WEAPON_POISON, 1),
 			60,
