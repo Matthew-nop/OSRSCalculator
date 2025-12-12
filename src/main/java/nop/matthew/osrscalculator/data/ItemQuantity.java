@@ -9,6 +9,10 @@ public class ItemQuantity {
 		this.quantity = quantity;
 	}
 
+	public Item getItem() {
+		return this.item;
+	}
+
 	public String getName() {
 		return this.item.toString();
 	}

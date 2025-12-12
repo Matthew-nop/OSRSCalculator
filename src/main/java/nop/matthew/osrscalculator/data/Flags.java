@@ -12,6 +12,7 @@ public enum Flags {
 	// Herblore
 	ALCHEMISTS_AMULET("Alchemist's amulet", Skills.HERBLORE),
 	AMULET_OF_CHEMISTRY("Amulet of chemistry", Skills.HERBLORE),
+	PRESCRIPTION_GOGGLES("Prescription goggles", Skills.HERBLORE),
 
 	// Magic
 	INFINITE_ELEMENTAL_RUNE_SOURCE("Infinite elemental rune source", Skills.MAGIC),
