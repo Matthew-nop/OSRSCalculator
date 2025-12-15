@@ -88,6 +88,14 @@ public enum Potions implements Recipe {
 			125,
 			new ItemQuantity(Item.ANTIVENOM4, 1),
 			new ItemQuantity(Item.TORSTOL, 1)),
+	ARMADYL_BREW(
+			new ItemQuantity(Item.ARMADYL_BREW3, 1),
+			89,
+			205,
+			new ItemQuantity(Item.UMBRAL_POTION_UNF, 1),
+			new ItemQuantity(Item.RAINBOW_CRAB_PASTE, 1),
+			new ItemQuantity(Item.ARMADYL_BREW4, 1)
+	),
 	ATTACK_POTION(
 			new ItemQuantity(Item.ATTACK_POTION3, 1),
 			3,
@@ -324,8 +332,9 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.GARLIC, 1),
 					new ItemQuantity(Item.SILVER_DUST, 1),
 			},
-			new ItemQuantity[0], // TODO: do prescription goggles work with guthix balance?
-			new ItemQuantity(Item.GUTHIX_BALANCE2, 1)),
+			new ItemQuantity[0],
+			new ItemQuantity(Item.GUTHIX_BALANCE2, 1)) // TODO: do prescription goggles work with guthix balance?
+	,
 	GUTHIX_BALANCE2(
 			new ItemQuantity(Item.GUTHIX_BALANCE2, 1),
 			22,
@@ -335,8 +344,9 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.GARLIC, 1),
 					new ItemQuantity(Item.SILVER_DUST, 1),
 			},
-			new ItemQuantity[0], // TODO: do prescription goggles work with guthix balance?
-			new ItemQuantity(Item.GUTHIX_BALANCE3, 1)),
+			new ItemQuantity[0],
+			new ItemQuantity(Item.GUTHIX_BALANCE3, 1)) // TODO: do prescription goggles work with guthix balance?
+	,
 	GUTHIX_BALANCE3(
 			new ItemQuantity(Item.GUTHIX_BALANCE3, 1),
 			22,
@@ -346,8 +356,9 @@ public enum Potions implements Recipe {
 					new ItemQuantity(Item.GARLIC, 1),
 					new ItemQuantity(Item.SILVER_DUST, 1),
 			},
-			new ItemQuantity[0], // TODO: do prescription goggles work with guthix balance?
-			new ItemQuantity(Item.GUTHIX_BALANCE4, 1)),
+			new ItemQuantity[0],
+			new ItemQuantity(Item.GUTHIX_BALANCE4, 1)) // TODO: do prescription goggles work with guthix balance?
+	,
 	GUTHIX_BALANCE4(
 			new ItemQuantity(Item.GUTHIX_BALANCE4, 1),
 			22,
