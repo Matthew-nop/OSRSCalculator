@@ -184,6 +184,7 @@ public enum Item {
 	FORGOTTEN_BREW2("Forgotten brew(2)", LegacyItemID.FORGOTTEN_BREW2),
 	FORGOTTEN_BREW3("Forgotten brew(3)", LegacyItemID.FORGOTTEN_BREW3),
 	FORGOTTEN_BREW4("Forgotten brew(4)", LegacyItemID.FORGOTTEN_BREW4),
+	FROST_DRAGON_BONES("Frost dragon bones", ItemID.FROST_DRAGON_BONES),
 	GARLIC("Garlic", LegacyItemID.GARLIC),
 	GOADING_POTION3("Goading potion(3)", LegacyItemID.GOADING_POTION3),
 	GOADING_POTION4("Goading potion(4)", LegacyItemID.GOADING_POTION4),
