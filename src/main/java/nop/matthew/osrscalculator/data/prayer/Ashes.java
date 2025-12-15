@@ -9,21 +9,21 @@ import java.net.URL;
 import java.util.Set;
 
 public enum Ashes implements Recipe {
-	ABYSSAL_ASHES(1, 85, new ItemQuantity(Item.ABYSSAL_ASHES, 1)),
-	FIENDISH_ASHES(1, 10, new ItemQuantity(Item.FIENDISH_ASHES, 1)),
-	INFERNAL_ASHES(1, 110, new ItemQuantity(Item.INFERNAL_ASHES, 1)),
-	MALICIOUS_ASHES(1, 65, new ItemQuantity(Item.MALICIOUS_ASHES, 1)),
-	VILE_ASHES(1, 25, new ItemQuantity(Item.VILE_ASHES, 1)),
+	ABYSSAL_ASHES(1, 85, Item.ABYSSAL_ASHES),
+	FIENDISH_ASHES(1, 10, Item.FIENDISH_ASHES),
+	INFERNAL_ASHES(1, 110, Item.INFERNAL_ASHES),
+	MALICIOUS_ASHES(1, 65, Item.MALICIOUS_ASHES),
+	VILE_ASHES(1, 25, Item.VILE_ASHES),
 	;
 
 	private final int level;
 	private final float xp;
 	private final ItemQuantity ingredient;
 
-	Ashes(int level, float xp, ItemQuantity ingredient) {
+	Ashes(int level, float xp, Item ingredient) {
 		this.level = level;
 		this.xp = xp;
-		this.ingredient = ingredient;
+		this.ingredient = new ItemQuantity(ingredient, 1);
 	}
 
 	@Override
