@@ -10,6 +10,7 @@ public class Smithing extends Skill {
 	private Smithing() {
 		super(Skills.SMITHING);
 		this.methodRecipes.put(Methods.DART_TIPS, DartTips.values());
+		this.methodRecipes.put(Methods.SMITHING_ARMOUR, Armour.values());
 	}
 
 	public static Smithing getInstance() {

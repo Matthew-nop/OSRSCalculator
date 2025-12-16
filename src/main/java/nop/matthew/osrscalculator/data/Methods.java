@@ -36,6 +36,7 @@ public enum Methods {
 
 	// Smithing
 	DART_TIPS("Dart tips", Skills.SMITHING),
+	SMITHING_ARMOUR("Armour", Skills.SMITHING),
 	;
 
 	private final String name;
