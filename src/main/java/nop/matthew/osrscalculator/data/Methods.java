@@ -30,6 +30,9 @@ public enum Methods {
 	// Prayer
 	ASHES("Ashes", Skills.PRAYER),
 	BONES("Bones", Skills.PRAYER),
+
+	// Smithing
+	DART_TIPS("Dart tips", Skills.SMITHING),
 	;
 
 	private final String name;
