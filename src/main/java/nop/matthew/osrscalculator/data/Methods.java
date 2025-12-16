@@ -3,6 +3,7 @@ package nop.matthew.osrscalculator.data;
 public enum Methods {
 	// Construction
 	PLANKS("Using planks", Skills.CONSTRUCTION),
+	REPAIR_KITS("Making repair kits", Skills.CONSTRUCTION),
 
 	// Cooking
 	COOKING_FISH("Cooking fish", Skills.COOKING),

@@ -12,6 +12,7 @@ public class Construction extends Skill {
 	private Construction() {
 		super(Skills.CONSTRUCTION);
 		this.methodRecipes.put(Methods.PLANKS, Planks.values());
+		this.methodRecipes.put(Methods.REPAIR_KITS, RepairKits.values());
 	}
 
 	public static Construction getInstance() {
