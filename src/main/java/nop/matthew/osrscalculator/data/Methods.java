@@ -4,6 +4,9 @@ public enum Methods {
 	// Construction
 	PLANKS("Using planks", Skills.CONSTRUCTION),
 
+	// Cooking
+	COOKING_FISH("Cooking fish", Skills.COOKING),
+
 	// Crafting
 	BATTLESTAVES("Battlestaves", Skills.CRAFTING),
 	DRAGON_LEATHER("Dragon leather", Skills.CRAFTING),
