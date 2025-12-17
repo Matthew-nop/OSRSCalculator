@@ -35,6 +35,9 @@ public enum Methods {
 	ASHES("Ashes", Skills.PRAYER),
 	BONES("Bones", Skills.PRAYER),
 
+	// Sailing
+	BARRACUDA_TRIALS("Barracuda trials", Skills.SAILING),
+
 	// Smithing
 	DART_TIPS("Dart tips", Skills.SMITHING),
 	SMITHING_ARMOUR("Armour", Skills.SMITHING),

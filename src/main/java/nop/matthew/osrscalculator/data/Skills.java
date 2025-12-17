@@ -11,6 +11,7 @@ public enum Skills {
 	HUNTER("Hunter"),
 	MAGIC("Magic"),
 	PRAYER("Prayer"),
+	SAILING("Sailing"),
 	SMITHING("Smithing"),
 	;
 
