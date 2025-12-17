@@ -1,5 +1,6 @@
 package nop.matthew.osrscalculator.data.farming;
 
+import nop.matthew.osrscalculator.data.Methods;
 import nop.matthew.osrscalculator.data.Skill;
 import nop.matthew.osrscalculator.data.Skills;
 
@@ -8,6 +9,7 @@ public class Farming extends Skill {
 
 	private Farming() {
 		super(Skills.FARMING);
+		methodRecipes.put(Methods.PLANTING_HARDWOOD_TREES, HardwoodTrees.values());
 	}
 
 	public static Farming getInstance() {

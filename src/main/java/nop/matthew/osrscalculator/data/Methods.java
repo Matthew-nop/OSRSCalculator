@@ -12,6 +12,9 @@ public enum Methods {
 	BATTLESTAVES("Battlestaves", Skills.CRAFTING),
 	DRAGON_LEATHER("Dragon leather", Skills.CRAFTING),
 
+	// Farming
+	PLANTING_HARDWOOD_TREES("Hardwood trees", Skills.FARMING),
+
 	// Firemaking
 	BURNING_LOGS("Burning logs", Skills.FIREMAKING),
 	CREMATING_SHADES("Cremating shades", Skills.FIREMAKING),
