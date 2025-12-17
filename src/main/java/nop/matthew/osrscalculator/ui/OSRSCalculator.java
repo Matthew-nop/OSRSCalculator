@@ -12,6 +12,7 @@ import nop.matthew.osrscalculator.data.herblore.Herblore;
 import nop.matthew.osrscalculator.data.hunter.Hunter;
 import nop.matthew.osrscalculator.data.magic.Magic;
 import nop.matthew.osrscalculator.data.prayer.Prayer;
+import nop.matthew.osrscalculator.data.sailing.Sailing;
 import nop.matthew.osrscalculator.data.smithing.Smithing;
 
 import javax.swing.JScrollPane;
@@ -66,6 +67,7 @@ public class OSRSCalculator {
 		Hunter hunter = Hunter.getInstance();
 		Magic magic = Magic.getInstance();
 		Prayer prayer = Prayer.getInstance();
+		Sailing sailing = Sailing.getInstance();
 		Smithing smithing = Smithing.getInstance();
 
 		construction.addRecipePrices();
@@ -78,6 +80,7 @@ public class OSRSCalculator {
 		hunter.addRecipePrices();
 		magic.addRecipePrices();
 		prayer.addRecipePrices();
+		sailing.addRecipePrices();
 		smithing.addRecipePrices();
 
 		Calculator calculator = Calculator.getInstance();
@@ -91,6 +94,7 @@ public class OSRSCalculator {
 		calculator.addSkill(hunter);
 		calculator.addSkill(magic);
 		calculator.addSkill(prayer);
+		calculator.addSkill(sailing);
 		calculator.addSkill(smithing);
 
 		calculator.start(DEFAULT_WIDTH, DEFAULT_HEIGHT);
